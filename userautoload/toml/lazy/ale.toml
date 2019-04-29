@@ -1,0 +1,35 @@
+[[plugins]]
+repo = 'maximbaz/lightline-ale'
+on_source = ['ale']
+
+[[plugins]]
+repo = 'w0rp/ale'
+on_event = 'BufWritePost'
+hook_add ='''
+" 左端のシンボルカラムを表示したままにする
+let g:ale_sign_column_always = 1
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+" let g:ale_open_list = 1
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 0
+
+" ファイルオープン時にチェックしたくない場合
+let g:ale_lint_on_enter = 0
+
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+
+" エラーウィンドウを出す
+function! s:ale_list()
+    let g:ale_open_list = 1
+    call ale#Queue(0, 'lint_file')
+endfunction
+command! ALEList call s:ale_list()
+
+" エラー間を移動する
+nnoremap <silent> <C-k> <Plug>(ale_previous_wrap)
+nnoremap <silent> <C-j> <Plug>(ale_next_wrap)
+'''

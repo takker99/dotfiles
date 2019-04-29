@@ -1,0 +1,4 @@
+[[plugins]] # Yank
+repo = 'Shougo/neoyank.vim'
+on_source = 'denite.nvim'
+on_event = 'TextYankPost'

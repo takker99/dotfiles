@@ -1,0 +1,5 @@
+[[plugins]]
+repo = 'LeafCage/autobackup.vim'
+hook_add = '''
+let g:autobackup_backup_dir=expand($XDG_CONFIG_HOME)."/nvim/.backup"
+'''
