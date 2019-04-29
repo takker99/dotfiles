@@ -1,14 +1,14 @@
-"•¶šƒR[ƒh‚ğUFT-8‚Éİ’è
+"æ–‡å­—ã‚³ãƒ¼ãƒ‰ã‚’UFT-8ã«è¨­å®š
 set encoding=utf-8
 scriptencoding utf-8
 
 GuiFont! Consolas:h11
 
-" ƒEƒBƒ“ƒhƒE‚Ìc•
+" ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®ç¸¦å¹…
 " set lines=55
-" ƒEƒBƒ“ƒhƒE‚Ì‰¡•
+" ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®æ¨ªå¹…
 " set columns=180
-" ƒJƒ‰[ƒXƒL[ƒ€
+" ã‚«ãƒ©ãƒ¼ã‚¹ã‚­ãƒ¼ãƒ 
 autocmd ColorScheme * highlight Comment ctermfg=22 guifg=#008800
 autocmd ColorScheme * highlight Search term=reverse cterm=reverse ctermfg=166 gui=reverse guifg=#FF8C00
 if has('multi_byte_ime')
@@ -17,7 +17,7 @@ if has('multi_byte_ime')
 endif
 colorscheme molokai
 
-" ƒ_[ƒNŒn‚ÌƒJƒ‰[ƒXƒL[ƒ€‚ğg‚¤
+" ãƒ€ãƒ¼ã‚¯ç³»ã®ã‚«ãƒ©ãƒ¼ã‚¹ã‚­ãƒ¼ãƒ ã‚’ä½¿ã†
 set background=dark
 syntax on
 
