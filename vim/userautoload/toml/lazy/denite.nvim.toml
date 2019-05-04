@@ -1,0 +1,20 @@
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+on_cmd = 'Denite'
+hook_post_source = '''
+" 以下はdenite起動時に使用するキーマップ
+
+" denite/insert モードのときは，C- で移動できるようにする
+call denite#custom#map('insert', "<C-j>", '<denite:move_to_next_line>')
+call denite#custom#map('insert', "<C-k>", '<denite:move_to_previous_line>')
+" バッファ一覧
+noremap <C-P> :Denite buffer<CR>
+" ファイル一覧
+" noremap <C-N> :Denite -buffer-name=file file<CR>
+" 最近使ったファイルの一覧
+noremap <C-Z> :Denite file_old<CR>
+" カレントディレクトリ
+noremap <C-C> :Denite file_rec<CR>
+"バッファ一覧
+nnoremap sB :<C-u>Denite buffer -buffer-name=file<CR>
+'''

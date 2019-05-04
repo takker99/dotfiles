@@ -1,0 +1,14 @@
+[[plugins]]
+repo = 'kassio/neoterm'
+hook_add = '''
+let g:neoterm_autoscroll = 1
+let g:neoterm_default_mod = 'belowright'
+" ノーマルモードで現在のカーソル行を実行
+nnoremap <silent> <C-e> :TREPLSendLine<CR>j0
+" ヴィジュアルモードで選択範囲を実行
+vnoremap <silent> <C-e> V:TREPLSendSelection<CR>'>j0
+
+nnoremap <F7> :T latexmk -lualatex "<C-r>=expand('%')<CR>"<CR><C-w>j<C-w>10-i<CR>
+'''
+
+
