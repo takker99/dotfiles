@@ -1,3 +1,0 @@
-[[plugins]]
-repo = 'chrisbra/Recover.vim'
-on_event = ['SwapExists']

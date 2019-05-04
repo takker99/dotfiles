@@ -1,8 +1,0 @@
-[[plugins]]
-repo = 'KeitaNakamura/tex-conceal.vim'
-on_ft = ['tex']
-hook_add ='''
-set conceallevel=2
-let g:tex_conceal="abdgms"
-set concealcursor="nc"
-'''
