@@ -123,6 +123,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
+export XDG_CONFIG_HOME=$HOME/.config
+export EDITOR=vim
 export GIT_EDITOR=vim
 export PATH="$HOME/.local/bin:$PATH"
 export LD_LIBRARY_PATH=$HOME/.local/lib/:$LD_LIBRARY_PATH
