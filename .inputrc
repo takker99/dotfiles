@@ -1,0 +1,29 @@
+# .inputrc
+
+# vi modeで使う
+set editing-mode vi
+
+# cf. https://marmooo.blogspot.com/2017/08/inputrc.html
+# cf. http://blog.digital-bot.com/blog/2013/08/30/more-useful-inputrc/
+# beep音を消す
+set bell-style none
+
+# 補間時大文字小文字無視
+set completion-ignore-case on
+
+# 入力候補リストのディレクトリや実行可能ファイルに印をつける
+set visible-stats on
+
+# ファイルタイプをカラフルに
+set colored-stats on
+# 補完の接頭辞をカラフルに
+set colored-completion-prefix on
+
+$if Bash
+    # スペースで特殊変数がその場で展開
+    space: magic-space
+
+    # キーバインド key: "hoge"でhogeが展開される
+    "\C-x\C-p": " | percol"
+    "\C-^": "~/"
+$endif
