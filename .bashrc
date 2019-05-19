@@ -63,6 +63,18 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+# cf.https://qiita.com/hmmrjn/items/60d2a64c9e5bf7c0fe60
+# add a blank line after each output
+function add_line {
+  if [[ -z "${PS1_NEWLINE_LOGIN}" ]]; then
+    PS1_NEWLINE_LOGIN = true
+  else
+    printf '\n'
+  fi
+}
+
+PROMPT_COMMAND='add_line'
+
 if [ "$color_prompt" = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
