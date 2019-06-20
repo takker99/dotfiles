@@ -2,8 +2,10 @@
 set encoding=utf-8
 scriptencoding utf-8
 
-let g:python3_host_prog = 'C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python36_64\python.exe'
-let g:python_host_prog = 'C:\Python27amd64\python.exe'
+if has('win32') || has('win64')
+    let g:python3_host_prog = 'C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python36_64\python.exe'
+    let g:python_host_prog = 'C:\Python27amd64\python.exe'
+endif
 
 " encodings
 set fileencoding=utf-8
