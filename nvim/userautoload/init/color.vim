@@ -10,6 +10,9 @@ scriptencoding utf-8
 "autocmd ColorScheme * highlight Comment ctermfg=22 guifg=#008800
 "autocmd ColorScheme * highlight Search term=reverse cterm=reverse ctermfg=166 gui=reverse guifg=#FF8C00
 
+autocmd ColorScheme * highlight Comment ctermfg=102 guifg=#008800
+autocmd ColorScheme * highlight Visual cterm=reverse ctermbg=236 gui=reverse guifg=#FF8C00
+"
 colorscheme molokai
 
 " ダーク系のカラースキームを使う
