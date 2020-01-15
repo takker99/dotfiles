@@ -36,6 +36,7 @@ set backupdir=$XDG_CONFIG_HOME/nvim/.backup  " このディレクトリはあら
 
 " 見た目系
 set number                " 行番号を表示
+set relativenumber
 set ruler                 " ルーラーを表示
 set cursorline            " 現在の行を強調表示
 set cursorcolumn          " 現在の行を強調表示（縦）
@@ -47,15 +48,16 @@ set matchtime=1
 set showcmd               " 入力中のコマンドをステータスに表示する
 set noshowmode
 set laststatus=2          " ステータスラインを常に表示
-set nowrap                "テキストが折り返されないようにする
+" set nowrap                "テキストが折り返されないようにする
+set wrap
 set display=lastline
 set cursorline            " 現在の行をハイライト
 hi clear CursorLine       " 上と合わせることで行番号のみハイライト
 set ambiwidth=double
 
 set conceallevel=2
-let g:tex_conceal="abdgms"
-set concealcursor="nc"
+let g:tex_conceal=""
+set concealcursor=""
 
 " 補完系
 set wildmenu

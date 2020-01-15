@@ -8,6 +8,7 @@ let g:lightline = {
         \   'left': [
         \     ['mode', 'paste'],
         \     [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
+        \     ['coc'],
         \     ['fugitive', 'gitgutter', 'filename'],
         \   ],
         \   'right': [
@@ -33,6 +34,7 @@ let g:lightline = {
         \   'mode': 'MyMode',
         \   'syntastic': 'SyntasticStatuslineFlag',
         \   'ale': 'ALEGetStatusLine',
+        \   'cocstatus': 'coc#status',
         \   'charcode': 'MyCharCode',
         \   'gitgutter': 'MyGitGutter',
         \ },
