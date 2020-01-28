@@ -1,0 +1,21 @@
+[[plugins]]
+repo = 'kana/vim-submode'
+hook_add = '''
+
+let g:submode_always_show_submode = 1 " show always the current submode
+let g:submode_timeout = 0            " disable time out on submodes
+
+" cf. https://qiita.com/tekkoc/items/98adcadfa4bdc8b5a6ca#vimrc
+" s>:windowの幅を増やす
+" s<:windowの幅を減らす
+" s+:windowの高さを増やす
+" s-:windowの高さを減らす
+call submode#enter_with('bufmove', 'n', '', 's>', '<C-w>>')
+call submode#enter_with('bufmove', 'n', '', 's<', '<C-w><')
+call submode#enter_with('bufmove', 'n', '', 's+', '<C-w>+')
+call submode#enter_with('bufmove', 'n', '', 's-', '<C-w>-')
+call submode#map('bufmove', 'n', '', '>', '<C-w>>')
+call submode#map('bufmove', 'n', '', '<', '<C-w><')
+call submode#map('bufmove', 'n', '', '+', '<C-w>+')
+call submode#map('bufmove', 'n', '', '-', '<C-w>-')
+'''

@@ -36,6 +36,7 @@ set backupdir=$XDG_CONFIG_HOME/nvim/.backup  " このディレクトリはあら
 
 " 見た目系
 set number                " 行番号を表示
+set relativenumber
 set ruler                 " ルーラーを表示
 set cursorline            " 現在の行を強調表示
 set cursorcolumn          " 現在の行を強調表示（縦）
@@ -47,14 +48,15 @@ set matchtime=1
 set showcmd               " 入力中のコマンドをステータスに表示する
 set noshowmode
 set laststatus=2          " ステータスラインを常に表示
-set nowrap                "テキストが折り返されないようにする
+" set nowrap                "テキストが折り返されないようにする
+set wrap
 set display=lastline
 set cursorline            " 現在の行をハイライト
 hi clear CursorLine       " 上と合わせることで行番号のみハイライト
 set ambiwidth=double
 
 set conceallevel=2
-let g:tex_conceal="abdgms"
+let g:tex_conceal=""
 set concealcursor="nc"
 
 " 補完系
@@ -70,6 +72,9 @@ set softtabstop=4         " <Tab> の挿入や <BS> の使用等の編集操作�
 " 不可視文字を可視化(タブが「?-」と表示される)
 set list
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:⍽
+
+" JSONでコメントがhighlightされるようにする
+autocmd FileType json syntax match Comment +\/\/.\+$+
 
 "全角スペースをハイライト表示
 function! ZenkakuSpace()
@@ -148,12 +153,12 @@ if !exists(":DiffOrig")
 endif
 
 
-" エラーウィンドウを出す
-function! s:ale_list()
-    let g:ale_open_list = 1
-    call ale#Queue(0, 'lint_file')
-endfunction
-command! ALEList call s:ale_list()
+" " エラーウィンドウを出す
+" function! s:ale_list()
+"     let g:ale_open_list = 1
+"     call ale#Queue(0, 'lint_file')
+" endfunction
+" command! ALEList call s:ale_list()
 " オートコンパイル
 " augroup setAutoCompile
 "     autocmd!

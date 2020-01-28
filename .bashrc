@@ -54,12 +54,12 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
     else
-	color_prompt=
+    color_prompt=
     fi
 fi
 
@@ -140,6 +140,10 @@ export EDITOR=vim
 export GIT_EDITOR=vim
 export PATH="$HOME/.local/bin:$PATH"
 export LD_LIBRARY_PATH=$HOME/.local/lib/:$LD_LIBRARY_PATH
+export DISPLAY=:0.0
+export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 # .inputrcの読み込み
 [ -f ~/.inputrc ] && bind -f ~/.inputrc
+
+exec fish
