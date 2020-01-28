@@ -1,0 +1,28 @@
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+merge = 0
+rev = 'release'
+hook_add = '''
+" cf. https://drumato.hatenablog.com/entry/2019/04/01/121139
+" use <tab> for trigger completion and navigate to next complete item
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+inoremap <silent><expr> <TAB>
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()"
+
+nmap <silent> <space><space> :<C-u>CocList<cr>
+"スペースhでHover
+nmap <silent> <leader>h :<C-u>call CocAction('doHover')<cr>
+""スペースdfでDefinition
+nmap <silent> <leader>df <Plug>(coc-definition)
+"スペースrfでReferences
+nmap <silent> <leader>rf <Plug>(coc-references)
+""スペースrnでRename
+nmap <silent> <leader>rn <Plug>(coc-rename)
+"スペースfmtでFormat
+nmap <silent> <leader>fmt <Plug>(coc-format)
+'''

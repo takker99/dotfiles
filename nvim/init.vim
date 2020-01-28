@@ -9,3 +9,5 @@ set encoding=utf-8
 scriptencoding utf-8
 
 runtime! userautoload/init/*.vim
+runtime! userautoload/init/color.vim
+" runtime! $HOME/git/dotfiles/nvim/init.vim

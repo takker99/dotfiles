@@ -1,3 +1,11 @@
+" memo
+" - <silent>を使うと、コマンドラインにコマンドが出力されないようになる。
+"   e.g
+"   - nnoremap <silent>sb :b#<CR>
+"   →一番下のラインには何も表示されない。
+"   - nnoremap sb :b#<CR>
+"   →一番下のラインには :b# が表示されない。
+"
 "文字コードをUFT-8に設定
 set encoding=utf-8
 scriptencoding utf-8
@@ -51,6 +59,14 @@ inoremap <C-j> <Down>
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
 
+" cf.https://qiita.com/itmammoth/items/312246b4b7688875d023#6%E8%A1%8C%E3%82%92%E7%A7%BB%E5%8B%95%E3%81%99%E3%82%8B
+" 行を移動
+nnoremap <A-k> "zdd<Up>"zP
+nnoremap <A-j> "zdd"zp
+" " 複数行を移動
+vnoremap <A-k> "zx<Up>"zP`[V`]
+vnoremap <A-j> "zx"zp`[V`]
+
 " Yでカーソル位置から行末までヤンクする
 nnoremap Y y$
 
@@ -97,13 +113,20 @@ nnoremap s= <C-w>=
 nnoremap sw <C-w>w
 nnoremap so <C-w>_<C-w>|
 nnoremap sO <C-w>=
-nnoremap <silent>sp :bprevious<CR>
 nnoremap <silent>sn :bnext<CR>
+nnoremap <silent>sp :bprevious<CR>
 nnoremap <silent>sb :b#<CR>
 nnoremap <silent>sd :bd<CR>
 nnoremap ss :<C-u>sp<CR>
 nnoremap sv :<C-u>vs<CR>
+nnoremap <silent>st :tabnew<CR>
+nnoremap <silent>sx :tabclose<CR>
+nnoremap sN gt
+nnoremap sP gT
 
+" cf.
+" 相対行番号表示の切り替え
+nnoremap <F12> :set relativenumber!<CR>
 " コマンドラインモードで %% を入力すると現在編集中のファイルのフォルダのパスが展開されるようにする
 cnoremap %% <C-R>=expand('%:p:h').'/'<cr>
 
