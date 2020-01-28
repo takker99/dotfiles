@@ -7,7 +7,7 @@ let g:lightline = {
         \ 'active': {
         \   'left': [
         \     ['mode', 'paste'],
-        \     [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ],
+        \     [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ],
         \     ['coc'],
         \     ['fugitive', 'gitgutter', 'filename'],
         \   ],
@@ -35,6 +35,7 @@ let g:lightline = {
         \   'syntastic': 'SyntasticStatuslineFlag',
         \   'ale': 'ALEGetStatusLine',
         \   'cocstatus': 'coc#status',
+        \   'currentfunction':'CocCurrentFunction',
         \   'charcode': 'MyCharCode',
         \   'gitgutter': 'MyGitGutter',
         \ },
@@ -48,10 +49,14 @@ let g:lightline = {
         \ 'subseparator': { 'left': '|', 'right': '|' }
         \ }
 
-let g:lightline#ale#indicator_checking = "\uf110"
-let g:lightline#ale#indicator_warnings = "\uf071"
-let g:lightline#ale#indicator_errors = "\uf05e"
-let g:lightline#ale#indicator_ok = "\uf00c"
+" let g:lightline#ale#indicator_checking = "\uf110"
+" let g:lightline#ale#indicator_warnings = "\uf071"
+" let g:lightline#ale#indicator_errors = "\uf05e"
+" let g:lightline#ale#indicator_ok = "\uf00c"
+"
+function! CocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
+endfunction
 
 function! MyModified()
     return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'

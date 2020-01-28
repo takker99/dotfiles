@@ -57,7 +57,7 @@ set ambiwidth=double
 
 set conceallevel=2
 let g:tex_conceal=""
-set concealcursor=""
+set concealcursor="nc"
 
 " 補完系
 set wildmenu
@@ -72,6 +72,9 @@ set softtabstop=4         " <Tab> の挿入や <BS> の使用等の編集操作�
 " 不可視文字を可視化(タブが「?-」と表示される)
 set list
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:⍽
+
+" JSONでコメントがhighlightされるようにする
+autocmd FileType json syntax match Comment +\/\/.\+$+
 
 "全角スペースをハイライト表示
 function! ZenkakuSpace()
@@ -150,12 +153,12 @@ if !exists(":DiffOrig")
 endif
 
 
-" エラーウィンドウを出す
-function! s:ale_list()
-    let g:ale_open_list = 1
-    call ale#Queue(0, 'lint_file')
-endfunction
-command! ALEList call s:ale_list()
+" " エラーウィンドウを出す
+" function! s:ale_list()
+"     let g:ale_open_list = 1
+"     call ale#Queue(0, 'lint_file')
+" endfunction
+" command! ALEList call s:ale_list()
 " オートコンパイル
 " augroup setAutoCompile
 "     autocmd!
