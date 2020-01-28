@@ -59,6 +59,16 @@ set conceallevel=2
 let g:tex_conceal=""
 set concealcursor="nc"
 
+" 折りたたみ系
+" cf. https://maku77.github.io/vim/advanced/folding.html
+set foldmethod=indent  "折りたたみ範囲の判断基準（デフォルト: manual）
+set foldlevel=2        "ファイルを開いたときにデフォルトで折りたたむレベル
+set foldcolumn=3       "左端に折りたたみ状態を表示する領域を追加する
+
+" 折りたたみの自動保存
+au BufWinLeave * mkview
+au BufWinEnter * silent loadview
+
 " 補完系
 set wildmenu
 set wildmode=list:full " コマンドラインの補完
