@@ -142,7 +142,8 @@ export PATH="$HOME/.local/bin:$PATH"
 export LD_LIBRARY_PATH=$HOME/.local/lib/:$LD_LIBRARY_PATH
 export DISPLAY=:0.0
 export PATH=$HOME/.nodebrew/current/bin:$PATH
-export PATH=/usr/local/llvm/10.0:$PATH
+export CC=clang
+export CXX=clang++
 
 # .inputrcの読み込み
 [ -f ~/.inputrc ] && bind -f ~/.inputrc
