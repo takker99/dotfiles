@@ -10,8 +10,8 @@
 set encoding=utf-8
 scriptencoding utf-8
 
-let s:script_path = expand('<sfile>:p')
-echom '[debug]enter ' . s:script_path
+" let s:script_path = expand('<sfile>:p')
+" echom '[debug]enter ' . s:script_path
 
 " <Leader> を<Space> にする
 let mapleader = "\<Space>"

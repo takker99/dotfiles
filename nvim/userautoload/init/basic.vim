@@ -7,8 +7,8 @@ scriptencoding utf-8
 "     let g:python_host_prog = 'C:\Python27amd64\python.exe'
 " endif
 
-let s:script_path = expand('<sfile>:p')
-echom '[debug]enter ' . s:script_path
+" let s:script_path = expand('<sfile>:p')
+" echom '[debug]enter ' . s:script_path
 
 " encodings
 set fileencoding=utf-8
@@ -155,6 +155,8 @@ if !exists(":DiffOrig")
                 \ | wincmd p | diffthis
 endif
 
+" coc-setting.jsonの場所
+let g:coc_config_home=expand('<sfile>:p:h:h').'/toml'
 
 " " エラーウィンドウを出す
 " function! s:ale_list()
