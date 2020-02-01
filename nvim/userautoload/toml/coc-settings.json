@@ -4,7 +4,7 @@
     "diagnostic.virtualText":true,
     "diagnostic.virtualTextLineSeparator":"▶",
     "diagnostic.virtualTextPrefix":"▶",
-    "diagnostic.errorSign":"⨉",
+    "diagnostic.errorSign":"✖",
     "diagnostic.infoSign":"ⓘ",
     "diagnostic.hintSign":"⚡",
     "languageserver": {
