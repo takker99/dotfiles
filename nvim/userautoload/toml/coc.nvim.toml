@@ -19,7 +19,12 @@ inoremap <silent><expr> <TAB>
 
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-nmap <silent> <space><space> :<C-u>CocList<cr>
+nnoremap <silent> <space><space> :<C-u>CocList<cr>
+
+" navigate diagnostics
+nnoremap <silent> [c <Plug>(coc-diagnostic-prev)
+nnoremap <silent> ]c <Plug>(coc-diagnostic-next)
+
 "スペースhでHover
 nmap <silent> <leader>h :<C-u>call CocAction('doHover')<cr>
 ""スペースdfでDefinition
