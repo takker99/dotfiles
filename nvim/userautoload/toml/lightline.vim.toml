@@ -18,16 +18,16 @@ let g:lightline = {
     \ },
     \ 'component_function': {
     \   'mode': 'LightLineMode',
-    \   'fugitive': 'MyFugitive',
     \   'readonly': 'LightLineReadonly',
     \   'fileformat': 'LightLineFileformat',
     \   'filetype': 'MyFiletype',
     \   'filename': 'LightLineFilename',
     \   'fileencoding': 'MyFileencoding',
+    \   'fugitive': 'LightLineFugitive',
+    \   'gitgutter': 'LightLineGitGutter',
     \   'cocstatus': 'CocStatus',
     \   'currentfunction':'CocCurrentFunction',
     \   'charcode': 'MyCharCode',
-    \   'gitgutter': 'MyGitGutter',
     \ },
     \ 'separator': { 'left': '', 'right': '' },
     \ 'subseparator': { 'left': '', 'right': '' }
@@ -72,7 +72,7 @@ function! MyFilename()
                 \ ('' != MyModified() ? ' ' . MyModified() : '')
 endfunction
 
-function! MyFugitive()
+function! LightLineFugitive()
     try
         if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
             let _ = fugitive#head()
@@ -99,7 +99,7 @@ function! MyMode()
     return winwidth('.') > 60 ? lightline#mode() : ''
 endfunction
 
-function! MyGitGutter()
+function! LightLineGitGutter()
     if ! exists('*GitGutterGetHunkSummary')
                 \ || ! get(g:, 'gitgutter_enabled', 0)
                 \ || winwidth('.') <= 90
