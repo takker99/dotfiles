@@ -68,13 +68,13 @@ set foldmethod=indent  "折りたたみ範囲の判断基準（デフォルト: 
 set foldlevel=0        "ファイルを開いたときにデフォルトで折りたたむレベル
 set foldcolumn=3       "左端に折りたたみ状態を表示する領域を追加する
 
-" 折りたたみの自動保存
-" cf. https://vim-jp.org/vim-users-jp/2009/10/08/Hack-84.html
-" Save fold settings.
-autocmd BufWritePost * if expand('%') != '' && &buftype !~ 'nofile' | mkview | endif
-autocmd BufRead * if expand('%') != '' && &buftype !~ 'nofile' | silent loadview | endif
-" Don't save options.
-set viewoptions-=options
+" " 折りたたみの自動保存
+" " cf. https://vim-jp.org/vim-users-jp/2009/10/08/Hack-84.html
+" " Save fold settings.
+" autocmd BufWritePost * if expand('%') != '' && &buftype !~ 'nofile' | mkview | endif
+" autocmd BufRead * if expand('%') != '' && &buftype !~ 'nofile' | silent loadview | endif
+" " Don't save options.
+" set viewoptions-=options
 
 " 折りたたみ設定etc.を保存するフォルダ
 " set viewdir=$XDG_CONFIG_HOME/nvim/.temp/view
