@@ -8,7 +8,7 @@
 set encoding=utf-8
 scriptencoding utf-8
 
-echom 'This is the remote init.vim.'
+" echom 'This is the remote init.vim.'
 
 let s:script_path = expand('<sfile>:p:h')
 execute "source ". s:script_path. '/userautoload/init/basic.vim'
