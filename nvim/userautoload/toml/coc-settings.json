@@ -1,0 +1,16 @@
+{
+    "suggest.enablePreview":true,
+    "codeLens.enable":true,
+    "diagnostic.virtualText":true,
+    "diagnostic.virtualTextLineSeparator":"▶",
+    "diagnostic.virtualTextPrefix":"▶",
+    "diagnostic.errorSign":"⨉",
+    "diagnostic.infoSign":"ⓘ",
+    "diagnostic.hintSign":"⚡",
+    "languageserver": {
+        "clangd": {
+            "command": "clangd",
+            "filetypes": ["c", "cpp", "objc", "objcpp"]
+        }
+    }
+}
