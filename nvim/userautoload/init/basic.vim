@@ -114,6 +114,8 @@ set incsearch  " 検索文字列入力時に順次対象文字列にヒットさ
 set wrapscan   " 検索時に最後まで行ったら最初に戻る
 set hlsearch   " 検索語をハイライト表示
 
+set updatetime=100 " エディタの更新速度を速くする。
+
 
 " I like highlighting strings inside C comments.
 let c_comment_strings=1
