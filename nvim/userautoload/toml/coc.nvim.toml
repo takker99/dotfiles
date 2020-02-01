@@ -3,16 +3,21 @@ repo = 'neoclide/coc.nvim'
 merge = 0
 rev = 'release'
 hook_add = '''
+" Note: g:coc_config_homeはbasic.vimに記述。
 " cf. https://drumato.hatenablog.com/entry/2019/04/01/121139
 " use <tab> for trigger completion and navigate to next complete item
 function! s:check_back_space() abort
     let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
+    return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
 inoremap <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()"
+  \ pumvisible() ? "\<C-n>" :
+  \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ coc#refresh()
+
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 nmap <silent> <space><space> :<C-u>CocList<cr>
 "スペースhでHover

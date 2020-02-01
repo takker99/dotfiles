@@ -8,6 +8,8 @@ let g:NERDTreeShowLineNumbers=1
 
 map <C-n> :NERDTreeToggle<CR>
 
+" Launch NERDTree automatically
+autocmd vimenter * NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " NERDTree File highlighting

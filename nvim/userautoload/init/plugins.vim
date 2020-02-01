@@ -1,8 +1,8 @@
 ﻿set encoding=utf-8
 scriptencoding utf-8
 
-let s:script_path = expand('<sfile>:p')
-echom '[debug]enter ' . s:script_path
+" let s:script_path = expand('<sfile>:p')
+" echom '[debug]enter ' . s:script_path
 
 " Neovim設定ディレクトリ
 let nvim_dir = substitute(expand($XDG_CONFIG_HOME) . '/nvim/', '\', '/', 'g')
@@ -23,13 +23,15 @@ endif
 " dein.vimをruntimepathへ追加
 let &runtimepath = s:dein_repo_dir . "," . &runtimepath
 
+
 " 設定開始
 if dein#load_state(s:dein_dir)
     call dein#begin(s:dein_dir)
 
+    " gitで管理しているtomlフォルダへのパス
+    let s:toml_dir = expand('<sfile>:p:h:h').'/toml/'
     " プラグインリストファイル
-    let s:toml_dir = nvim_dir . 'userautoload/toml/'
-    let s:lazy_toml_dir = nvim_dir . 'userautoload/toml/lazy/'
+    let s:lazy_toml_dir = s:toml_dir . 'lazy/'
 
     " プラグインリストを読み込みキャッシュする
     let s:toml_list = glob(s:toml_dir.'*.toml')
