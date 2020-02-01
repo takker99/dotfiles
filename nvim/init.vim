@@ -8,6 +8,12 @@
 set encoding=utf-8
 scriptencoding utf-8
 
-runtime! userautoload/init/*.vim
-runtime! userautoload/init/color.vim
+echom 'This is the remote init.vim.'
+
+let s:script_path = expand('<sfile>:p:h')
+execute "source ". s:script_path. '/userautoload/init/basic.vim'
+execute "source ". s:script_path. '/userautoload/init/mapping.vim'
+execute "source ". s:script_path. '/userautoload/init/plugins.vim'
+execute "source ". s:script_path. '/userautoload/init/color.vim'
+" runtime! userautoload/init/color.vim
 " runtime! $HOME/git/dotfiles/nvim/init.vim

@@ -2,10 +2,13 @@
 set encoding=utf-8
 scriptencoding utf-8
 
-if has('win32') || has('win64')
-    let g:python3_host_prog = 'C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python36_64\python.exe'
-    let g:python_host_prog = 'C:\Python27amd64\python.exe'
-endif
+" if has('win32') || has('win64')
+"     let g:python3_host_prog = 'C:\Program Files (x86)\Microsoft Visual Studio\Shared\Python36_64\python.exe'
+"     let g:python_host_prog = 'C:\Python27amd64\python.exe'
+" endif
+
+let s:script_path = expand('<sfile>:p')
+echom '[debug]enter ' . s:script_path
 
 " encodings
 set fileencoding=utf-8
@@ -62,12 +65,19 @@ set concealcursor="nc"
 " 折りたたみ系
 " cf. https://maku77.github.io/vim/advanced/folding.html
 set foldmethod=indent  "折りたたみ範囲の判断基準（デフォルト: manual）
-set foldlevel=2        "ファイルを開いたときにデフォルトで折りたたむレベル
+set foldlevel=0        "ファイルを開いたときにデフォルトで折りたたむレベル
 set foldcolumn=3       "左端に折りたたみ状態を表示する領域を追加する
 
 " 折りたたみの自動保存
-au BufWinLeave * mkview
-au BufWinEnter * silent loadview
+" cf. https://vim-jp.org/vim-users-jp/2009/10/08/Hack-84.html
+" Save fold settings.
+autocmd BufWritePost * if expand('%') != '' && &buftype !~ 'nofile' | mkview | endif
+autocmd BufRead * if expand('%') != '' && &buftype !~ 'nofile' | silent loadview | endif
+" Don't save options.
+set viewoptions-=options
+
+" 折りたたみ設定etc.を保存するフォルダ
+" set viewdir=$XDG_CONFIG_HOME/nvim/.temp/view
 
 " 補完系
 set wildmenu
@@ -83,22 +93,6 @@ set softtabstop=4         " <Tab> の挿入や <BS> の使用等の編集操作�
 set list
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:⍽
 
-" JSONでコメントがhighlightされるようにする
-autocmd FileType json syntax match Comment +\/\/.\+$+
-
-"全角スペースをハイライト表示
-function! ZenkakuSpace()
-    highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
-endfunction
-
-if has('syntax')
-    augroup ZenkakuSpace
-        autocmd!
-        autocmd ColorScheme       * call ZenkakuSpace()
-        autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
-    augroup END
-    call ZenkakuSpace()
-endif
 
 " 入力系
 set textwidth=0
@@ -120,7 +114,6 @@ set incsearch  " 検索文字列入力時に順次対象文字列にヒットさ
 set wrapscan   " 検索時に最後まで行ったら最初に戻る
 set hlsearch   " 検索語をハイライト表示
 
-set termguicolors
 
 " I like highlighting strings inside C comments.
 let c_comment_strings=1
