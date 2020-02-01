@@ -64,6 +64,10 @@ function! LightLineFilename()
                 \ '' != expand('%:t') ? expand('%:t') : '[No Name]'
 endfunction
 
+  function! MyFiletype()
+    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+  endfunction
+
 function! MyFilename()
     return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
                 \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
@@ -84,12 +88,9 @@ function! MyFugitive()
 endfunction
 
 function! LightLineFileformat()
-    return winwidth('.') > 70 ? &fileformat : ''
+    return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
 
-function! MyFiletype()
-    return winwidth('.') > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
-endfunction
 
 function! MyFileencoding()
     return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
