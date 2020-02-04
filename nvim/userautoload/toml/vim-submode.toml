@@ -10,12 +10,12 @@ let g:submode_timeout = 0            " disable time out on submodes
 " s<:windowの幅を減らす
 " s+:windowの高さを増やす
 " s-:windowの高さを減らす
-call submode#enter_with('bufmove', 'n', '', 's>', '<C-w>>')
-call submode#enter_with('bufmove', 'n', '', 's<', '<C-w><')
-call submode#enter_with('bufmove', 'n', '', 's+', '<C-w>+')
-call submode#enter_with('bufmove', 'n', '', 's-', '<C-w>-')
-call submode#map('bufmove', 'n', '', '>', '<C-w>>')
-call submode#map('bufmove', 'n', '', '<', '<C-w><')
-call submode#map('bufmove', 'n', '', '+', '<C-w>+')
-call submode#map('bufmove', 'n', '', '-', '<C-w>-')
+call submode#enter_with('BUFMOVE', 'n', '', 's>', '<C-w>>')
+call submode#enter_with('BUFMOVE', 'n', '', 's<', '<C-w><')
+call submode#enter_with('BUFMOVE', 'n', '', 's+', '<C-w>+')
+call submode#enter_with('BUFMOVE', 'n', '', 's-', '<C-w>-')
+call submode#map('BUFMOVE', 'n', '', '>', '<C-w>>')
+call submode#map('BUFMOVE', 'n', '', '<', '<C-w><')
+call submode#map('BUFMOVE', 'n', '', '+', '<C-w>+')
+call submode#map('BUFMOVE', 'n', '', '-', '<C-w>-')
 '''
