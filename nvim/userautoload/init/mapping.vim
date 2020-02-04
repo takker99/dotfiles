@@ -55,13 +55,6 @@ inoremap <Down> <Nop>
 inoremap <Left> <Nop>
 inoremap <Right> <Nop>
 
-inoremap <C-h> <Nop>
-
-inoremap <C-k> <Up>
-inoremap <C-j> <Down>
-inoremap <C-h> <Left>
-inoremap <C-l> <Right>
-
 " cf.https://qiita.com/itmammoth/items/312246b4b7688875d023#6%E8%A1%8C%E3%82%92%E7%A7%BB%E5%8B%95%E3%81%99%E3%82%8B
 " 行を移動
 nnoremap <A-k> "zdd<Up>"zP
@@ -118,7 +111,6 @@ nnoremap so <C-w>_<C-w>|
 nnoremap sO <C-w>=
 nnoremap <silent>sn :bnext<CR>
 nnoremap <silent>sp :bprevious<CR>
-nnoremap <silent>sb :b#<CR>
 nnoremap <silent>sd :bd<CR>
 nnoremap ss :<C-u>sp<CR>
 nnoremap sv :<C-u>vs<CR>
