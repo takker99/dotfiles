@@ -57,6 +57,7 @@ set display=lastline
 set cursorline            " 現在の行をハイライト
 hi clear CursorLine       " 上と合わせることで行番号のみハイライト
 set ambiwidth=double
+set signcolumn=auto
 
 set conceallevel=2
 let g:tex_conceal=""
