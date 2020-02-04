@@ -2,13 +2,12 @@
 repo = 'itchyny/lightline.vim'
 hook_add = '''
 let g:lightline = {
-    \ 'colorscheme': 'molokai',
     \ 'mode_map': {'c': 'NORMAL'},
     \ 'active': {
     \   'left': [
     \     ['mode', 'paste'],
-    \     ['readonly', 'filename','cocstatus', 'currentfunction', 'modified' ],
-    \     ['fugitive', 'gitgutter'],
+    \     ['fugitive', 'gitgutter','readonly','filename','modified'],
+    \     ['cocstatus', 'currentfunction'],
     \   ],
     \   'right': [
     \     ['lineinfo'],
@@ -20,9 +19,9 @@ let g:lightline = {
     \   'mode': 'LightLineMode',
     \   'readonly': 'LightLineReadonly',
     \   'fileformat': 'LightLineFileformat',
-    \   'filetype': 'MyFiletype',
+    \   'filetype': 'LightLineFiletype',
     \   'filename': 'LightLineFilename',
-    \   'fileencoding': 'MyFileencoding',
+    \   'fileencoding': 'LightLineFileencoding',
     \   'fugitive': 'LightLineFugitive',
     \   'gitgutter': 'LightLineGitGutter',
     \   'cocstatus': 'CocStatus',
@@ -33,40 +32,42 @@ let g:lightline = {
     \ 'subseparator': { 'left': '', 'right': '' }
     \ }
 
+" 特殊バッファとして認識するfiletypes
+let s:ignore_types='defx\|help\|undotree'
+
 function! CocCurrentFunction()
-    return &filetype == 'nerdtree' ? '' : get(b:, 'coc_current_function', '')
+    return &filetype =~ s:ignore_types ? '' : get(b:, 'coc_current_function', '')
 endfunction
 
 function! CocStatus()
-    return &filetype == 'nerdtree' ? '' : get(g:, 'coc_status', '')
-endfunction
-
-function! MyModified()
-    return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-
-function! MyReadonly()
-    return &ft !~? 'help\|vimfiler\|gundo' && &ro ? '⭤' : ''
+    return &filetype =~ s:ignore_types ? '' : get(g:, 'coc_status', '')
 endfunction
 
 function! LightLineMode()
-    return  &filetype == 'nerdtree' ? 'NERDtree' :
+    if exists('*submode#current')
+        let _ = submode#current()
+        if strlen(_)
+            return _
+        endif
+    endif
+    return   &filetype == 'defx' ? 'defx' :
+                \ &filetype ==  'undotree' ? 'undotree':
                 \ winwidth(0) > 60 ?  lightline#mode() : ''
 endfunction
 
+" 特殊バッファと読み取り専用ファイルに対して、読み取り専用マークを表示する。
 function! LightLineReadonly()
-    return &filetype == 'nerdtree' ? '' :
-                \ &readonly ? '' : ''
+    return &filetype =~ s:ignore_types || &readonly ? '' : ''
 endfunction
 
 function! LightLineFilename()
-    return &filetype == 'nerdtree' ? '' :
+    return &filetype =~ s:ignore_types ? '' :
                 \ '' != expand('%:t') ? expand('%:t') : '[No Name]'
 endfunction
 
-  function! MyFiletype()
+function! LightLineFiletype()
     return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
-  endfunction
+endfunction
 
 function! MyFilename()
     return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
@@ -78,7 +79,7 @@ endfunction
 
 function! LightLineFugitive()
     try
-        if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
+        if &ft !~? s:ignore_types && exists('*fugitive#head')
             let _ = fugitive#head()
             return strlen(_) ? '⭠ '._ : ''
         endif
@@ -92,12 +93,8 @@ function! LightLineFileformat()
 endfunction
 
 
-function! MyFileencoding()
+function! LightLineFileencoding()
     return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
-endfunction
-
-function! MyMode()
-    return winwidth('.') > 60 ? lightline#mode() : ''
 endfunction
 
 function! LightLineGitGutter()
