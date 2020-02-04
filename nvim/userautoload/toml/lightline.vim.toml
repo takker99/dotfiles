@@ -81,7 +81,7 @@ function! LightLineFugitive()
     try
         if &ft !~? s:ignore_types && exists('*fugitive#head')
             let _ = fugitive#head()
-            return strlen(_) ? '⭠ '._ : ''
+            return strlen(_) ? ''._ : ''
         endif
     catch
     endtry
