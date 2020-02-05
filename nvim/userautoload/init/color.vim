@@ -16,6 +16,9 @@ scriptencoding utf-8
 set termguicolors
 colorscheme zenburn
 
+" ダーク系のカラースキームを使う
+set background=dark
+
 "cf. https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwiU9Lq2wf7mAhXSG6YKHcnJDTYQFjAAegQIBRAB&url=https%3A%2F%2Fgithub.com%2Fxaizek%2Fdotvim%2Fblob%2Fmaster%2Fftdetect%2Fxaml.vim&usg=AOvVaw3fFHYZwsk5d0Pe1r63IWXW
 autocmd BufRead,BufNewFile *.xaml :set filetype=xml
 
@@ -50,7 +53,10 @@ if has('syntax')
     call ZenkakuSpace()
 endif
 
-" ダーク系のカラースキームを使う
-set background=dark
+highlight! Normal ctermbg=NONE guibg=NONE
+highlight! NonText ctermbg=NONE guibg=NONE
+highlight! SpecialKey ctermbg=NONE guibg=NONE
+highlight! EndOfBuffer ctermbg=NONE guibg=NONE
+
 syntax enable
 
