@@ -32,7 +32,7 @@ call defx#custom#column('filename', {
       \ })
 
 call defx#custom#column('mark', {
-      \ 'readonly_icon': '✗',
+      \ 'readonly_icon': '',
       \ 'selected_icon': '✓',
       \ })
 
