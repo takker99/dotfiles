@@ -92,6 +92,22 @@ nnoremap N Nzz
 nnoremap + <C-a>
 nnoremap - <C-x>
 
+" Enterで行ジャンプ
+" cf. http://deris.hatenablog.jp/entry/2013/05/02/192415
+nnoremap <Enter> G
+
+" vp doesn't replace paste buffer
+" cf. http://deris.hatenablog.jp/entry/2013/05/02/192415
+function! RestoreRegister()
+  let @" = s:restore_reg
+  return ''
+endfunction
+function! s:Repl()
+  let s:restore_reg = @"
+  return "p@=RestoreRegister()\<cr>"
+endfunction
+nmap <silent> <expr> p <sid>Repl()
+
 " ウィンドウ関連
 " c.f. https://qiita.com/tekkoc/items/98adcadfa4bdc8b5a6ca
 " c.f. http://ivxi.hatenablog.com/entry/2013/05/23/163825
@@ -118,6 +134,9 @@ nnoremap <silent>st :tabnew<CR>
 nnoremap <silent>sx :tabclose<CR>
 nnoremap sN gt
 nnoremap sP gT
+
+" function key 関連
+nnoremap <F1> :h<space>
 
 " cf.
 " 相対行番号表示の切り替え
