@@ -6,7 +6,7 @@ let g:lightline = {
     \ 'active': {
     \   'left': [
     \     ['mode', 'paste'],
-    \     ['fugitive', 'gitgutter','readonly','filename','modified'],
+    \     ['gitbranch', 'gitgutter','readonly','filename','modified'],
     \     ['cocstatus', 'currentfunction'],
     \   ],
     \   'right': [
@@ -22,7 +22,7 @@ let g:lightline = {
     \   'filetype': 'LightLineFiletype',
     \   'filename': 'LightLineFilename',
     \   'fileencoding': 'LightLineFileencoding',
-    \   'fugitive': 'LightLineFugitive',
+    \   'gitbranch': 'LightLineGitBranch',
     \   'gitgutter': 'LightLineGitGutter',
     \   'cocstatus': 'CocStatus',
     \   'currentfunction':'CocCurrentFunction',
@@ -52,6 +52,8 @@ function! LightLineMode()
     endif
     return   &filetype == 'defx' ? 'defx' :
                 \ &filetype ==  'undotree' ? 'undotree':
+                \ &filetype ==  'gina-status' ? 'GSTATUS':
+                \ &filetype ==  'gina-commit' ? 'GCOMMIT':
                 \ winwidth(0) > 60 ?  lightline#mode() : ''
 endfunction
 
@@ -62,6 +64,7 @@ endfunction
 
 function! LightLineFilename()
     return &filetype =~ s:ignore_types ? '' :
+                \ &filetype =~ 'gina-status\|gina-commit' ? '' :
                 \ '' != expand('%:t') ? expand('%:t') : '[No Name]'
 endfunction
 
@@ -69,18 +72,19 @@ function! LightLineFiletype()
     return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
 endfunction
 
-function! MyFilename()
-    return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-                \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-                \  &ft == 'unite' ? unite#get_status_string() :
-                \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-                \ ('' != MyModified() ? ' ' . MyModified() : '')
-endfunction
+" function! MyFilename()
+"     return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+"                 \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+"                 \  &ft == 'unite' ? unite#get_status_string() :
+"                 \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+"                 \ ('' != MyModified() ? ' ' . MyModified() : '')
+" endfunction
 
-function! LightLineFugitive()
+function! LightLineGitBranch()
+    " if &ft !~ s:ignore_types && exists('*gina#component#repo#branch')
     try
-        if &ft !~? s:ignore_types && exists('*fugitive#head')
-            let _ = fugitive#head()
+        if &ft !~ s:ignore_types
+            let _ = gina#component#repo#branch()
             return strlen(_) ? ''._ : ''
         endif
     catch
@@ -155,5 +159,5 @@ function! MyCharCode()
 endfunction
 
 " Use auocmd to force lightline update.
-autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+kutocmd User CocStatusChange,CocDiagnosticChange,GitGutter call lightline#update()
 '''
