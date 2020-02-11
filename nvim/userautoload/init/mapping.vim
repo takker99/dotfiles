@@ -92,6 +92,10 @@ nnoremap N Nzz
 nnoremap + <C-a>
 nnoremap - <C-x>
 
+"押しにくい$及び^をリマッピング
+nmap H ^
+nmap L $
+
 " Enterで行ジャンプ
 " cf. http://deris.hatenablog.jp/entry/2013/05/02/192415
 nnoremap <Enter> G
