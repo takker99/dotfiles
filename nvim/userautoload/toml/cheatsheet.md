@@ -110,6 +110,13 @@
 - `<C-o>`                  : 元の場所へ戻る
 - `K`                      : カーソル位置のキーワードを調べる
 
+### EasyMotion
+- `;{char}{char}{label}` : ;のあとに続けた二文字がある場所にカーソルを飛ばす。複数箇所ある場合はジャンプ用のlabelsを表示する
+- `f{char}{label}` : 現在行内で、カーソルの右にある{char}に飛ぶ。複数箇所あるときはlabelsを表示する。
+- `F{char}{label}` : 現在行内で、カーソルの左にある{char}に飛ぶ。複数箇所あるときはlabelsを表示する。
+- `<leader>k{label}` : {label}が表示されている行に飛ぶ。範囲はカーソルより上の行
+- `<leader>j{label}` : {label}が表示されている行に飛ぶ。範囲はカーソルより下の行
+
 ### Denite
 - `:Dgrep`   : Denite grep
 - `:Dresume` : 閉じた検索結果を再度開く
