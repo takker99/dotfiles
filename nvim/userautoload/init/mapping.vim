@@ -95,6 +95,8 @@ nnoremap - <C-x>
 "押しにくい$及び^をリマッピング
 nmap H ^
 nmap L $
+vmap H ^
+vmap L $
 
 " Enterで行ジャンプ
 " cf. http://deris.hatenablog.jp/entry/2013/05/02/192415
