@@ -19,125 +19,126 @@
 
 #### object
 - `(`  : 文単位で上へ
-        - `)`  : 文単位で下へ
+- `)`  : 文単位で下へ
 - `{`  : 段落単位で上へ
-    - `}`  : 段落単位で下へ
-    - `[[` : セクション単位で上へ
-    - `]]` : セクション単位で下へ
+- `}`  : 段落単位で下へ
+- `[[` : セクション単位で上へ
+- `]]` : セクション単位で下へ
 
 #### scroll
-    - `<C-u>` : 画面半分上へスクロール
-    - `<C-d>` : 画面半分下へスクロール
-    - `<C-b>` : 1画面分上へスクロール(PageUp)
-    - `<C-f>` : 1画面分下へスクロール(PageDown)
+- `<C-u>` : 画面半分上へスクロール
+- `<C-d>` : 画面半分下へスクロール
+- `<C-b>` : 1画面分上へスクロール(PageUp)
+- `<C-f>` : 1画面分下へスクロール(PageDown)
 
 #### other
-    - `gg` : ファイル先頭へ
-    - `G`  : ファイル末尾へ
-    - `I`  : 行頭でインサートモードへ
-    - `A`  : 行末でインサートモードへ
-    - `S`  : 行を消してインサートモードへ
-    - `J`  : 行をスペース区切りで結合(頭に数字で繰り返し)
-    - `gJ` : 行を結合(頭に数字で繰り返し)
-    - `<F12>` : 行表示切り替え(相対表示⇔絶対表示)
+- `gg` : ファイル先頭へ
+- `G`  : ファイル末尾へ
+- `I`  : 行頭でインサートモードへ
+- `A`  : 行末でインサートモードへ
+- `S`  : 行を消してインサートモードへ
+- `J`  : 行をスペース区切りで結合(頭に数字で繰り返し)
+- `gJ` : 行を結合(頭に数字で繰り返し)
+- `<F12>` : 行表示切り替え(相対表示⇔絶対表示)
 
 
 ### yank
-    - `"0p` : レジスタ`"0`の内容を貼り付け(`"0`は`dd`などで削除しても使用されない)
+- `"0p` : レジスタ`"0`の内容を貼り付け(`"0`は`dd`などで削除しても使用されない)
 
 ### fold
-    - `zf` : 新規作成
-    - `zo` : 開く
-    - `zc` : 閉じる
-    - `zr` : 全体を一段開く
-    - `zR` : 全体を全て開く
-    - `zm` : 全体を一段閉じる
-    - `zM` : 全体を全て閉じる
+- `zf` : 新規作成
+- `zo` : 開く
+- `zc` : 閉じる
+- `zr` : 全体を一段開く
+- `zR` : 全体を全て開く
+- `zm` : 全体を一段閉じる
+- `zM` : 全体を全て閉じる
 
 ### pane
-    - `sv`         : 縦に分割
-    - `ss`         : 横に分割
-    - `<C-e>`       : 幅調整モードへ移行
-    - `<Leader>Tab` : 次のペインへ
-    - `sh`          : 左のペインへ
-    - `sj`          : 下のペインへ
-    - `sk`          : 上のペインへ
-    - `sl`          : 右のペインへ
-    - `st`          : 最も左上のペインへ
-    - `sb`          : 最も右下のペインへ
+- `sv`: 縦に分割
+- `ss`: 横に分割
+- `sh`: 左のペインへ
+- `sj`: 下のペインへ
+- `sk`: 上のペインへ
+- `sl`: 右のペインへ
+- `sw`: 次のペインへ
+- `sh`: ペインを左に移動
+- `sj`: ペインを下に移動
+- `sk`: ペインを上に移動
+- `sl`: ペインを右に移動
+- `sr`: ペインを回転
 
 ### buffer
-    - `sn`       : 次へ
-    - `sp`       : 前へ
-    - `sd`       : 削除
-    - `:b {名前}` : 指定したバッファへ(補完可能)
+- `sn`       : 次へ
+- `sp`       : 前へ
+- `sd`       : 削除
+- `:b {名前}` : 指定したバッファへ(補完可能)
 
 ### macro
-    - `q(a-z)`       : 記録開始
-    - `q`            : 記録終了
-    - `[数字]@(a-z)` : 任意の回数分マクロを実行
+- `q(a-z)`       : 記録開始
+- `q`            : 記録終了
+- `[数字]@(a-z)` : 任意の回数分マクロを実行
 
-### quick fix
-    - `:cn`, `<C-n>` : 次のエラーへ
-    - `:cp`, `<C-p>` : 前のエラーへ
-    - `:ccl[ose]`    : Quick Fixを閉じる
-
+### coc.nvim
+- `<tab>` : 補完開始
+- `[c` : 前の警告へ飛ぶ
+- `]c` : 次の警告へ飛ぶ
 ### location list
-    - `:lop[en]`     : ロケーションリストを開く
-    - `:lcl[ose]`    : ロケーションリストを閉じる
-    - `:lne[xt]`     : 次へ
-    - `:lp[revious]` : 前へ
+- `:lop[en]`     : ロケーションリストを開く
+- `:lcl[ose]`    : ロケーションリストを閉じる
+- `:lne[xt]`     : 次へ
+- `:lp[revious]` : 前へ
 
 ### snippets
-    - `<C-k>` : スニペットの展開、次の位置へ
+- `<C-k>` : スニペットの展開、次の位置へ
 
 ### help
-    - `:h[elp] ${name}`        : ヘルプを分割して表示
-    - `:h[elp] ${name} | only` : ヘルプを全画面で表示
-    - `<C-]>`                  : 項目へジャンプ
-    - `<C-o>`                  : 元の場所へ戻る
-    - `K`                      : カーソル位置のキーワードを調べる
+- `:h[elp] ${name}`        : ヘルプを分割して表示
+- `:h[elp] ${name} | only` : ヘルプを全画面で表示
+- `<C-]>`                  : 項目へジャンプ
+- `<C-o>`                  : 元の場所へ戻る
+- `K`                      : カーソル位置のキーワードを調べる
 
 ### Denite
-    - `:Dgrep`   : Denite grep
-    - `:Dresume` : 閉じた検索結果を再度開く
-    - `:Dprev`   : 前の検索結果へ
-    - `:Dnext`   : 次の検索結果へ
-    - `<C-n>`    : (検索結果ダイアログ)次へ
-    - `<C-p>`    : (検索結果ダイアログ)前へ
+- `:Dgrep`   : Denite grep
+- `:Dresume` : 閉じた検索結果を再度開く
+- `:Dprev`   : 前の検索結果へ
+- `:Dnext`   : 次の検索結果へ
+- `<C-n>`    : (検索結果ダイアログ)次へ
+- `<C-p>`    : (検索結果ダイアログ)前へ
 
 ### vim-fugitve
-    - `:Gstatus`      : statusの表示
-    - `:Glog | copen` : git logをquickfixで表示
-    - `:Gdiff`        : diffをvimdiffで表示
-    - `:Gblame`       : git blame
+- `:Gstatus`      : statusの表示
+- `:Glog | copen` : git logをquickfixで表示
+- `:Gdiff`        : diffをvimdiffで表示
+- `:Gblame`       : git blame
 
 ### gv.vim
-    - `:GV`            : commit browserを開く
-    - `o` or `<Enter>` : コミットの詳細を表示する
-    - `q`              : commit browserの終了
+- `:GV`            : commit browserを開く
+- `o` or `<Enter>` : コミットの詳細を表示する
+- `q`              : commit browserの終了
 
 ### vim-go
-    - `<Leader>b`         : GoBuild = `go build`
-    - `<Leader>r`         : GoRun = `go run`
-    - `<Leader>t`         : GoTest = `go test`
-    - `<Leader>tf`        : GoTestFunc = `go test -run ...`
-    - `<Leader>c`         : GoCoverageToggle
-    - `:GoImport ${name}` : importに追加、tab補完可能
-    - `:GoDrop ${name}`   : importから削除、tab補完可能
-    - `:GoImports`        : 不足しているパッケージをimportに追加する
-    - `dif`               : 関数の中身をdelete
-    - `vif`               : 関数の中身を選択
-    - `yif`               : 関数の中身をyank
-    - `daf`               : 関数の全体をdelete
-    - `vaf`               : 関数の全体を選択
-    - `yaf`               : 関数の全体をyank
-    - `:GoAlternate`      : foo.go と foo_test.goを行き来する
-    - `:GoDef`            : 定義へ移動
-    - `:GoDoc`            : ドキュメントを開く
-    - `:GoDocBrowser`     : ドキュメントをブラウザで開く
-    - `<Leader>i`         : GoInfo = カーソル下の情報を表示
-    - `:GoRename`         : カーソル下の要素をリネーム
+- `<Leader>b`         : GoBuild = `go build`
+- `<Leader>r`         : GoRun = `go run`
+- `<Leader>t`         : GoTest = `go test`
+- `<Leader>tf`        : GoTestFunc = `go test -run ...`
+- `<Leader>c`         : GoCoverageToggle
+- `:GoImport ${name}` : importに追加、tab補完可能
+- `:GoDrop ${name}`   : importから削除、tab補完可能
+- `:GoImports`        : 不足しているパッケージをimportに追加する
+- `dif`               : 関数の中身をdelete
+- `vif`               : 関数の中身を選択
+- `yif`               : 関数の中身をyank
+- `daf`               : 関数の全体をdelete
+- `vaf`               : 関数の全体を選択
+- `yaf`               : 関数の全体をyank
+- `:GoAlternate`      : foo.go と foo_test.goを行き来する
+- `:GoDef`            : 定義へ移動
+- `:GoDoc`            : ドキュメントを開く
+- `:GoDocBrowser`     : ドキュメントをブラウザで開く
+- `<Leader>i`         : GoInfo = カーソル下の情報を表示
+- `:GoRename`         : カーソル下の要素をリネーム
 
 ## c.f
 
