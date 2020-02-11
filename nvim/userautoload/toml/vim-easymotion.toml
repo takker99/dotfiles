@@ -12,7 +12,7 @@ map T <Plug>(easymotion-Tl)
 " Jump to anywhere you want with minimal keystrokes, with just one key binding.
 " `;{char}{char}{label}`
 " Need one more keystroke, but on average, it may be more comfortable.
-nmap ; <Plug>(easymotion-overwin-f2)
+map ; <Plug>(easymotion-overwin-f2)
 
 " Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
