@@ -41,7 +41,7 @@ set backupdir=$XDG_CONFIG_HOME/nvim/.backup  " このディレクトリはあら
 set number                " 行番号を表示
 set relativenumber
 set ruler                 " ルーラーを表示
-set cursorline            " 現在の行を強調表示
+" set cursorline            " 現在の行を強調表示
 " set cursorcolumn          " 現在の行を強調表示（縦）
 set title                 " タイトルを表示
 set virtualedit=onemore   " 行末の1文字先までカーソルを移動できるように
