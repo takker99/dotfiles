@@ -1,6 +1,38 @@
 ﻿[[plugins]]
 repo = 'itchyny/lightline.vim'
 hook_add = '''
+" let g:lightline = {
+"     \ 'mode_map': {'c': 'NORMAL'},
+"     \ 'active': {
+"     \   'left': [
+"     \     ['mode', 'paste'],
+"     \     ['gitbranch', 'gitgutter','readonly','filename','modified'],
+"     \     ['cocstatus', 'currentfunction'],
+"     \   ],
+"     \   'right': [
+"     \     ['lineinfo'],
+"     \     ['percent'],
+"     \     ['charcode', 'fileformat', 'fileencoding', 'filetype'],
+"     \   ]
+"     \ },
+"     \ 'component_function': {
+"     \   'mode': 'LightLineMode',
+"     \   'readonly': 'LightLineReadonly',
+"     \   'fileformat': 'LightLineFileformat',
+"     \   'filetype': 'LightLineFiletype',
+"     \   'filename': 'LightLineFilename',
+"     \   'fileencoding': 'LightLineFileencoding',
+"     \   'gitbranch': 'LightLineGitBranch',
+"     \   'gitgutter': 'LightLineGitGutter',
+"     \   'cocstatus': 'CocStatus',
+"     \   'currentfunction':'CocCurrentFunction',
+"     \   'charcode': 'MyCharCode',
+"     \ },
+"     \ 'separator': { 'left': '', 'right': '' },
+"     \ 'subseparator': { 'left': '', 'right': '' }
+"     \ }
+
+" debug statement
 let g:lightline = {
     \ 'mode_map': {'c': 'NORMAL'},
     \ 'active': {
@@ -15,23 +47,19 @@ let g:lightline = {
     \     ['charcode', 'fileformat', 'fileencoding', 'filetype'],
     \   ]
     \ },
+    \ 'component': {
+    \   'gitbranch': 'debug mode',
+    \   'gitgutter': 'debug mode',
+    \   'charcode': 'debug mode',
+      \     },
     \ 'component_function': {
-    \   'mode': 'LightLineMode',
-    \   'readonly': 'LightLineReadonly',
-    \   'fileformat': 'LightLineFileformat',
-    \   'filetype': 'LightLineFiletype',
-    \   'filename': 'LightLineFilename',
-    \   'fileencoding': 'LightLineFileencoding',
-    \   'gitbranch': 'LightLineGitBranch',
-    \   'gitgutter': 'LightLineGitGutter',
-    \   'cocstatus': 'CocStatus',
+    \   'mode': 'lightline#mode',
+    \   'cocstatus': 'coc#status',
     \   'currentfunction':'CocCurrentFunction',
-    \   'charcode': 'MyCharCode',
     \ },
     \ 'separator': { 'left': '', 'right': '' },
     \ 'subseparator': { 'left': '', 'right': '' }
     \ }
-
 " 特殊バッファとして認識するfiletypes
 let s:ignore_types='defx\|help\|undotree'
 
