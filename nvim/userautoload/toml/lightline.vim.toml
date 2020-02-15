@@ -1,38 +1,6 @@
 ﻿[[plugins]]
 repo = 'itchyny/lightline.vim'
 hook_add = '''
-" let g:lightline = {
-"     \ 'mode_map': {'c': 'NORMAL'},
-"     \ 'active': {
-"     \   'left': [
-"     \     ['mode', 'paste'],
-"     \     ['gitbranch', 'gitgutter','readonly','filename','modified'],
-"     \     ['cocstatus', 'currentfunction'],
-"     \   ],
-"     \   'right': [
-"     \     ['lineinfo'],
-"     \     ['percent'],
-"     \     ['charcode', 'fileformat', 'fileencoding', 'filetype'],
-"     \   ]
-"     \ },
-"     \ 'component_function': {
-"     \   'mode': 'LightLineMode',
-"     \   'readonly': 'LightLineReadonly',
-"     \   'fileformat': 'LightLineFileformat',
-"     \   'filetype': 'LightLineFiletype',
-"     \   'filename': 'LightLineFilename',
-"     \   'fileencoding': 'LightLineFileencoding',
-"     \   'gitbranch': 'LightLineGitBranch',
-"     \   'gitgutter': 'LightLineGitGutter',
-"     \   'cocstatus': 'CocStatus',
-"     \   'currentfunction':'CocCurrentFunction',
-"     \   'charcode': 'MyCharCode',
-"     \ },
-"     \ 'separator': { 'left': '', 'right': '' },
-"     \ 'subseparator': { 'left': '', 'right': '' }
-"     \ }
-
-" debug statement
 let g:lightline = {
     \ 'mode_map': {'c': 'NORMAL'},
     \ 'active': {
@@ -47,19 +15,23 @@ let g:lightline = {
     \     ['charcode', 'fileformat', 'fileencoding', 'filetype'],
     \   ]
     \ },
-    \ 'component': {
-    \   'gitbranch': 'debug mode',
-    \   'gitgutter': 'debug mode',
-    \   'charcode': 'debug mode',
-      \     },
     \ 'component_function': {
-    \   'mode': 'lightline#mode',
-    \   'cocstatus': 'coc#status',
+    \   'mode': 'LightLineMode',
+    \   'readonly': 'LightLineReadonly',
+    \   'fileformat': 'LightLineFileformat',
+    \   'filetype': 'LightLineFiletype',
+    \   'filename': 'LightLineFilename',
+    \   'fileencoding': 'LightLineFileencoding',
+    \   'gitbranch': 'LightLineGitBranch',
+    \   'gitgutter': 'LightLineGitGutter',
+    \   'cocstatus': 'CocStatus',
     \   'currentfunction':'CocCurrentFunction',
+    \   'charcode': 'MyCharCode',
     \ },
     \ 'separator': { 'left': '', 'right': '' },
     \ 'subseparator': { 'left': '', 'right': '' }
     \ }
+
 " 特殊バッファとして認識するfiletypes
 let s:ignore_types='defx\|help\|undotree'
 
@@ -100,14 +72,6 @@ function! LightLineFiletype()
     return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
 endfunction
 
-" function! MyFilename()
-"     return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-"                 \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-"                 \  &ft == 'unite' ? unite#get_status_string() :
-"                 \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-"                 \ ('' != MyModified() ? ' ' . MyModified() : '')
-" endfunction
-
 function! LightLineGitBranch()
     " if &ft !~ s:ignore_types && exists('*gina#component#repo#branch')
     try
@@ -123,7 +87,6 @@ endfunction
 function! LightLineFileformat()
     return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
-
 
 function! LightLineFileencoding()
     return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
@@ -187,5 +150,5 @@ function! MyCharCode()
 endfunction
 
 " Use auocmd to force lightline update.
-kutocmd User CocStatusChange,CocDiagnosticChange,GitGutter call lightline#update()
+autocmd User CocStatusChange,CocDiagnosticChange,GitGutter call lightline#update()
 '''
