@@ -8,6 +8,7 @@ nmap <Leader>g [GitMode]
 " cf. https://woodyzootopia.github.io/2019/04/vim%E3%81%A7git%E3%82%82%E7%88%86%E9%80%9F%E7%B7%A8%E9%9B%86/#fnref:what-is-gs-doing
 nnoremap [GitMode]s :Gina status<CR>:only<CR>
 nnoremap [GitMode]c :Gina commit<CR>
+nnoremap [GitMode]l :Gina log --graph<CR>
 " nnoremap <leader>ga :Gwrite<CR>
 " nnoremap <leader>gb :Gblame<CR>
 " nnoremap <leader>gl :Git log<CR>
