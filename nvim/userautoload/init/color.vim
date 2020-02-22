@@ -14,7 +14,7 @@ scriptencoding utf-8
 "autocmd ColorScheme * highlight Search term=reverse cterm=reverse ctermfg=166 gui=reverse guifg=#FF8C00
 
 set termguicolors
-colorscheme zenburn
+colorscheme Atelier_DuneDark
 
 " ダーク系のカラースキームを使う
 set background=dark
