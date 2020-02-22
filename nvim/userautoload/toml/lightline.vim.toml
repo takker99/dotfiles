@@ -26,7 +26,7 @@ let g:lightline = {
     \   'gitgutter': 'LightLineGitGutter',
     \   'cocstatus': 'CocStatus',
     \   'currentfunction':'CocCurrentFunction',
-    \   'charcode': 'MyCharCode',
+    \   'charcode':'MyCharCode',
     \ },
     \ 'separator': { 'left': '', 'right': '' },
     \ 'subseparator': { 'left': '', 'right': '' }
