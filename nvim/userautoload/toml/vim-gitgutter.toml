@@ -2,6 +2,22 @@
 repo = 'airblade/vim-gitgutter'
 hook_add='''
 let g:gitgutter_sign_added = '✚'
-let g:gitgutter_sign_modified = '➜'
+let g:gitgutter_sign_modified = '~'
 let g:gitgutter_sign_removed = '✘'
+let g:gitgutter_sign_removed_first_line = '‾'
+let g:gitgutter_sign_modified_removed   = '~✘'
+
+let g:gitgutter_map_keys = 0
+
+nmap [g <Plug>(GitGutterPrevHunk)
+nmap ]g <Plug>(GitGutterNextHunk)
+nmap gh <Plug>(GitGutterStageHunk)
+nmap gl <Plug>(GitGutterUndoHunk)
+
+" call submode#enter_with('GITSTAGE', 'n', '', 'gh', '<Plug>(GitGutterStageHunk)')
+" call submode#enter_with('GITSTAGE', 'n', '', 'gl', '<Plug>(GitGutterUndoHunk)')
+" call submode#map('GITSTAGE', 'n', '', 'h', '<Plug>(GitGutterStageHunk)')
+" call submode#map('GITSTAGE', 'n', '', 'l', '<Plug>(GitGutterUndoHunk)')
+" call submode#map('GITSTAGE', 'n', '', 'k', '<Plug>(GitGutterPrevHunk)')
+" call submode#map('GITSTAGE', 'n', '', 'j', '<Plug>(GitGutterNextHunk)')
 '''

@@ -2,13 +2,12 @@
 repo = 'itchyny/lightline.vim'
 hook_add = '''
 let g:lightline = {
-    \ 'colorscheme': 'molokai',
     \ 'mode_map': {'c': 'NORMAL'},
     \ 'active': {
     \   'left': [
     \     ['mode', 'paste'],
-    \     ['readonly', 'filename','cocstatus', 'currentfunction', 'modified' ],
-    \     ['fugitive', 'gitgutter'],
+    \     ['gitbranch', 'gitgutter','readonly','filename','modified'],
+    \     ['cocstatus', 'currentfunction'],
     \   ],
     \   'right': [
     \     ['lineinfo'],
@@ -20,10 +19,10 @@ let g:lightline = {
     \   'mode': 'LightLineMode',
     \   'readonly': 'LightLineReadonly',
     \   'fileformat': 'LightLineFileformat',
-    \   'filetype': 'MyFiletype',
+    \   'filetype': 'LightLineFiletype',
     \   'filename': 'LightLineFilename',
-    \   'fileencoding': 'MyFileencoding',
-    \   'fugitive': 'LightLineFugitive',
+    \   'fileencoding': 'LightLineFileencoding',
+    \   'gitbranch': 'LightLineGitBranch',
     \   'gitgutter': 'LightLineGitGutter',
     \   'cocstatus': 'CocStatus',
     \   'currentfunction':'CocCurrentFunction',
@@ -33,54 +32,52 @@ let g:lightline = {
     \ 'subseparator': { 'left': '', 'right': '' }
     \ }
 
+" 特殊バッファとして認識するfiletypes
+let s:ignore_types='defx\|help\|undotree'
+
 function! CocCurrentFunction()
-    return &filetype == 'nerdtree' ? '' : get(b:, 'coc_current_function', '')
+    return &filetype =~ s:ignore_types ? '' : get(b:, 'coc_current_function', '')
 endfunction
 
 function! CocStatus()
-    return &filetype == 'nerdtree' ? '' : get(g:, 'coc_status', '')
-endfunction
-
-function! MyModified()
-    return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-
-function! MyReadonly()
-    return &ft !~? 'help\|vimfiler\|gundo' && &ro ? '⭤' : ''
+    return &filetype =~ s:ignore_types ? '' : get(g:, 'coc_status', '')
 endfunction
 
 function! LightLineMode()
-    return  &filetype == 'nerdtree' ? 'NERDtree' :
+    if exists('*submode#current')
+        let _ = submode#current()
+        if strlen(_)
+            return _
+        endif
+    endif
+    return   &filetype == 'defx' ? 'defx' :
+                \ &filetype ==  'undotree' ? 'undotree':
+                \ &filetype ==  'gina-status' ? 'GSTATUS':
+                \ &filetype ==  'gina-commit' ? 'GCOMMIT':
                 \ winwidth(0) > 60 ?  lightline#mode() : ''
 endfunction
 
+" 特殊バッファと読み取り専用ファイルに対して、読み取り専用マークを表示する。
 function! LightLineReadonly()
-    return &filetype == 'nerdtree' ? '' :
-                \ &readonly ? '' : ''
+    return &filetype =~ s:ignore_types || &readonly ? '' : ''
 endfunction
 
 function! LightLineFilename()
-    return &filetype == 'nerdtree' ? '' :
+    return &filetype =~ s:ignore_types ? '' :
+                \ &filetype =~ 'gina-status\|gina-commit' ? '' :
                 \ '' != expand('%:t') ? expand('%:t') : '[No Name]'
 endfunction
 
-  function! MyFiletype()
+function! LightLineFiletype()
     return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
-  endfunction
-
-function! MyFilename()
-    return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-                \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-                \  &ft == 'unite' ? unite#get_status_string() :
-                \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-                \ ('' != MyModified() ? ' ' . MyModified() : '')
 endfunction
 
-function! LightLineFugitive()
+function! LightLineGitBranch()
+    " if &ft !~ s:ignore_types && exists('*gina#component#repo#branch')
     try
-        if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
-            let _ = fugitive#head()
-            return strlen(_) ? '⭠ '._ : ''
+        if &ft !~ s:ignore_types
+            let _ = gina#component#repo#branch()
+            return strlen(_) ? ''._ : ''
         endif
     catch
     endtry
@@ -91,13 +88,8 @@ function! LightLineFileformat()
     return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
 
-
-function! MyFileencoding()
+function! LightLineFileencoding()
     return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
-endfunction
-
-function! MyMode()
-    return winwidth('.') > 60 ? lightline#mode() : ''
 endfunction
 
 function! LightLineGitGutter()
@@ -107,15 +99,15 @@ function! LightLineGitGutter()
         return ''
     endif
     let symbols = [
-                \ g:gitgutter_sign_added . ' ',
-                \ g:gitgutter_sign_modified . ' ',
-                \ g:gitgutter_sign_removed . ' '
+                \ g:gitgutter_sign_added,
+                \ g:gitgutter_sign_modified,
+                \ g:gitgutter_sign_removed
                 \ ]
     let hunks = GitGutterGetHunkSummary()
     let ret = []
     for i in [0, 1, 2]
         if hunks[i] > 0
-            call add(ret, symbols[i] . hunks[i])
+            call add(ret, symbols[i] . ' '. hunks[i])
         endif
     endfor
     return join(ret, ' ')
@@ -158,5 +150,5 @@ function! MyCharCode()
 endfunction
 
 " Use auocmd to force lightline update.
-autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+autocmd User CocStatusChange,CocDiagnosticChange,GitGutter call lightline#update()
 '''

@@ -17,8 +17,12 @@ if has('multi_byte_ime')
 endif
 colorscheme molokai
 
+set termguicolors
 " ダーク系のカラースキームを使う
 set background=dark
+highlight! Normal ctermbg=NONE guibg=NONE
+highlight! NonText ctermbg=NONE guibg=NONE
+highlight! SpecialKey ctermbg=NONE guibg=NONE
+highlight! EndOfBuffer ctermbg=NONE guibg=NONE
 syntax on
 
-set termguicolors

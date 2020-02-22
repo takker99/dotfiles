@@ -21,18 +21,41 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 nnoremap <silent> <space><space> :<C-u>CocList<cr>
 
+" cf. https://qiita.com/maguro_tuna/items/70814d99aef8f1ddc8e9
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" mapping for snippets
+" let g:coc_snippet_next="<Tab>"
+" let g:coc_snippet_prev="<S-Tab>"
+
+" coc-actions
+" Remap for do codeAction of selected region
+function! s:cocActionsOpenFromSelected(type) abort
+  execute 'CocCommand actions.open ' . a:type
+endfunction
+xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
+nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
+
 " navigate diagnostics
 nnoremap <silent> [c <Plug>(coc-diagnostic-prev)
 nnoremap <silent> ]c <Plug>(coc-diagnostic-next)
 
+" call submode#enter_with('COCMODE', 'n', '', '<leader>c', '<C-w>>')
+" call submode#enter_with('COCMODE', 'n', '', 's<', '<C-w><')
+" call submode#enter_with('COCMODE', 'n', '', 's+', '<C-w>+')
+" call submode#enter_with('COCMODE', 'n', '', 's-', '<C-w>-')
+" call submode#map('COCMODE', 'n', '', '>', '<C-w>>')
+" call submode#map('COCMODE', 'n', '', '<', '<C-w><')
+" call submode#map('COCMODE', 'n', '', '+', '<C-w>+')
+" call submode#map('COCMODE', 'n', '', '-', '<C-w>-')
 "スペースhでHover
-nmap <silent> <leader>h :<C-u>call CocAction('doHover')<cr>
+"
+nnoremap <silent> <leader>h :<C-u>call CocAction('doHover')<cr>
 ""スペースdfでDefinition
-nmap <silent> <leader>df <Plug>(coc-definition)
+nnoremap <silent> <leader>df <Plug>(coc-definition)
 "スペースrfでReferences
-nmap <silent> <leader>rf <Plug>(coc-references)
-""スペースrnでRename
-nmap <silent> <leader>rn <Plug>(coc-rename)
+nnoremap <silent> <leader>rf <Plug>(coc-references)
+nnoremap <silent>  <Plug>(coc-rename)
 "スペースfmtでFormat
-nmap <silent> <leader>fmt <Plug>(coc-format)
+nnoremap <silent> <leader>fmt <Plug>(coc-format)
 '''
