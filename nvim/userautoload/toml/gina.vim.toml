@@ -13,7 +13,10 @@ nnoremap [GitMode]b :Gina branch<CR>
 
 " Gina log 上でのkey mappings
 call gina#custom#mapping#nmap('log', '<CR>', ':call gina#action#call(''commit:checkout'')<CR>', {'noremap': 1, 'silent': 1})
+
+" Gina branch 上でのkey mappings
 call gina#custom#mapping#nmap('branch', 'm', ':call gina#action#call(''commit:merge'')<CR>', {'noremap': 1, 'silent': 1})
+call gina#custom#mapping#nmap('branch', 'o', ':call gina#action#call(''branch:new'')<CR>', {'noremap': 1, 'silent': 1})
 " nnoremap <leader>ga :Gwrite<CR>
 " nnoremap <leader>gb :Gblame<CR>
 " nnoremap <leader>gh :tab sp<CR>:0Glog<CR>
