@@ -135,14 +135,16 @@ if ! shopt -oq posix; then
   fi
 fi
 
+alias vim=nvim
 export XDG_CONFIG_HOME=$HOME/.config
 export EDITOR=vim
 export GIT_EDITOR=vim
+export CC=clang
+export CXX=clang++
 export PATH="$HOME/.local/bin:$PATH"
 export LD_LIBRARY_PATH=$HOME/.local/lib/:$LD_LIBRARY_PATH
 export DISPLAY=:0.0
 export PATH=$HOME/.nodebrew/current/bin:$PATH
-export PATH=/usr/local/llvm/10.0:$PATH
 
 # .inputrcの読み込み
 [ -f ~/.inputrc ] && bind -f ~/.inputrc

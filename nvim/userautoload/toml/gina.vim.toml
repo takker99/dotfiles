@@ -1,0 +1,25 @@
+[[plugins]]
+repo='lambdalisue/gina.vim'
+hook_add='''
+
+nnoremap [GitMode] <Nop>
+nmap <Leader>g [GitMode]
+
+" cf. https://woodyzootopia.github.io/2019/04/vim%E3%81%A7git%E3%82%82%E7%88%86%E9%80%9F%E7%B7%A8%E9%9B%86/#fnref:what-is-gs-doing
+nnoremap [GitMode]s :Gina status<CR>:only<CR>
+nnoremap [GitMode]c :Gina commit<CR>
+nnoremap [GitMode]l :Gina log --graph --all<CR>
+
+" Gina log 上でのkey mappings
+call gina#custom#mapping#nmap('log', '<CR>', ':call gina#action#call(''commit:checkout'')<CR>', {'noremap': 1, 'silent': 1})
+" nnoremap <leader>ga :Gwrite<CR>
+" nnoremap <leader>gb :Gblame<CR>
+" nnoremap <leader>gh :tab sp<CR>:0Glog<CR>
+" " abbrev for `git history`: create new quickfix tab for history
+" nnoremap <leader>gp :Gpush<CR>
+" nnoremap <leader>gf :Gfetch<CR>
+" nnoremap <leader>gd :Gvdiff<CR>
+" nnoremap <leader>gr :Grebase -i<CR>
+" nnoremap <leader>gg :Ggrep
+" nnoremap <leader>gm :Gmerge
+'''

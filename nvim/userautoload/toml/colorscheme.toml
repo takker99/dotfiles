@@ -1,0 +1,8 @@
+[[plugins]]
+# repo = 'tomasr/molokai'
+# repo = 'relastle/bluewery.vim'
+# repo = 'kamykn/dark-theme.vim'
+repo = 'flazz/vim-colorschemes'
+
+[[plugins]]
+repo = 'kamykn/dark-theme.vim'

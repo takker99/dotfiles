@@ -55,13 +55,6 @@ inoremap <Down> <Nop>
 inoremap <Left> <Nop>
 inoremap <Right> <Nop>
 
-inoremap <C-h> <Nop>
-
-inoremap <C-k> <Up>
-inoremap <C-j> <Down>
-inoremap <C-h> <Left>
-inoremap <C-l> <Right>
-
 " cf.https://qiita.com/itmammoth/items/312246b4b7688875d023#6%E8%A1%8C%E3%82%92%E7%A7%BB%E5%8B%95%E3%81%99%E3%82%8B
 " 行を移動
 nnoremap <A-k> "zdd<Up>"zP
@@ -99,6 +92,28 @@ nnoremap N Nzz
 nnoremap + <C-a>
 nnoremap - <C-x>
 
+"押しにくい$及び^をリマッピング
+nmap H ^
+nmap L $
+vmap H ^
+vmap L $
+
+" Enterで行ジャンプ
+" cf. http://deris.hatenablog.jp/entry/2013/05/02/192415
+nnoremap <Enter> G
+
+" vp doesn't replace paste buffer
+" cf. http://deris.hatenablog.jp/entry/2013/05/02/192415
+function! RestoreRegister()
+  let @" = s:restore_reg
+  return ''
+endfunction
+function! s:Repl()
+  let s:restore_reg = @"
+  return "p@=RestoreRegister()\<cr>"
+endfunction
+nmap <silent> <expr> p <sid>Repl()
+
 " ウィンドウ関連
 " c.f. https://qiita.com/tekkoc/items/98adcadfa4bdc8b5a6ca
 " c.f. http://ivxi.hatenablog.com/entry/2013/05/23/163825
@@ -118,7 +133,6 @@ nnoremap so <C-w>_<C-w>|
 nnoremap sO <C-w>=
 nnoremap <silent>sn :bnext<CR>
 nnoremap <silent>sp :bprevious<CR>
-nnoremap <silent>sb :b#<CR>
 nnoremap <silent>sd :bd<CR>
 nnoremap ss :<C-u>sp<CR>
 nnoremap sv :<C-u>vs<CR>
@@ -126,6 +140,9 @@ nnoremap <silent>st :tabnew<CR>
 nnoremap <silent>sx :tabclose<CR>
 nnoremap sN gt
 nnoremap sP gT
+
+" function key 関連
+nnoremap <F1> :h<space>
 
 " cf.
 " 相対行番号表示の切り替え
