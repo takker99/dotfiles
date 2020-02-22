@@ -9,6 +9,7 @@ nmap <Leader>g [GitMode]
 nnoremap [GitMode]s :Gina status<CR>:only<CR>
 nnoremap [GitMode]c :Gina commit<CR>
 nnoremap [GitMode]l :Gina log --graph --all<CR>
+nnoremap [GitMode]b :Gina branch<CR>
 
 " Gina log 上でのkey mappings
 call gina#custom#mapping#nmap('log', '<CR>', ':call gina#action#call(''commit:checkout'')<CR>', {'noremap': 1, 'silent': 1})
