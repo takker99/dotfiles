@@ -58,5 +58,8 @@ highlight! NonText ctermbg=NONE guibg=NONE
 highlight! SpecialKey ctermbg=NONE guibg=NONE
 highlight! EndOfBuffer ctermbg=NONE guibg=NONE
 
+" 入力補完を半透明にする
+set pumblend=30
+
 syntax enable
 
