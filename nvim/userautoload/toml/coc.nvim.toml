@@ -53,7 +53,7 @@ nnoremap <silent> ]c <Plug>(coc-diagnostic-next)
 "
 nnoremap <silent> <leader>h :<C-u>call CocAction('doHover')<cr>
 ""スペースdfでDefinition
-nnoremap <silent> <leader>df <Plug>(coc-definition)
+nnoremap <silent> <F11> <Plug>(coc-definition)
 "スペースrfでReferences
 nnoremap <silent> <leader>rf <Plug>(coc-references)
 nnoremap <silent>  <Plug>(coc-rename)
