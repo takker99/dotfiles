@@ -9,10 +9,11 @@ module.exports = {
     updateChannel: 'stable',
 
     // default font size in pixels for all tabs
-    fontSize: 12,
+    fontSize: 20,
 
     // font family with optional fallbacks
-    fontFamily: 'Menlo, "DejaVu Sans Mono", Consolas, "Lucida Console", monospace',
+   // fontFamily: '"Inconsolata Nerd Font Mono", "MyricaM M", Consolas, "Lucida Console", monospace',
+    fontFamily: '"Inconsolata Nerd Font Mono", "MyricaM M", Consolas, "Lucida Console", monospace',
 
     // default font weight: 'normal' or 'bold'
     fontWeight: 'normal',
@@ -27,7 +28,7 @@ module.exports = {
     letterSpacing: 0,
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
-    cursorColor: 'rgba(248,28,229,0.8)',
+    cursorColor: '#000',
 
     // terminal text color under BLOCK cursor
     cursorAccentColor: '#000',
@@ -43,7 +44,7 @@ module.exports = {
 
     // terminal background color
     // opacity is only supported on macOS
-    backgroundColor: '#000',
+    backgroundColor: 'rgba(39, 79, 79, 0.5)',
 
     // terminal selection color
     selectionColor: 'rgba(248,28,229,0.3)',
@@ -103,11 +104,11 @@ module.exports = {
     //
     // PowerShell on Windows
     // - Example: `C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe`
-    shell: '',
+    shell: 'C:\\Windows\\System32\\wsl.exe',
 
     // for setting shell arguments (i.e. for using interactive shellArgs: `['-i']`)
     // by default `['--login']` will be used
-    shellArgs: ['--login'],
+    shellArgs: ['~'],
 
     // for environment variables
     env: {},
@@ -116,7 +117,7 @@ module.exports = {
     bell: 'SOUND',
 
     // if `true` (without backticks and without quotes), selected text will automatically be copied to the clipboard
-    copyOnSelect: false,
+    copyOnSelect: true,
 
     // if `true` (without backticks and without quotes), hyper will be set as the default protocol client for SSH
     defaultSSHApp: true,
@@ -138,7 +139,21 @@ module.exports = {
     webGLRenderer: true,
 
     // for advanced config flags please refer to https://hyper.is/#cfg
+    hyperBlend: {
+      terminal: {
+        opacity: 0.8,
+        color: "#000000",
+        colorOpacity: 0.8
+      },
+      background: {
+        folder: "C:/Users/elect/AppData/Local/hyper/background/",
+        position: "center",
+        size: "cover",
+        repeat: "no-repeat"
+      }
+    }
   },
+
 
   // a list of plugins to fetch and install from npm
   // format: [@org/]project[#version]
@@ -146,7 +161,7 @@ module.exports = {
   //   `hyperpower`
   //   `@company/project`
   //   `project#1.0.1`
-  plugins: [],
+  plugins: [`hyper-solarized-dark`,`hyperminimal`,`hyper-blend`],
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
