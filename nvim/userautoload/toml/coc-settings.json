@@ -40,13 +40,12 @@
     //"cSpell.ignoreRegExpList":["0x[a-f0-9]+","\\u[a-f0-9]+"],
     "cSpell.showStatus":false,
 
-    "clangd.arguments":["-clang-tidy"],
-
-    //"languageserver": {
-    //    "clangd": {
-    //        "command": "clangd",
-    //        "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
-    //        "filetypes": ["c", "cpp", "objc", "objcpp"]
-    //    }
-    //}
+    "languageserver": {
+        "clangd": {
+            "command": "clangd",
+            "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
+            "args":["--clang-tidy"],
+            "filetypes": ["c", "cpp", "objc", "objcpp"]
+        }
+    }
 }
