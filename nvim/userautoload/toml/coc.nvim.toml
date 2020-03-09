@@ -25,7 +25,10 @@ nnoremap <silent> <space><space> :<C-u>CocList<cr>
 inoremap <silent><expr> <cr> "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " mapping for snippets
-" imap <C-j> <Plug>(coc-snippets-expand-jump)
+imap <c-j> <Plug>(coc-snippets-expand-jump)
+
+let g:coc_snippet_next = '<c-j>'
+let g:coc_snippet_prev = '<c-k>'
 
 " coc-actions
 " Remap for do codeAction of selected region
@@ -36,8 +39,8 @@ xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<
 nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 
 " navigate diagnostics
-nnoremap <silent> [c <Plug>(coc-diagnostic-prev)
-nnoremap <silent> ]c <Plug>(coc-diagnostic-next)
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
 " call submode#enter_with('COCMODE', 'n', '', '<leader>c', '<C-w>>')
 " call submode#enter_with('COCMODE', 'n', '', 's<', '<C-w><')
@@ -51,10 +54,10 @@ nnoremap <silent> ]c <Plug>(coc-diagnostic-next)
 "
 nnoremap <silent> <leader>h :<C-u>call CocAction('doHover')<cr>
 ""スペースdfでDefinition
-nnoremap <silent> <leader>df <Plug>(coc-definition)
+nmap <silent> <leader>df <Plug>(coc-definition)
 "スペースrfでReferences
-nnoremap <silent> <leader>rf <Plug>(coc-references)
-nnoremap <silent>  <Plug>(coc-rename)
+nmap <silent> <leader>rf <Plug>(coc-references)
+nmap <silent>  <Plug>(coc-rename)
 "スペースfmtでFormat
-nnoremap <silent> <leader>fmt <Plug>(coc-format)
+nmap <silent> <leader>fmt <Plug>(coc-format)
 '''
