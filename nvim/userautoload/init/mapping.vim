@@ -39,7 +39,10 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 nmap / /\v
 
 " insert mode を抜けるときIMEをオフにする
-inoremap <C-[> <C-[>:set iminsert=0<CR>
+" inoremap <C-[> <C-[>:set iminsert=0<CR>
+
+" jj で insert mode を抜ける
+inoremap jj <ESC>
 
 " 誤動作すると困るキーを無効にする
 nnoremap ZZ <Nop>
