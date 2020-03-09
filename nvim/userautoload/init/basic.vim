@@ -16,6 +16,7 @@ set fileencodings=utf-8,euc-jp,ucs-bom,iso-2022-jp,sjis,cp932,latin1
 set fileformats=unix,dos,mac
 
 " setting
+set confirm    " 終了前に未保存ファイルの保存確認を行う
 set autoread   " 編集中のファイルが変更されたら自動で読み直す
 set hidden     " バッファが編集中でもその他のファイルを開けるように
 set autochdir
@@ -48,7 +49,8 @@ set virtualedit=onemore   " 行末の1文字先までカーソルを移動でき
 set visualbell            " ビープ音を可視化
 set showmatch             " 括弧入力時の対応する括弧を表示
 set matchtime=1
-set matchpairs& matchpairs+=<:>
+set matchpairs
+set matchpairs+=<:>
 set showcmd               " 入力中のコマンドをステータスに表示する
 set noshowmode
 set laststatus=2          " ステータスラインを常に表示
