@@ -13,7 +13,6 @@ endfunction
 
 inoremap <silent><expr> <TAB>
   \ pumvisible() ? "\<c-n>" :
-  \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
   \ <SID>check_back_space() ? "\<TAB>" :
   \ coc#refresh()
 
@@ -26,8 +25,12 @@ nnoremap <silent> <space><space> :<C-u>CocList<cr>
 inoremap <silent><expr> <cr> "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " mapping for snippets
-" let g:coc_snippet_next="<Tab>"
-" let g:coc_snippet_prev="<S-Tab>"
+inoremap <silent><expr> <C-j>
+    \ coc#expandableOrJumpable()? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+    \ <Plug>(coc-snippets-expand)
+
+let g:coc_snippet_next="<Tab>"
+let g:coc_snippet_prev="<S-Tab>"
 
 " coc-actions
 " Remap for do codeAction of selected region
