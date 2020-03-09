@@ -150,6 +150,12 @@ nnoremap <F12> :set relativenumber!<CR>
 " コマンドラインモードで %% を入力すると現在編集中のファイルのフォルダのパスが展開されるようにする
 cnoremap %% <C-R>=expand('%:p:h').'/'<cr>
 
+" コマンドライン補完の選択キー
+set wildcharm=<TAB>
+cnoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+cnoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+
 " terminal の設定
 
 " 新しいタブでターミナルを起動

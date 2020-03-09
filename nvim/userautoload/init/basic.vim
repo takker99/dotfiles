@@ -16,7 +16,6 @@ set fileencodings=utf-8,euc-jp,ucs-bom,iso-2022-jp,sjis,cp932,latin1
 set fileformats=unix,dos,mac
 
 " setting
-set confirm    " 終了前に未保存ファイルの保存確認を行う
 set autoread   " 編集中のファイルが変更されたら自動で読み直す
 set hidden     " バッファが編集中でもその他のファイルを開けるように
 set autochdir
@@ -86,7 +85,7 @@ set foldcolumn=3       "左端に折りたたみ状態を表示する領域を�
 
 " 補完系
 set wildmenu
-set wildmode=list:full " コマンドラインの補完
+set wildmode=longest:full,full " コマンドラインの補完
 set pumheight=10          "変換候補で一度に表示される数を設定する
 
 " Tab系
