@@ -25,9 +25,7 @@ nnoremap <silent> <space><space> :<C-u>CocList<cr>
 inoremap <silent><expr> <cr> "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " mapping for snippets
-inoremap <silent><expr> <C-j>
-    \ coc#expandableOrJumpable()? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-    \ <Plug>(coc-snippets-expand)
+inoremap <silent><expr> <C-j> <Plug>(coc-snippets-expand)
 
 let g:coc_snippet_next="<Tab>"
 let g:coc_snippet_prev="<S-Tab>"
