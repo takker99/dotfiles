@@ -38,11 +38,23 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 " 検索で使う規定の正規表現を Very Magic にする
 nmap / /\v
 
-" insert mode を抜けるときIMEをオフにする
-" inoremap <C-[> <C-[>:set iminsert=0<CR>
-
 " jj で insert mode を抜ける
 inoremap jj <ESC>
+
+" WSLかどうかを判定する
+" cf.https://moyapro.com/2018/03/21/detect-wsl/
+function! s:isWsl()
+    return filereadable('/proc/sys/fs/binfmt_misc/WSLInterop')
+endfunction
+
+" insert mode を抜けるときIMEをオフにする
+" cf.https://moyapro.com/2018/04/02/disable-ime-on-wsl-vim/
+if s:isWsl() && executable('AutoHotkeyU64.exe')
+    augroup insertLeave
+        autocmd!
+        autocmd InsertLeave * :call system('AutoHotkeyU64.exe "C:/linux_home/git/dotfiles/nvim/userautoload/init/ImDisable.ahk"')
+    augroup END
+endif
 
 " 誤動作すると困るキーを無効にする
 nnoremap ZZ <Nop>
