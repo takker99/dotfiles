@@ -48,7 +48,8 @@ set virtualedit=onemore   " 行末の1文字先までカーソルを移動でき
 set visualbell            " ビープ音を可視化
 set showmatch             " 括弧入力時の対応する括弧を表示
 set matchtime=1
-set matchpairs& matchpairs+=<:>
+set matchpairs
+set matchpairs+=<:>
 set showcmd               " 入力中のコマンドをステータスに表示する
 set noshowmode
 set laststatus=2          " ステータスラインを常に表示
@@ -84,7 +85,7 @@ set foldcolumn=3       "左端に折りたたみ状態を表示する領域を�
 
 " 補完系
 set wildmenu
-set wildmode=list:full " コマンドラインの補完
+set wildmode=longest:full,full " コマンドラインの補完
 set pumheight=10          "変換候補で一度に表示される数を設定する
 
 " Tab系
@@ -92,6 +93,7 @@ set expandtab               " Tab文字を半角スペースにする
 set tabstop=4              " 行頭以外のTab文字の表示幅（スペースいくつ分）
 set shiftwidth=4            " 行頭でのTab文字の表示幅
 set softtabstop=4         " <Tab> の挿入や <BS> の使用等の編集操作をするときに、<Tab> が対応する空白の数。
+
 " 不可視文字を可視化(タブが「?-」と表示される)
 set list
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:⍽
