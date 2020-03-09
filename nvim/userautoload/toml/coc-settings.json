@@ -40,6 +40,8 @@
     //"cSpell.ignoreRegExpList":["0x[a-f0-9]+","\\u[a-f0-9]+"],
     "cSpell.showStatus":false,
 
+    "clangd.arguments":["-clang-tidy"],
+
     //"languageserver": {
     //    "clangd": {
     //        "command": "clangd",
