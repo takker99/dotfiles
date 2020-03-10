@@ -36,6 +36,7 @@
     "diagnostic.hintSign":"⚡",
     "coc.preferences.currentFunctionSymbolAutoUpdate":true,
     "coc.preferences.formatOnType":true,
+    "snippets.userSnippetsDirectory":"../snippets",
 
     //"cSpell.ignoreRegExpList":["0x[a-f0-9]+","\\u[a-f0-9]+"],
     "cSpell.showStatus":false,
