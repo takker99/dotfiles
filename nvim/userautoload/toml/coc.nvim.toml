@@ -25,10 +25,10 @@ nnoremap <silent> <space><space> :<C-u>CocList<cr>
 inoremap <silent><expr> <cr> "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " mapping for snippets
-imap <c-j> <Plug>(coc-snippets-expand-jump)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
 
-let g:coc_snippet_next = '<c-j>'
-let g:coc_snippet_prev = '<c-k>'
+let g:coc_snippet_next = '<C-j>'
+let g:coc_snippet_prev = '<C-k>'
 
 " coc-actions
 " Remap for do codeAction of selected region
