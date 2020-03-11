@@ -23,10 +23,11 @@
 #		endsnippet
 #
 # Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
-snippet cl_default "class snippet with default statements" b
+snippet st_default "class snippet with default statements" b
 struct ${1:class_name}
 {
 	constexpr $1() noexcept = default;
+	constexpr ~$1() noexcept = default;
 	constexpr $1(const $1&) noexcept = default;
 	constexpr $1($1&&) noexcept = default;
 	constexpr $1& operator=(const $1&) noexcept = default;
@@ -37,4 +38,20 @@ struct ${1:class_name}
 private:
 	${3:private_members}
 };
+endsnippet
+
+snippet array_subscripts "array subscripts" b
+constexpr const ${1:RESULT}& operator[](${2:PARAM}) const& noexcept
+{
+	${3:CONTEXT}
+}
+constexpr $1& operator[]($2) & noexcept
+{
+	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-const-cast)
+	return const_cast<$1&>(( *static_cast<const ${4:CLASS_NAME}*>(this) )[${5:INDEX}]);
+}
+constexpr $1 operator[]($2) const&& noexcept
+{
+	return std::move(( *static_cast<const ${4:CLASS_NAME}*>(this) )[${5:INDEX}]);
+}
 endsnippet
