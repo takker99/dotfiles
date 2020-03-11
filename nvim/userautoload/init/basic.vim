@@ -162,6 +162,9 @@ if !exists(":DiffOrig")
                 \ | wincmd p | diffthis
 endif
 
+" vimdiff 関連
+set diffopt=internal,filler,algorithm:histogram,indent-heuristic
+
 " coc-setting.jsonの場所
 let g:coc_config_home=expand('<sfile>:p:h:h').'/toml'
 
