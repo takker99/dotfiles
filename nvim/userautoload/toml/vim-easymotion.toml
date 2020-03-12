@@ -9,6 +9,7 @@ map t <Plug>(easymotion-tl)
 map F <Plug>(easymotion-Fl)
 map T <Plug>(easymotion-Tl)
 
+
 " Jump to anywhere you want with minimal keystrokes, with just one key binding.
 " `;{char}{char}{label}`
 " Need one more keystroke, but on average, it may be more comfortable.
@@ -16,6 +17,16 @@ map ; <Plug>(easymotion-overwin-f2)
 
 " Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
+
+" Word motions
+map <Leader>w <Plug>(easymotion-w)
+map <Leader>W <Plug>(easymotion-W)
+map <Leader>b <Plug>(easymotion-b)
+map <Leader>B <Plug>(easymotion-B)
+map <Leader>e <Plug>(easymotion-e)
+map <Leader>E <Plug>(easymotion-E)
+map <Leader>ge <Plug>(easymotion-ge)
+map <Leader>gE <Plug>(easymotion-gE)
 
 " JK motions: Line motions
 let g:EasyMotion_startofline=0
