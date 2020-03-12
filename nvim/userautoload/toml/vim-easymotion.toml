@@ -4,9 +4,9 @@ hook_add = '''
 map <Leader> <Plug>(easymotion-prefix)
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
-map f <Plug>(easymotion-fl)
+map <Leader>l <Plug>(easymotion-fl)
+map <Leader>h <Plug>(easymotion-Fl)
 map t <Plug>(easymotion-tl)
-map F <Plug>(easymotion-Fl)
 map T <Plug>(easymotion-Tl)
 
 
