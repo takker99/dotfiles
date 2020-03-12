@@ -4,18 +4,32 @@ hook_add = '''
 map <Leader> <Plug>(easymotion-prefix)
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
-map f <Plug>(easymotion-fl)
+map <Leader>l <Plug>(easymotion-fl)
+map <Leader>h <Plug>(easymotion-Fl)
 map t <Plug>(easymotion-tl)
-map F <Plug>(easymotion-Fl)
 map T <Plug>(easymotion-Tl)
+
+map f <Plug>(easymotion-bd-fl)
+
 
 " Jump to anywhere you want with minimal keystrokes, with just one key binding.
 " `;{char}{char}{label}`
 " Need one more keystroke, but on average, it may be more comfortable.
-map ; <Plug>(easymotion-overwin-f2)
+map ; <Plug>(easymotion-bd-f2)
+nmap ; <Plug>(easymotion-overwin-f2)
 
 " Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
+
+" Word motions
+map <Leader>w <Plug>(easymotion-wl)
+map <Leader>W <Plug>(easymotion-W)
+map <Leader>b <Plug>(easymotion-bl)
+map <Leader>B <Plug>(easymotion-B)
+map <Leader>e <Plug>(easymotion-el)
+map <Leader>E <Plug>(easymotion-E)
+map <Leader>ge <Plug>(easymotion-gel)
+map <Leader>gE <Plug>(easymotion-gE)
 
 " JK motions: Line motions
 let g:EasyMotion_startofline=0
