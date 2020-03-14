@@ -1,5 +1,6 @@
 [[plugins]]
 repo = 'Shougo/denite.nvim'
+depends = ['neoclide/coc-denite']
 hook_add='''
 nnoremap [Denite] <Nop>
 nmap <Leader>d [Denite]
