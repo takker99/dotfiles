@@ -45,7 +45,7 @@
         "clangd": {
             "command": "clangd",
             "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
-            "args":["--clang-tidy"],
+            "args":["--clang-tidy", "--suggest-missing-includes","--header-insertion==iwyu"],
             "filetypes": ["c", "cpp", "objc", "objcpp"]
         }
     }
