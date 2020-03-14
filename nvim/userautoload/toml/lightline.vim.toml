@@ -3,6 +3,7 @@ repo = 'itchyny/lightline.vim'
 hook_add = '''
 let g:lightline = {
     \ 'mode_map': {'c': 'NORMAL'},
+    \ 'colorscheme':'solarized',
     \ 'active': {
     \   'left': [
     \     ['mode', 'paste'],
