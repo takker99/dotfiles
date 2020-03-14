@@ -44,7 +44,7 @@ module.exports = {
 
     // terminal background color
     // opacity is only supported on macOS
-    backgroundColor: 'rgba(39, 79, 79, 0.5)',
+    // backgroundColor: 'rgba(39, 79, 79, 0.5)',
 
     // terminal selection color
     selectionColor: 'rgba(248,28,229,0.3)',
@@ -141,7 +141,7 @@ module.exports = {
     // for advanced config flags please refer to https://hyper.is/#cfg
     hyperBlend: {
       terminal: {
-        opacity: 0.8,
+        opacity: 0.9,
         color: "#000000",
         colorOpacity: 0.8
       },
