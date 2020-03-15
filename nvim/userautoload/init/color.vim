@@ -48,14 +48,30 @@ if has('syntax')
     call ZenkakuSpace()
 endif
 
-highlight! Normal ctermbg=NONE guibg=NONE
-highlight! NonText ctermbg=NONE guibg=NONE
-highlight! SpecialKey ctermbg=NONE guibg=NONE
-highlight! EndOfBuffer ctermbg=NONE guibg=NONE
+
+
 
 " 入力補完を半透明にする
-set pumblend=30
+set pumblend=20
 
 syntax enable
 colorscheme solarized8_dark_low
 set background=dark
+
+" Floating Window の色設定
+highlight! NormalFloat ctermbg=NONE guibg=#808080
+set winblend=20
+
+" 無色透明にする
+highlight! Normal ctermbg=NONE guibg=NONE
+highlight! NonText ctermbg=NONE guibg=NONE
+highlight! CursorLineNr ctermbg=NONE guibg=NONE
+highlight! LineNr ctermbg=NONE guibg=NONE
+highlight! CursorLine ctermbg=NONE guibg=NONE
+highlight! SpecialKey ctermbg=NONE guibg=NONE
+highlight! EndOfBuffer ctermbg=NONE guibg=NONE
+highlight! Folded ctermbg=NONE guibg=NONE
+highlight! FoldColumn ctermbg=NONE guibg=NONE
+
+" cterm ではなく gui の色を使用する
+set termguicolors
