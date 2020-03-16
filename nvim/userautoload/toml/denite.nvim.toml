@@ -9,8 +9,8 @@ nmap <Leader>d [Denite]
 nnoremap <silent> [Denite]a :<C-u>Denite file buffer -split=floating file:new<CR>
 " バッファを表示
 nnoremap <silent> [Denite]b :<C-u>Denite buffer -split=floating file:new<CR>
-"  カレントディレクトリを表示
-nnoremap <silent> [Denite]f :<C-u>Denite file -split=floating file:new<CR>
+"  最近使ったファイルを表示
+nnoremap <silent> [Denite]f :<C-u>Denite file/old -split=floating file:new<CR>
 "  カレントディレクトリ以下を再帰的に表示
 nnoremap <silent> [Denite]r :<C-u>Denite file/rec -split=floating file:new<CR>
 "  カレントディレクトリ以下のファイルから指定した文字列を検索
