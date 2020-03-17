@@ -1,4 +1,7 @@
 [[plugins]]
+repo = 'neoclide/coc-denite'
+
+[[plugins]]
 repo = 'neoclide/coc.nvim'
 merge = 0
 rev = 'release'
@@ -12,8 +15,7 @@ function! s:check_back_space() abort
 endfunction
 
 inoremap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+  \ pumvisible() ? "\<c-n>" :
   \ <SID>check_back_space() ? "\<TAB>" :
   \ coc#refresh()
 
@@ -21,12 +23,15 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 nnoremap <silent> <space><space> :<C-u>CocList<cr>
 
-" cf. https://qiita.com/maguro_tuna/items/70814d99aef8f1ddc8e9
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" " cf. https://qiita.com/maguro_tuna/items/70814d99aef8f1ddc8e9
+" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr> <cr> "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " mapping for snippets
-" let g:coc_snippet_next="<Tab>"
-" let g:coc_snippet_prev="<S-Tab>"
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+let g:coc_snippet_next = '<C-j>'
+let g:coc_snippet_prev = '<C-k>'
 
 " coc-actions
 " Remap for do codeAction of selected region
@@ -37,8 +42,8 @@ xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<
 nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 
 " navigate diagnostics
-nnoremap <silent> [c <Plug>(coc-diagnostic-prev)
-nnoremap <silent> ]c <Plug>(coc-diagnostic-next)
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
 " call submode#enter_with('COCMODE', 'n', '', '<leader>c', '<C-w>>')
 " call submode#enter_with('COCMODE', 'n', '', 's<', '<C-w><')
@@ -52,10 +57,9 @@ nnoremap <silent> ]c <Plug>(coc-diagnostic-next)
 "
 nnoremap <silent> <leader>h :<C-u>call CocAction('doHover')<cr>
 ""スペースdfでDefinition
-nnoremap <silent> <leader>df <Plug>(coc-definition)
 "スペースrfでReferences
-nnoremap <silent> <leader>rf <Plug>(coc-references)
-nnoremap <silent>  <Plug>(coc-rename)
+nmap <silent> <leader>rf <Plug>(coc-references)
+nmap <silent>  <Plug>(coc-rename)
 "スペースfmtでFormat
-nnoremap <silent> <leader>fmt <Plug>(coc-format)
+nmap <silent> =G <Plug>(coc-format)
 '''

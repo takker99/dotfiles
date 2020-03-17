@@ -6,3 +6,6 @@ repo = 'flazz/vim-colorschemes'
 
 [[plugins]]
 repo = 'kamykn/dark-theme.vim'
+
+[[plugins]]
+repo = 'altercation/vim-colors-solarized'

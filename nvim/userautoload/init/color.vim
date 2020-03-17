@@ -13,11 +13,6 @@ scriptencoding utf-8
 "autocmd ColorScheme * highlight Comment ctermfg=22 guifg=#008835
 "autocmd ColorScheme * highlight Search term=reverse cterm=reverse ctermfg=166 gui=reverse guifg=#FF8C00
 
-set termguicolors
-colorscheme zenburn
-
-" ダーク系のカラースキームを使う
-set background=dark
 
 "cf. https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwiU9Lq2wf7mAhXSG6YKHcnJDTYQFjAAegQIBRAB&url=https%3A%2F%2Fgithub.com%2Fxaizek%2Fdotvim%2Fblob%2Fmaster%2Fftdetect%2Fxaml.vim&usg=AOvVaw3fFHYZwsk5d0Pe1r63IWXW
 autocmd BufRead,BufNewFile *.xaml :set filetype=xml
@@ -53,10 +48,30 @@ if has('syntax')
     call ZenkakuSpace()
 endif
 
-highlight! Normal ctermbg=NONE guibg=NONE
-highlight! NonText ctermbg=NONE guibg=NONE
-highlight! SpecialKey ctermbg=NONE guibg=NONE
-highlight! EndOfBuffer ctermbg=NONE guibg=NONE
+
+
+
+" 入力補完を半透明にする
+set pumblend=20
 
 syntax enable
+colorscheme solarized8_dark_low
+set background=dark
 
+" Floating Window の色設定
+highlight! NormalFloat ctermbg=NONE guibg=#808080
+set winblend=20
+
+" 無色透明にする
+highlight! Normal ctermbg=NONE guibg=NONE
+highlight! NonText ctermbg=NONE guibg=NONE
+highlight! CursorLineNr ctermbg=NONE guibg=NONE
+highlight! LineNr ctermbg=NONE guibg=NONE
+highlight! CursorLine ctermbg=NONE guibg=NONE
+highlight! SpecialKey ctermbg=NONE guibg=NONE
+highlight! EndOfBuffer ctermbg=NONE guibg=NONE
+highlight! Folded ctermbg=NONE guibg=NONE
+highlight! FoldColumn ctermbg=NONE guibg=NONE
+
+" cterm ではなく gui の色を使用する
+set termguicolors
