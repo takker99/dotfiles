@@ -55,6 +55,7 @@ function! LightLineMode()
                 \ &filetype ==  'undotree' ? 'undotree':
                 \ &filetype ==  'gina-status' ? 'GSTATUS':
                 \ &filetype ==  'gina-commit' ? 'GCOMMIT':
+                \ &filetype ==  'ginaog' ? 'GLOG':
                 \ winwidth(0) > 60 ?  lightline#mode() : ''
 endfunction
 
