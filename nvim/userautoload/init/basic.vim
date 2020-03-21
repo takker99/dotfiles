@@ -94,6 +94,12 @@ set tabstop=4              " 行頭以外のTab文字の表示幅（スペース
 set shiftwidth=4            " 行頭でのTab文字の表示幅
 set softtabstop=4         " <Tab> の挿入や <BS> の使用等の編集操作をするときに、<Tab> が対応する空白の数。
 
+" 言語ごとにTabの設定を変える
+augroup fileTypeIndent
+    autocmd!
+    autocmd BufNewFile,BufRead *.md setlocal tabstop=2 softtabstop=2 shiftwidth=2
+augroup END
+
 " 不可視文字を可視化(タブが「?-」と表示される)
 set list
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:⍽
