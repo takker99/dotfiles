@@ -1,10 +1,11 @@
+
+
+
 # ==== Format ====
 # :emoji: Subject
 # <PUT ONE BLANK LINE>
 # Commit body...
-
-
-
+#
 # ==== Emojis ====
 # :sparkles:          New Feature
 # :+1:                Fixing a feature
