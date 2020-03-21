@@ -13,7 +13,7 @@ module.exports = {
 
     // font family with optional fallbacks
    // fontFamily: '"Inconsolata Nerd Font Mono", "MyricaM M", Consolas, "Lucida Console", monospace',
-    fontFamily: '"Inconsolata Nerd Font Mono", "MyricaM M", Consolas, "Lucida Console", monospace',
+    fontFamily: 'Cica',
 
     // default font weight: 'normal' or 'bold'
     fontWeight: 'normal',
