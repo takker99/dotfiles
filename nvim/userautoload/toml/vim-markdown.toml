@@ -1,0 +1,10 @@
+[[plugins]]
+repo = 'plasticboy/vim-markdown'
+depends = ['godlygeek/tabular']
+hook_add='''
+let g:vim_markdown_override_foldtext = 0       " prevent foldtext from being set
+let g:vim_markdown_no_default_key_mappings = 1 " disable default key mappings
+let g:vim_markdown_toc_autofit = 1
+let g:vim_markdown_math = 1                    " used as $x^2$, $$x^2$$, escapable as \$x\$ and \$\$x\$\$
+let g:vim_markdown_strikethrough = 1           " Strikethrough uses two tilde
+'''
