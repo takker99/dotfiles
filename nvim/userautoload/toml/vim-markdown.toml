@@ -7,4 +7,5 @@ let g:vim_markdown_no_default_key_mappings = 1 " disable default key mappings
 let g:vim_markdown_toc_autofit = 1
 let g:vim_markdown_math = 1                    " used as $x^2$, $$x^2$$, escapable as \$x\$ and \$\$x\$\$
 let g:vim_markdown_strikethrough = 1           " Strikethrough uses two tilde
+let g:vim_markdown_new_list_item_indent = 2    " change ther number of space as 2
 '''
