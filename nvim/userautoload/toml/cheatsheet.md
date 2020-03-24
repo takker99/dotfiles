@@ -2,22 +2,57 @@
 
 ## vim
 
+### note
+
+`<Leader>`は`<Space>`にしてある。
+
 ### move
+
+#### cursor
+
+- `h` : 右
+- `j` : 下
+- `k` : 上
+- `l` : 左
 
 #### word
 
-- `w` : 単語 記号区切り 次へ
-- `b` : 単語 記号区切り 前へ
-- `e` : 単語 記号区切り 末尾へ
-- `W` : 単語 空白区切り 次へ
-- `B` : 単語 空白区切り 前へ
-- `E` : 単語 空白区切り 末尾へ
+- `w`   : 単語 記号区切り 次の先頭へ
+- `b`   : 単語 記号区切り 前の先頭へ
+- `e`   : 単語 記号区切り 次の末尾へ
+- `ge`  : 単語 記号区切り 前の末尾へ
+- `W`   : 単語 空白区切り 次の先頭へ
+- `B`   : 単語 空白区切り 前の先頭へ
+- `E`   : 単語 空白区切り 次の末尾へ
+- `gE`  : 単語 空白区切り 前の末尾へ
 
 #### line
 
-- `0`, `<Leader>H` : 行頭へ
-- `^`, `<Leader>h` : 空白以外の行頭へ
-- `$`, `<Leader>l` : 行末へ
+- `0`    : 行頭へ
+- `^`, `H` : 空白以外の行頭へ
+- `$`, `L` : 行末へ
+
+- `<Leader>w`   : marker へ飛ぶ(単語 記号区切り cursor より次にある先頭)
+- `<Leader>b`   : marker へ飛ぶ(単語 記号区切り cursor より前にある先頭)
+- `<Leader>e`   : marker へ飛ぶ(単語 記号区切り cursor より次にある末尾)
+- `<Leader>ge`  : marker へ飛ぶ(単語 記号区切り cursor より前にある末尾)
+- `<Leader>W`   : marker へ飛ぶ(単語 空白区切り cursor より次にある先頭)
+- `<Leader>B`   : marker へ飛ぶ(単語 空白区切り cursor より前にある先頭)
+- `<Leader>E`   : marker へ飛ぶ(単語 空白区切り cursor より次にある末尾)
+- `<Leader>gE`  : marker へ飛ぶ(単語 空白区切り cursor より前にある末尾)
+
+- `<Leader>h{char}` : marker へ飛ぶ ({char}の真上 cursor より左)
+- `<Leader>l{char}` : marker へ飛ぶ ({char}の真上 cursor より右)
+- `<Leader>H{char}` : marker へ飛ぶ ({char}の前 cursor より左)
+- `<Leader>L{char}` : marker へ飛ぶ ({char}の前 cursor より右)
+
+- `f{char}` : marker へ飛ぶ ({char}の真上)
+- `t{char}` : marker へ飛ぶ ({char}の前)
+
+#### column
+
+- `<Leader>j` : marker へ飛ぶ (下)
+- `<Leader>k` : marker へ飛ぶ (上)
 
 #### object
 
@@ -30,10 +65,10 @@
 
 #### scroll
 
-- `<C-u>` : 画面半分上へスクロール
-- `<C-d>` : 画面半分下へスクロール
-- `<C-b>` : 1画面分上へスクロール(PageUp)
-- `<C-f>` : 1画面分下へスクロール(PageDown)
+- `<C-u>`             : 画面半分上へスクロール
+- `<C-d>`             : 画面半分下へスクロール
+- `<C-b>`, `<PageUp>`   : 1画面分上へスクロール
+- `<C-f>`, `<PageDown>` : 1画面分下へスクロール
 
 #### other
 
@@ -52,7 +87,7 @@
 
 ### fold
 
-- `zf` : 新規作成
+- ~`zf` : 新規作成~ 使用不可
 - `zo` : 開く
 - `zc` : 閉じる
 - `za` : 折りたたみ状態の切り替え
@@ -103,6 +138,10 @@
 ### coc.nvim
 
 - `<tab>` : 補完開始
+- `<C-j>` : ( snippet を展開できるとき ) snippet を展開する
+- `<C-j>` : ( snippet 展開中 ) 次の placefolder へ飛ぶ
+- `<C-k>` : ( snippet 展開中 ) 前の placefolder に戻る
+- `=G`    : LSP を使って code を整形する
 - `[c` : 前の警告へ飛ぶ
 - `]c` : 次の警告へ飛ぶ
 
@@ -112,10 +151,6 @@
 - `:lcl[ose]`    : ロケーションリストを閉じる
 - `:lne[xt]`     : 次へ
 - `:lp[revious]` : 前へ
-
-### snippets
-
-- `<C-k>` : スニペットの展開、次の位置へ
 
 ### help
 
@@ -142,6 +177,26 @@
 - `<C-n>`    : (検索結果ダイアログ)次へ
 - `<C-p>`    : (検索結果ダイアログ)前へ
 
+### Defx
+
+- `<C-u>` : defx を開く
+
+以下、defx buffer 内でのみ有効
+
+- `h`       : 親 directory に戻る
+- `j`       : 下に進む
+- `k`       : 上に戻る
+- `l`, `<CR>` : cursor 行の file/directory を開く
+- `~`       : root directory に飛ぶ
+- `o`       : file tree の展開の切り替え
+- `N`       : file を新規作成
+- `K`       : directory を新規作成
+- `r`       : 名前変更
+- `C`       : 詳細情報の表示切り替え
+- `cd`      : 現在地点を vim の current directory にする
+
+- `q` : defx を閉じる
+
 ### vim-fugitve
 
 - `:Gstatus`      : statusの表示
@@ -149,19 +204,8 @@
 - `:Gdiff`        : diffをvimdiffで表示
 - `:Gblame`       : git blame
 
-### gv.vim
-
-- `:GV`            : commit browserを開く
-- `o` or `<Enter>` : コミットの詳細を表示する
-- `q`              : commit browserの終了
-
 ### vim-go
 
-- `<Leader>b`         : GoBuild = `go build`
-- `<Leader>r`         : GoRun = `go run`
-- `<Leader>t`         : GoTest = `go test`
-- `<Leader>tf`        : GoTestFunc = `go test -run ...`
-- `<Leader>c`         : GoCoverageToggle
 - `:GoImport ${name}` : importに追加、tab補完可能
 - `:GoDrop ${name}`   : importから削除、tab補完可能
 - `:GoImports`        : 不足しているパッケージをimportに追加する
