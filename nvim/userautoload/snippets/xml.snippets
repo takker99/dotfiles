@@ -30,6 +30,10 @@ snippet e "<element>...</element>" b
 </${1/([0-9a-zA-Z\.]+).*/$1/}>
 endsnippet
 
+snippet e_inline "<element>...</element>" b
+<${1:TAG}>${2:VISUAL} </${1/([0-9a-zA-Z\.]+).*/$1/}>
+endsnippet
+
 snippet empty_elm "<element ... />" b
 <${1:TAG} ${2:VISUAL} />
 endsnippet
