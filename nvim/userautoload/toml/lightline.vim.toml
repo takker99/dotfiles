@@ -60,8 +60,9 @@ function! LightLineMode()
 endfunction
 
 " 特殊バッファと読み取り専用ファイルに対して、読み取り専用マークを表示する。
+" commit window は編集可能なので除外している
 function! LightLineReadonly()
-    return &filetype =~ s:ignore_types || &readonly ? '' : ''
+    return (&filetype =~ s:ignore_types || &readonly) && &filetype!='gina-commit' ? '':  ''
 endfunction
 
 " 保存していない変更があったら+マークを表示する
