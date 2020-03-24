@@ -7,7 +7,7 @@ let g:lightline = {
     \ 'active': {
     \   'left': [
     \     ['mode', 'paste'],
-    \     ['gitbranch', 'gitgutter','readonly','filename','modified'],
+    \     ['gitbranch', 'gitgutter','filename'],
     \     ['cocstatus', 'currentfunction'],
     \   ],
     \   'right': [
@@ -64,9 +64,16 @@ function! LightLineReadonly()
     return &filetype =~ s:ignore_types || &readonly ? '' : ''
 endfunction
 
+" 保存していない変更があったら+マークを表示する
+function! LightLineModified()
+    return &filetype !~s:ignore_types && &modified ? '+' : ''
+endfunction
+
 function! LightLineFilename()
-    return &filetype =~ s:ignore_types ? '' :
-        \ '' != expand('%:t') ? expand('%:t') : '[No Name]'
+    return ('' != LightLineReadonly() ? LightLineReadonly().' ' : '').
+                \ (&filetype =~ s:ignore_types ? '' :
+        \ '' != expand('%:t') ? expand('%:t') : '[No Name]').
+        \ (''!= LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
 
 function! LightLineFiletype()
@@ -78,7 +85,7 @@ function! LightLineGitBranch()
     try
         if &ft !~ s:ignore_types
             let _ = gina#component#repo#branch()
-            return strlen(_) ? ''._ : ''
+            return strlen(_) ? ' '._ : ''
         endif
     catch
     endtry
