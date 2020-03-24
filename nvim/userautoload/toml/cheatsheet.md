@@ -2,22 +2,60 @@
 
 ## vim
 
+### note
+
+`<Leader>`は`<Space>`にしてある。
+
 ### move
 
+#### cursor
+
+- `h` : 右
+- `j` : 下
+- `k` : 上
+- `l` : 左
+
 #### word
-- `w` : 単語 記号区切り 次へ
-- `b` : 単語 記号区切り 前へ
-- `e` : 単語 記号区切り 末尾へ
-- `W` : 単語 空白区切り 次へ
-- `B` : 単語 空白区切り 前へ
-- `E` : 単語 空白区切り 末尾へ
+
+- `w`   : 単語 記号区切り 次の先頭へ
+- `b`   : 単語 記号区切り 前の先頭へ
+- `e`   : 単語 記号区切り 次の末尾へ
+- `ge`  : 単語 記号区切り 前の末尾へ
+- `W`   : 単語 空白区切り 次の先頭へ
+- `B`   : 単語 空白区切り 前の先頭へ
+- `E`   : 単語 空白区切り 次の末尾へ
+- `gE`  : 単語 空白区切り 前の末尾へ
 
 #### line
-- `0`, `<Leader>H` : 行頭へ
-- `^`, `<Leader>h` : 空白以外の行頭へ
-- `$`, `<Leader>l` : 行末へ
+
+- `0`    : 行頭へ
+- `^`, `H` : 空白以外の行頭へ
+- `$`, `L` : 行末へ
+
+- `<Leader>w`   : marker へ飛ぶ(単語 記号区切り cursor より次にある先頭)
+- `<Leader>b`   : marker へ飛ぶ(単語 記号区切り cursor より前にある先頭)
+- `<Leader>e`   : marker へ飛ぶ(単語 記号区切り cursor より次にある末尾)
+- `<Leader>ge`  : marker へ飛ぶ(単語 記号区切り cursor より前にある末尾)
+- `<Leader>W`   : marker へ飛ぶ(単語 空白区切り cursor より次にある先頭)
+- `<Leader>B`   : marker へ飛ぶ(単語 空白区切り cursor より前にある先頭)
+- `<Leader>E`   : marker へ飛ぶ(単語 空白区切り cursor より次にある末尾)
+- `<Leader>gE`  : marker へ飛ぶ(単語 空白区切り cursor より前にある末尾)
+
+- `<Leader>h{char}` : marker へ飛ぶ ({char}の真上 cursor より左)
+- `<Leader>l{char}` : marker へ飛ぶ ({char}の真上 cursor より右)
+- `<Leader>H{char}` : marker へ飛ぶ ({char}の前 cursor より左)
+- `<Leader>L{char}` : marker へ飛ぶ ({char}の前 cursor より右)
+
+- `f{char}` : marker へ飛ぶ ({char}の真上)
+- `t{char}` : marker へ飛ぶ ({char}の前)
+
+#### column
+
+- `<Leader>j` : marker へ飛ぶ (下)
+- `<Leader>k` : marker へ飛ぶ (上)
 
 #### object
+
 - `(`  : 文単位で上へ
 - `)`  : 文単位で下へ
 - `{`  : 段落単位で上へ
@@ -26,12 +64,14 @@
 - `]]` : セクション単位で下へ
 
 #### scroll
-- `<C-u>` : 画面半分上へスクロール
-- `<C-d>` : 画面半分下へスクロール
-- `<C-b>` : 1画面分上へスクロール(PageUp)
-- `<C-f>` : 1画面分下へスクロール(PageDown)
+
+- `<C-u>`             : 画面半分上へスクロール
+- `<C-d>`             : 画面半分下へスクロール
+- `<C-b>`, `<PageUp>`   : 1画面分上へスクロール
+- `<C-f>`, `<PageDown>` : 1画面分下へスクロール
 
 #### other
+
 - `gg` : ファイル先頭へ
 - `G`  : ファイル末尾へ
 - `I`  : 行頭でインサートモードへ
@@ -41,12 +81,13 @@
 - `gJ` : 行を結合(頭に数字で繰り返し)
 - `<F12>` : 行表示切り替え(相対表示⇔絶対表示)
 
-
 ### yank
+
 - `"0p` : レジスタ`"0`の内容を貼り付け(`"0`は`dd`などで削除しても使用されない)
 
 ### fold
-- `zf` : 新規作成
+
+- ~`zf` : 新規作成~ 使用不可
 - `zo` : 開く
 - `zc` : 閉じる
 - `za` : 折りたたみ状態の切り替え
@@ -60,6 +101,7 @@
 - `]z` : 現在開いている折り畳みの末尾へ移動
 
 ### pane
+
 - `sv`: 縦に分割
 - `ss`: 横に分割
 - `sh`: 左のペインへ
@@ -74,36 +116,44 @@
 - `sr`: ペインを回転
 
 ### buffer
+
 - `sn`       : 次へ
 - `sp`       : 前へ
 - `sd`       : 削除
 - `:b {名前}` : 指定したバッファへ(補完可能)
 
 ### tab
+
 - `st`       : 空タブを新規作成
 - `sN`       : 次へ
 - `sP`       : 前へ
 - `sx`       : 削除
 
 ### macro
+
 - `q(a-z)`       : 記録開始
 - `q`            : 記録終了
 - `[数字]@(a-z)` : 任意の回数分マクロを実行
 
 ### coc.nvim
+
 - `<tab>` : 補完開始
+- `<C-j>` : ( snippet を展開できるとき ) snippet を展開する
+- `<C-j>` : ( snippet 展開中 ) 次の placefolder へ飛ぶ
+- `<C-k>` : ( snippet 展開中 ) 前の placefolder に戻る
+- `=G`    : LSP を使って code を整形する
 - `[c` : 前の警告へ飛ぶ
 - `]c` : 次の警告へ飛ぶ
+
 ### location list
+
 - `:lop[en]`     : ロケーションリストを開く
 - `:lcl[ose]`    : ロケーションリストを閉じる
 - `:lne[xt]`     : 次へ
 - `:lp[revious]` : 前へ
 
-### snippets
-- `<C-k>` : スニペットの展開、次の位置へ
-
 ### help
+
 - `:h[elp] ${name}`        : ヘルプを分割して表示
 - `:h[elp] ${name} | only` : ヘルプを全画面で表示
 - `<C-]>`                  : 項目へジャンプ
@@ -111,6 +161,7 @@
 - `K`                      : カーソル位置のキーワードを調べる
 
 ### EasyMotion
+
 - `;{char}{char}{label}` : ;のあとに続けた二文字がある場所にカーソルを飛ばす。複数箇所ある場合はジャンプ用のlabelsを表示する
 - `f{char}{label}` : 現在行内で、カーソルの右にある{char}に飛ぶ。複数箇所あるときはlabelsを表示する。
 - `F{char}{label}` : 現在行内で、カーソルの左にある{char}に飛ぶ。複数箇所あるときはlabelsを表示する。
@@ -118,6 +169,7 @@
 - `<leader>j{label}` : {label}が表示されている行に飛ぶ。範囲はカーソルより下の行
 
 ### Denite
+
 - `:Dgrep`   : Denite grep
 - `:Dresume` : 閉じた検索結果を再度開く
 - `:Dprev`   : 前の検索結果へ
@@ -125,23 +177,35 @@
 - `<C-n>`    : (検索結果ダイアログ)次へ
 - `<C-p>`    : (検索結果ダイアログ)前へ
 
+### Defx
+
+- `<C-u>` : defx を開く
+
+以下、defx buffer 内でのみ有効
+
+- `h`       : 親 directory に戻る
+- `j`       : 下に進む
+- `k`       : 上に戻る
+- `l`, `<CR>` : cursor 行の file/directory を開く
+- `~`       : root directory に飛ぶ
+- `o`       : file tree の展開の切り替え
+- `N`       : file を新規作成
+- `K`       : directory を新規作成
+- `r`       : 名前変更
+- `C`       : 詳細情報の表示切り替え
+- `cd`      : 現在地点を vim の current directory にする
+
+- `q` : defx を閉じる
+
 ### vim-fugitve
+
 - `:Gstatus`      : statusの表示
 - `:Glog | copen` : git logをquickfixで表示
 - `:Gdiff`        : diffをvimdiffで表示
 - `:Gblame`       : git blame
 
-### gv.vim
-- `:GV`            : commit browserを開く
-- `o` or `<Enter>` : コミットの詳細を表示する
-- `q`              : commit browserの終了
-
 ### vim-go
-- `<Leader>b`         : GoBuild = `go build`
-- `<Leader>r`         : GoRun = `go run`
-- `<Leader>t`         : GoTest = `go test`
-- `<Leader>tf`        : GoTestFunc = `go test -run ...`
-- `<Leader>c`         : GoCoverageToggle
+
 - `:GoImport ${name}` : importに追加、tab補完可能
 - `:GoDrop ${name}`   : importから削除、tab補完可能
 - `:GoImports`        : 不足しているパッケージをimportに追加する
@@ -165,20 +229,20 @@ source:[VIM Cheatsheet](https://gist.github.com/0xadada/1ea7f96d108dcfbe75c9)
 _Motion, keyboard commands and shortcuts for VI Improved_
 
 * [Legend](#legend)
-    * [Motion / Normal mode](#motion---normal-mode)
-    * [Insert mode](#insert-mode)
-    * [Changes](#changes)
-    * [Yank/Put or Copy/Paste](#yankput-or-copypaste)
-    * [Visual/Visual Block Mode](#visual--visual-block-mode)
-    * [Commands](#commands)
-    * [Files](#files)
-    * [Windows](#windows)
-    * [Tabs](#tabs)
-    * [coc.nvim](#cocnvim)
-    * [Denite](#denite)
-    * [Help](#help)
-    * [Search/Replace](#search--replace)
-    * [Find Files](#find-files)
+  * [Motion / Normal mode](#motion---normal-mode)
+  * [Insert mode](#insert-mode)
+  * [Changes](#changes)
+  * [Yank/Put or Copy/Paste](#yankput-or-copypaste)
+  * [Visual/Visual Block Mode](#visual--visual-block-mode)
+  * [Commands](#commands)
+  * [Files](#files)
+  * [Windows](#windows)
+  * [Tabs](#tabs)
+  * [coc.nvim](#cocnvim)
+  * [Denite](#denite)
+  * [Help](#help)
+  * [Search/Replace](#search--replace)
+  * [Find Files](#find-files)
 
     ![Graphic](http://i.imgur.com/HkCjM63.png)
 
@@ -204,7 +268,6 @@ _Motion, keyboard commands and shortcuts for VI Improved_
     |  end          | <kbd>↘</kbd>                 |
     |  page up      | <kbd>⇞</kbd>                 |
     |  page down    | <kbd>⇟</kbd>                 |
-
 
 ## Motion - Normal Mode
 
@@ -243,7 +306,6 @@ _Motion, keyboard commands and shortcuts for VI Improved_
     * <kbd>zr</kbd>         - Open one layer of code folds
     * <kbd>z⇧r</kbd>        - Open all code folks
 
-
 ## Insert Mode
 
     These commands are entered while in Normal or visual mode.
@@ -270,7 +332,6 @@ _Motion, keyboard commands and shortcuts for VI Improved_
     * <kbd>⇧j</kbd>            - Join line with line below
     * <kbd>c(f|t)&lt;char&gt;</kbd>  - Change characters (inclusive with f or exclusive with t) to `char`
 
-
 ## Yank/Put or Copy/Paste
 
     * <kbd>yw</kbd>         - Yank word into buffer
@@ -280,7 +341,6 @@ _Motion, keyboard commands and shortcuts for VI Improved_
     * <kbd>x</kbd>          - Yank character at cursor
     * <kbd>p</kbd>          - Put buffer after cursor
     * <kbd>⇧p</kbd>         - Put buffer before cursor
-
 
 ## Visual / Visual Block Mode
 
@@ -319,7 +379,6 @@ _Motion, keyboard commands and shortcuts for VI Improved_
     * <kbd>&gt;</kbd>       - Indent right
     * <kbd>&lt;</kbd>       - Indent left
 
-
 ## Commands
 
     * <kbd>.</kbd>           - Repeat previous command
@@ -328,7 +387,6 @@ _Motion, keyboard commands and shortcuts for VI Improved_
     * <kbd>⌃r</kbd>          - Redo
     * <kbd>:q</kbd>           - Quit
     * <kbd>:q!</kbd>          - Quit (without saving changes)
-
 
 ## Files
 
@@ -339,7 +397,6 @@ _Motion, keyboard commands and shortcuts for VI Improved_
     * <kbd>:(bd|bdelete) &lt;n&gt;</kbd>   - Delete buffer `n` (close file)
     * <kbd>:bp</kbd>                 - Switch to previous buffer
     * <kbd>:bn</kbd>                 - Switch to next buffer
-
 
 ## Windows
 
@@ -363,7 +420,6 @@ _Motion, keyboard commands and shortcuts for VI Improved_
     * <kbd>:(resize|res) (+|-)&lt;n&gt;</kbd> - Horizontal resize to `n` or increase/decrease by `n`
     * <kbd>:vertical resize (+|-)&lt;n&gt;</kbd> - Vertical resize to `n` or increase/decrease by `n`
 
-
 ## Tabs
 
     * <kbd>sN</kbd>          - GoTo next tab
@@ -375,24 +431,11 @@ _Motion, keyboard commands and shortcuts for VI Improved_
     * <kbd>:tabclose &lt;n&gt;</kbd>  - Close tab `n`
     * <kbd>:tabonly</kbd>   - Close all other tabs
 
-## coc.nvim
-
-    * <kbd>,dj</kbd> Open implementation at cursor (coc-implementation)
-    * <kbd>,dd</kbd> Open symbol definition at cursor (coc-definition)
-    * <kbd>,dr</kbd> Open panel of symbol references at cursor (coc-references)
-
-## Denite
-
-    * <kbd>;</kbd>  - fuzzy-search buffers for a string
-    * <kbd>,t</kbd> - fuzzy-search current directory for string
-    * <kbd>,j</kbd> - fuzzy-search current directory for string at cursor
-
 ## Help
 
     * <kbd>:h</kbd> - Open Help
     * <kbd>⌃]</kbd> - Activate link at cursor
     * <kbd>⌃T</kbd> - Back
-
 
 ## Search / Replace
 
@@ -408,7 +451,6 @@ _Motion, keyboard commands and shortcuts for VI Improved_
     * <kbd>* &lt;n|⇧n&gt;</kbd>    - Search forward for word at cursor, `n` jumps to Next result, `N` jumps to previous
     * <kbd># &lt;n|⇧n&gt;</kbd>    - Search backward for word at cursor, `n` jumps to Next result, `N` jumps to previous
 
-
 ## Find Files
 
     For finding patterns in files. Use <kbd>:vimgrep</kbd> if unsure if the `grep`
@@ -420,5 +462,4 @@ _Motion, keyboard commands and shortcuts for VI Improved_
       The `g` option specifies that all matches for a search will be returned instead of just one per line,
             and the `j` option specifies that Vim will not jump to the first match automatically.
     * <kbd>:grep &lt;pattern&gt; &lt;path&gt;</kbd> - Search for regex `pattern` located in `path`.
-
 
