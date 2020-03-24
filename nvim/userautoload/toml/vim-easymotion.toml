@@ -6,10 +6,11 @@ let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
 map <Leader>l <Plug>(easymotion-fl)
 map <Leader>h <Plug>(easymotion-Fl)
-map t <Plug>(easymotion-tl)
-map T <Plug>(easymotion-Tl)
+map <Leader>L <Plug>(easymotion-tl)
+map <Leader>H <Plug>(easymotion-Tl)
 
 map f <Plug>(easymotion-bd-fl)
+map t <Plug>(easymotion-bd-tl)
 
 
 " Jump to anywhere you want with minimal keystrokes, with just one key binding.
@@ -23,13 +24,13 @@ let g:EasyMotion_smartcase = 1
 
 " Word motions
 map <Leader>w <Plug>(easymotion-wl)
-map <Leader>W <Plug>(easymotion-W)
+map <Leader>W <Plug>(easymotion-Wl)
 map <Leader>b <Plug>(easymotion-bl)
-map <Leader>B <Plug>(easymotion-B)
+map <Leader>B <Plug>(easymotion-Bl)
 map <Leader>e <Plug>(easymotion-el)
-map <Leader>E <Plug>(easymotion-E)
+map <Leader>E <Plug>(easymotion-El)
 map <Leader>ge <Plug>(easymotion-gel)
-map <Leader>gE <Plug>(easymotion-gE)
+map <Leader>gE <Plug>(easymotion-gEl)
 
 " JK motions: Line motions
 let g:EasyMotion_startofline=0
