@@ -20,7 +20,7 @@ repo ="kristijanhusak/defx-icons"
 repo = 'Shougo/defx.nvim'
 depends = ['defx-git', 'defx-icons']
 hook_add = '''
-nnoremap <silent><C-n> :<C-u>Defx -listed -resume `expand('%:p:h')` -search=`expand('%:p')`<CR>
+nnoremap <silent><C-n> :<C-u>Defx -listed -resume `expand('%:p:h')` -search=`expand('%:p')` -buffer-name=``<CR>
 
 function! Root(path) abort
   return fnamemodify(a:path, ':t')
