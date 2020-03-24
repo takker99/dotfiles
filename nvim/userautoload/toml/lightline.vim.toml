@@ -66,8 +66,8 @@ endfunction
 
 function! LightLineFilename()
     return &filetype =~ s:ignore_types ? '' :
-                \ &filetype =~ 'gina-status\|gina-commit' ? '' :
-                \ '' != expand('%:t') ? expand('%:t') : '[No Name]'
+        \ &filetype =~ 'gina-status\|gina-commit' ? '' :
+        \ '' != expand('%:t') ? expand('%:t') : '[No Name]'
 endfunction
 
 function! LightLineFiletype()
