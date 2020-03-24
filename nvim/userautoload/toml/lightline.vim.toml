@@ -51,8 +51,8 @@ function! LightLineMode()
             return _
         endif
     endif
-    return   &filetype == 'defx' ? 'defx' :
-                \ &filetype ==  'undotree' ? 'undotree':
+    return   &filetype == 'defx' ? 'Explorer' :
+                \ &filetype ==  'undotree' ? 'UndoTree':
                 \ &filetype ==  'gina-status' ? 'GSTATUS':
                 \ &filetype ==  'gina-commit' ? 'GCOMMIT':
                 \ &filetype ==  'gina-log' ? 'GLOG':
