@@ -10,6 +10,8 @@ nnoremap <silent> [Denite]a :<C-u>Denite file buffer -split=floating file:new<CR
 " バッファを表示
 nnoremap <silent> [Denite]b :<C-u>Denite buffer -split=floating file:new<CR>
 "  最近使ったファイルを表示
+nnoremap <silent> [Denite]o :<C-u>Denite file/old -split=floating file:new<CR>
+"  current directoryを表示
 nnoremap <silent> [Denite]f :<C-u>Denite file/old -split=floating file:new<CR>
 "  カレントディレクトリ以下を再帰的に表示
 nnoremap <silent> [Denite]r :<C-u>Denite file/rec -split=floating file:new<CR>
@@ -25,7 +27,6 @@ nnoremap <silent> [Denite]c :<C-u>Denite command_history -split=floating<CR>
 autocmd FileType denite call s:denite_my_settings()
 function! s:denite_my_settings() abort
   nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
-  " 【o】 ファイルを開く
   nnoremap <silent><buffer><expr> o  denite#do_map('do_action')
   nnoremap <silent><buffer><expr> l  denite#do_map('do_action')
   " 【s】 ウィンドウを水平分割してファイルを開く
