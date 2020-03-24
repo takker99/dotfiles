@@ -34,7 +34,7 @@ let g:lightline = {
     \ }
 
 " 特殊バッファとして認識するfiletypes
-let s:ignore_types='defx\|help\|undotree'
+let s:ignore_types='defx\|help\|undotree\|gina-*'
 
 function! CocCurrentFunction()
     return &filetype =~ s:ignore_types ? '' : get(b:, 'coc_current_function', '')
@@ -66,7 +66,6 @@ endfunction
 
 function! LightLineFilename()
     return &filetype =~ s:ignore_types ? '' :
-        \ &filetype =~ 'gina-status\|gina-commit' ? '' :
         \ '' != expand('%:t') ? expand('%:t') : '[No Name]'
 endfunction
 
