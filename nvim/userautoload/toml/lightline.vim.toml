@@ -54,15 +54,15 @@ function! LightLineMode()
     return   &filetype == 'defx' ? 'Explorer' :
                 \ &filetype ==  'undotree' ? 'UndoTree':
                 \ &filetype ==  'gina-status' ? 'GSTATUS':
+                \ &filetype ==  'gina-branch' ? 'GBRANCH':
                 \ &filetype ==  'gina-commit' ? 'GCOMMIT':
                 \ &filetype ==  'gina-log' ? 'GLOG':
                 \ winwidth(0) > 60 ?  lightline#mode() : ''
 endfunction
 
 " 特殊バッファと読み取り専用ファイルに対して、読み取り専用マークを表示する。
-" commit window は編集可能なので除外している
 function! LightLineReadonly()
-    return (&filetype =~ s:ignore_types || &readonly) && &filetype!='gina-commit' ? '':  ''
+    return &filetype =~ s:ignore_types || &readonly ? '' :&filetype ==  ''
 endfunction
 
 " 保存していない変更があったら+マークを表示する
