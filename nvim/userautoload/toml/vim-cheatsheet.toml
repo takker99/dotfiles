@@ -3,4 +3,9 @@ repo = 'reireias/vim-cheatsheet'
 hook_add='''
 " only absolute path
 let g:cheatsheet#cheat_file = '~/git/dotfiles/nvim/userautoload/toml/cheatsheet.md'
+
+" show in a float window
+let g:cheatsheet#float_window = 1
+let g:cheatsheet#float_window_width_ratio = 0.6
+let g:cheatsheet#float_window_height_ratio = 0.6
 '''
