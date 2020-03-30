@@ -1,9 +1,12 @@
 [[plugins]]
 repo = 'reireias/vim-cheatsheet'
+on_cmd=['Cheat']
 hook_add='''
 nnoremap <silent><F1> :Cheat<CR>
+'''
+hook_source='''
 " only absolute path
-let g:cheatsheet#cheat_file = '~/git/dotfiles/nvim/userautoload/toml/cheatsheet.md'
+let g:cheatsheet#cheat_file = '~/git/dotfiles/nvim/userautoload/toml/lazy/cheatsheet.md'
 
 " show in a float window
 let g:cheatsheet#float_window = 1

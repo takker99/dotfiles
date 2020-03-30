@@ -1,5 +1,6 @@
 [[plugins]]
 repo = 'Lokaltog/vim-easymotion'
+on_map=['<Plug>(easymotion-']
 hook_add = '''
 map <Leader> <Plug>(easymotion-prefix)
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
