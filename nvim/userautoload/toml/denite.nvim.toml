@@ -6,15 +6,15 @@ nnoremap [Denite] <Nop>
 nmap <Leader>d [Denite]
 
 " カレントディレクトリとバッファを表示
-nnoremap <silent> [Denite]a :<C-u>Denite file buffer -split=floating file:new<CR>
+nnoremap <silent> [Denite]a :<C-u>Denite file buffer file:new<CR>
 " バッファを表示
-nnoremap <silent> [Denite]b :<C-u>Denite buffer -split=floating file:new<CR>
+nnoremap <silent> [Denite]b :<C-u>Denite buffer file:new<CR>
 "  最近使ったファイルを表示
-nnoremap <silent> [Denite]o :<C-u>Denite file/old -split=floating file:new<CR>
+nnoremap <silent> [Denite]o :<C-u>Denite file/old file:new<CR>
 "  current directoryを表示
-nnoremap <silent> [Denite]f :<C-u>Denite file -split=floating file:new<CR>
+nnoremap <silent> [Denite]f :<C-u>Denite file file:new<CR>
 "  カレントディレクトリ以下を再帰的に表示
-nnoremap <silent> [Denite]r :<C-u>Denite file/rec -split=floating file:new<CR>
+nnoremap <silent> [Denite]r :<C-u>Denite file/rec file:new<CR>
 "  カレントディレクトリ以下のファイルから指定した文字列を検索
 nnoremap <silent> [Denite]gr :<C-u>Denite grep -buffer-name=search<CR>
 "  カレントディレクトリ以下のファイルからカーソル下の文字列を検索
@@ -22,7 +22,30 @@ nnoremap <silent> [Denite], :<C-u>DeniteCursorWord grep -buffer-name=search line
 "  grepした結果を再表示
 nnoremap <silent> [Denite]gs :<C-u>Denite -resume -buffer-name=search<CR>
 "  Neovim内で実行したコマンドを表示
-nnoremap <silent> [Denite]c :<C-u>Denite command_history -split=floating<CR>
+nnoremap <silent> [Denite]c :<C-u>Denite command_history<CR>
+
+" Denite の default options
+" cf. https://qiita.com/reireias/items/a15f43dbbf7c88aeaf99
+let s:denite_win_width_percent = 0.85
+let s:denite_win_height_percent = 0.7
+let s:denite_default_options = {
+    \ 'split': 'floating_relative',
+    \ 'floating-preview': v:true,
+    \ 'filter-split-direction': 'floating',
+    " \ 'winwidth': float2nr(&columns * s:denite_win_width_percent),
+    " \ 'wincol': float2nr((&columns - (&columns * s:denite_win_width_percent)) / 2),
+    " \ 'winheight': float2nr(&lines * s:denite_win_height_percent),
+    " \ 'winrow': float2nr((&lines - (&lines * s:denite_win_height_percent)) / 2),
+    \ 'highlight_filter_background': 'DeniteFilter',
+    \ 'prompt': '$ ',
+    \ }
+" default options を登録する
+let s:denite_option_array = []
+for [key, value] in items(s:denite_default_options)
+  call add(s:denite_option_array, '-'.key.'='.value)
+endfor
+call denite#custom#option('default', s:denite_default_options)
+set lines
 
 autocmd FileType denite call s:denite_my_settings()
 function! s:denite_my_settings() abort
@@ -48,6 +71,6 @@ endfunction
 
 autocmd FileType denite-filter call s:denite_filter_my_settings()
 function! s:denite_filter_my_settings() abort
-  imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
+  imap <silent><buffer> jj <Plug>(denite_filter_quit)
 endfunction
 '''
