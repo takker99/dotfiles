@@ -2,5 +2,5 @@
 repo = 'Shougo/deol.nvim'
 hook_add='''
 " floating window でterminalを表示する。
-nnoremap <silent><C-o> :<C-u>Deol -split=floating<CR>
+nnoremap <silent><Leader>t :<C-u>Deol -split=floating<CR>
 '''
