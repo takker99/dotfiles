@@ -102,24 +102,9 @@ function! LightLineFileencoding()
 endfunction
 
 function! LightLineGitGutter()
-    if ! exists('*GitGutterGetHunkSummary')
-                \ || ! get(g:, 'gitgutter_enabled', 0)
-                \ || winwidth('.') <= 90
-        return ''
-    endif
-    let symbols = [
-                \ g:gitgutter_sign_added,
-                \ g:gitgutter_sign_modified,
-                \ g:gitgutter_sign_removed
-                \ ]
-    let hunks = GitGutterGetHunkSummary()
-    let ret = []
-    for i in [0, 1, 2]
-        if hunks[i] > 0
-            call add(ret, symbols[i] . ' '. hunks[i])
-        endif
-    endfor
-    return join(ret, ' ')
+    let status = get(b:, 'coc_git_status', '')
+    " return blame
+    return winwidth(0) > 120 ? status : ''
 endfunction
 
 " https://github.com/Lokaltog/vim-powerline/blob/develop/autoload/Powerline/Functions.vim
@@ -179,5 +164,5 @@ function! LightlineTabFilename(n) abort
 endfunction
 
 " Use auocmd to force lightline update.
-autocmd User CocStatusChange,CocDiagnosticChange,GitGutter call lightline#update()
+autocmd User CocStatusChange,CocDiagnosticChange,CocGitStatusChange call lightline#update()
 '''

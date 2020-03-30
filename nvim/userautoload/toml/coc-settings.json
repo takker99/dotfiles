@@ -46,6 +46,9 @@
     "javascript.format.placeOpenBraceOnNewLineForFunctions":true,
     "javascript.format.placeOpenBraceOnNewLineForControlBlocks":true,
 
+
+    // coc-git setting
+
     "languageserver": {
         "clangd": {
             "command": "clangd",
