@@ -84,10 +84,8 @@ endfunction
 function! LightLineGitBranch()
     " if &ft !~ s:ignore_types && exists('*gina#component#repo#branch')
     try
-        if &ft !~ s:ignore_types
-            let _ = gina#component#repo#branch()
-            return strlen(_) ? ' '._ : ''
-        endif
+        let status = get(g:, 'coc_git_status', '')
+        return winwidth(0) > 70 ? status : ''
     catch
     endtry
     return ''
@@ -103,7 +101,6 @@ endfunction
 
 function! LightLineGitGutter()
     let status = get(b:, 'coc_git_status', '')
-    " return blame
     return winwidth(0) > 70 ? status : ''
 endfunction
 
