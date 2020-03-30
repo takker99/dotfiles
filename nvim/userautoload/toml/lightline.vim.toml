@@ -11,8 +11,7 @@ let g:lightline = {
     \     ['cocstatus', 'currentfunction'],
     \   ],
     \   'right': [
-    \     ['lineinfo'],
-    \     ['percent'],
+    \     ['percent', 'lineinfo'],
     \     ['charcode', 'fileformat', 'fileencoding', 'filetype'],
     \   ]
     \ },
