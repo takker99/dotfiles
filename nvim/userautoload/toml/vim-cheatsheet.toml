@@ -1,5 +1,6 @@
 [[plugins]]
 repo = 'reireias/vim-cheatsheet'
 hook_add='''
-let g:cheatsheet#cheat_file = 'cheatsheet.md'
+" only absolute path
+let g:cheatsheet#cheat_file = '~/git/dotfiles/nvim/userautoload/toml/cheatsheet.md'
 '''
