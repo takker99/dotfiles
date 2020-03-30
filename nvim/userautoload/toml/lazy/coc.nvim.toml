@@ -9,6 +9,22 @@ rev = 'release'
 on_event = ['InsertEnter']
 on_map = ['<Plug>(coc-']
 hook_source = '''
+call coc#add_extension(
+    \ 'coc-dictionary',
+    \ 'coc-fish',
+    \ 'coc-json',
+    \ 'coc-markdownlint',
+    \ 'coc-marketplace',
+    \ 'coc-omnisharp',
+    \ 'coc-pairs',
+    \ 'coc-snippets',
+    \ 'coc-syntax',
+    \ 'coc-tsserver',
+    \ 'coc-vimlsp',
+    \ 'coc-word',
+    \ 'coc-xml',
+    \ 'coc-git'
+  \ )
 " Note: g:coc_config_homeはbasic.vimに記述。
 " cf. https://drumato.hatenablog.com/entry/2019/04/01/121139
 " use <tab> for trigger completion and navigate to next complete item

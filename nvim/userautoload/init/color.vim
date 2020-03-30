@@ -67,6 +67,9 @@ highlight! SpecialKey ctermbg=NONE guibg=NONE
 highlight! EndOfBuffer ctermbg=NONE guibg=NONE
 highlight! Folded ctermbg=NONE guibg=NONE
 highlight! FoldColumn ctermbg=NONE guibg=NONE
+highlight! DiffAdd ctermbg=NONE guibg=NONE
+highlight! DiffChange ctermbg=NONE guibg=NONE
+highlight! DiffDelete ctermbg=NONE guibg=NONE
 
 " Comment を緑色にして見やすくする
 highlight! Comment ctermfg=22 guifg=#3DB680
