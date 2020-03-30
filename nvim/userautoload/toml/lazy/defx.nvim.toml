@@ -1,6 +1,7 @@
 [[plugins]]
 repo ="kristijanhusak/defx-git"
-hook_add = '''
+on_source = ['defx.nvim']
+hook_source = '''
 call defx#custom#column('git', 'indicators', {
   \ 'Modified'  : '✹',
   \ 'Staged'    : '✚',
@@ -15,13 +16,15 @@ call defx#custom#column('git', 'indicators', {
 
 [[plugins]]
 repo ="kristijanhusak/defx-icons"
+on_source = ['defx.nvim']
 
 [[plugins]]
 repo = 'Shougo/defx.nvim'
 depends = ['defx-git', 'defx-icons']
 hook_add = '''
 nnoremap <silent><C-n> :<C-u>Defx -listed -resume `expand('%:p:h')` -search=`expand('%:p')` -buffer-name=""<CR>
-
+'''
+hook_source = '''
 function! Root(path) abort
   return fnamemodify(a:path, ':t')
 endfunction

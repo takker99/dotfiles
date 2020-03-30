@@ -1,6 +1,5 @@
 [[plugins]]
 repo = 'Shougo/denite.nvim'
-depends = ['neoclide/coc-denite']
 hook_add='''
 nnoremap [Denite] <Nop>
 nmap <Leader>d [Denite]
@@ -23,7 +22,8 @@ nnoremap <silent> [Denite], :<C-u>DeniteCursorWord grep -buffer-name=search line
 nnoremap <silent> [Denite]gs :<C-u>Denite -resume -buffer-name=search<CR>
 "  Neovim内で実行したコマンドを表示
 nnoremap <silent> [Denite]c :<C-u>Denite command_history<CR>
-
+'''
+hook_source='''
 " Denite の default options
 " cf. https://qiita.com/reireias/items/a15f43dbbf7c88aeaf99
 let s:denite_win_width_percent = 0.85

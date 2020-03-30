@@ -1,6 +1,6 @@
 [[plugins]]
 repo = 'mbbill/undotree'
-hook_add = '''
+hook_source = '''
 let g:undotree_WindowLayout = 1         " undotreeは左側/diffは下にウィンドウ幅で表示
 let g:undotree_ShortIndicators = 1      " 時間単位は短く表示
 let g:undotree_SplitWidth = 10          " undotreeのウィンドウ幅

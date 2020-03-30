@@ -1,11 +1,14 @@
 [[plugins]]
 repo = 'neoclide/coc-denite'
+on_source=['coc.nvim','denite.nvim']
 
 [[plugins]]
 repo = 'neoclide/coc.nvim'
 merge = 0
 rev = 'release'
-hook_add = '''
+on_event = ['InsertEnter']
+on_map = ['<Plug>(coc-']
+hook_source = '''
 " Note: g:coc_config_homeはbasic.vimに記述。
 " cf. https://drumato.hatenablog.com/entry/2019/04/01/121139
 " use <tab> for trigger completion and navigate to next complete item
