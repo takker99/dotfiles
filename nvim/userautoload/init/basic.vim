@@ -69,7 +69,7 @@ set concealcursor="nc"
 " 折りたたみ系
 " cf. https://maku77.github.io/vim/advanced/folding.html
 set foldmethod=indent  "折りたたみ範囲の判断基準（デフォルト: manual）
-set foldlevel=0        "ファイルを開いたときにデフォルトで折りたたむレベル
+set foldlevel=99       "ファイルを開いたときにデフォルトで折りたたむレベル (0: すべて折りたたむ 数値の分だけ折りたたまない)
 set foldcolumn=3       "左端に折りたたみ状態を表示する領域を追加する
 
 " " 折りたたみの自動保存
