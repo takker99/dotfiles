@@ -23,15 +23,4 @@ call gina#custom#mapping#nmap('log', 'dd', ':call gina#action#call(''commit:reve
 call gina#custom#mapping#nmap('branch', 'm', ':call gina#action#call(''commit:merge:no-ff'')<CR>', {'noremap': 1, 'silent': 1})
 call gina#custom#mapping#nmap('branch', 'o', ':call gina#action#call(''branch:new'')<CR>', {'noremap': 1, 'silent': 1})
 call gina#custom#mapping#nmap('branch', 'dd', ':call gina#action#call(''branch:delete'')<CR>', {'noremap': 1, 'silent': 1})
-
-" nnoremap <leader>ga :Gwrite<CR>
-" nnoremap <leader>gb :Gblame<CR>
-" nnoremap <leader>gh :tab sp<CR>:0Glog<CR>
-" " abbrev for `git history`: create new quickfix tab for history
-" nnoremap <leader>gp :Gpush<CR>
-" nnoremap <leader>gf :Gfetch<CR>
-" nnoremap <leader>gd :Gvdiff<CR>
-" nnoremap <leader>gr :Grebase -i<CR>
-" nnoremap <leader>gg :Ggrep
-" nnoremap <leader>gm :Gmerge
 '''
