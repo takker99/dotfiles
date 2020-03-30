@@ -90,17 +90,17 @@ function! LightLineGitBranch()
     return ''
 endfunction
 
+function! LightLineGitGutter()
+    let status = get(b:, 'coc_git_status', '')
+    return winwidth(0) > 70 ? status : ''
+endfunction
+
 function! LightLineFileformat()
     return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
 
 function! LightLineFileencoding()
     return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
-endfunction
-
-function! LightLineGitGutter()
-    let status = get(b:, 'coc_git_status', '')
-    return winwidth(0) > 70 ? status : ''
 endfunction
 
 " https://github.com/Lokaltog/vim-powerline/blob/develop/autoload/Powerline/Functions.vim
