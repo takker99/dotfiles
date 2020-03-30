@@ -12,6 +12,7 @@ let g:lightline = {
     \   ],
     \   'right': [
     \     ['percent', 'lineinfo'],
+    \     ['gitblame'],
     \     ['charcode', 'fileformat', 'fileencoding', 'filetype'],
     \   ]
     \ },
@@ -24,6 +25,7 @@ let g:lightline = {
     \   'fileencoding': 'LightLineFileencoding',
     \   'gitbranch': 'LightLineGitBranch',
     \   'gitgutter': 'LightLineGitGutter',
+    \   'gitblame': 'LightLineGitBlame',
     \   'cocstatus': 'CocStatus',
     \   'currentfunction':'CocCurrentFunction',
     \   'charcode':'MyCharCode',
@@ -93,6 +95,11 @@ endfunction
 function! LightLineGitGutter()
     let status = get(b:, 'coc_git_status', '')
     return winwidth(0) > 70 ? status : ''
+endfunction
+
+function! LightLineGitBlame()
+    let blame = get(b:, 'coc_git_blame', '')
+    return winwidth(0) > 70 ? blame : ''
 endfunction
 
 function! LightLineFileformat()
