@@ -6,7 +6,7 @@ nnoremap [GitMode] <Nop>
 nmap <Leader>g [GitMode]
 
 " cf. https://woodyzootopia.github.io/2019/04/vim%E3%81%A7git%E3%82%82%E7%88%86%E9%80%9F%E7%B7%A8%E9%9B%86/#fnref:what-is-gs-doing
-nnoremap [GitMode]s :Gina status<CR>:only<CR>
+nnoremap [GitMode]s :<C-u>GinaFloatStatus<CR>
 nnoremap [GitMode]c :Gina commit<CR>
 nnoremap [GitMode]r :Gina commit --amend<CR>
 nnoremap [GitMode]l :Gina log --graph --all<CR>
@@ -14,6 +14,10 @@ nnoremap [GitMode]b :Gina branch<CR>
 nnoremap [GitMode]k :Gina push<CR>
 nnoremap [GitMode]j :Gina pull<CR>
 nnoremap [GitMode]J :Gina fetch<CR>
+
+" 各種 buffer の options
+" call gina#custom#command#option( 'status', '-s') " git status を短く表示する
+call gina#custom#command#option( '/\%(log\|reflog\)', '--opener', 'vsplit' ) " git log を垂直分割で開く
 
 " Gina log 上でのkey mappings
 call gina#custom#mapping#nmap('log', '<CR>', ':call gina#action#call(''commit:checkout'')<CR>', {'noremap': 1, 'silent': 1})
@@ -23,6 +27,20 @@ call gina#custom#mapping#nmap('log', 'dd', ':call gina#action#call(''commit:reve
 call gina#custom#mapping#nmap('branch', 'm', ':call gina#action#call(''commit:merge:no-ff'')<CR>', {'noremap': 1, 'silent': 1})
 call gina#custom#mapping#nmap('branch', 'o', ':call gina#action#call(''branch:new'')<CR>', {'noremap': 1, 'silent': 1})
 call gina#custom#mapping#nmap('branch', 'dd', ':call gina#action#call(''branch:delete'')<CR>', {'noremap': 1, 'silent': 1})
+
+" git status に floating window を用いる
+function! Show_git_status() abort
+" 一つ目のウィンドウを青色の背景色で開く。
+" 第２引数に v:false を指定しているので、フォーカスが移りません。
+let [bufnum,line,col,off]=getpos(".")
+execute ":Gina status -s -b"
+" window ID を取得
+let winid = nvim_open_win(bufnr(''), v:false, {'relative': 'win', 'height': 5, 'width': 40, 'bufpos': [line,col]})
+bprev
+let _=win_gotoid(winid)
+endfunction
+
+command! GinaFloatStatus call Show_git_status()
 
 " nnoremap <leader>ga :Gwrite<CR>
 " nnoremap <leader>gb :Gblame<CR>
