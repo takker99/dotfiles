@@ -30,7 +30,7 @@
     "codeLens.enable":true,
     "diagnostic.virtualText":true,
     "diagnostic.virtualTextLineSeparator":"▶",
-    "diagnostic.virtualTextPrefix":"▶",
+    "diagnostic.virtualTextPrefix":"▶ ",
     "diagnostic.errorSign":"✖",
     "diagnostic.infoSign":"ⓘ",
     "diagnostic.hintSign":"⚡",
