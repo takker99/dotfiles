@@ -157,7 +157,6 @@ nnoremap sN gt
 nnoremap sP gT
 
 " function key 関連
-nnoremap <F1> :h<space>
 
 " cf.
 " 相対行番号表示の切り替え
