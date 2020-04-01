@@ -5,6 +5,7 @@ hook_add = '''
 " statusline に表示するようにしたのでいらない
 " let g:submode_always_show_submode = 1 " show always the current submode
 let g:submode_timeout = 0            " disable time out on submodes
+let g:submode_keep_leaving_key=v:true
 
 " cf. https://qiita.com/tekkoc/items/98adcadfa4bdc8b5a6ca#vimrc
 " s>:windowの幅を増やす
@@ -19,4 +20,30 @@ call submode#map('WINSIZE', 'n', '', '>', '<C-w>>')
 call submode#map('WINSIZE', 'n', '', '<', '<C-w><')
 call submode#map('WINSIZE', 'n', '', '+', '<C-w>+')
 call submode#map('WINSIZE', 'n', '', '-', '<C-w>-')
+
++" window/buffer 関連
++call submode#enter_with('BUFMOVE', 'n', '', 'sj', '<C-w>j')
++call submode#enter_with('BUFMOVE', 'n', '', 'sk', '<C-w>k')
++call submode#enter_with('BUFMOVE', 'n', '', 'sl', '<C-w>l')
++call submode#enter_with('BUFMOVE', 'n', '', 'sh', '<C-w>h')
++call submode#enter_with('BUFMOVE', 'n', '', 'sJ', '<C-w>J')
++call submode#enter_with('BUFMOVE', 'n', '', 'sK', '<C-w>K')
++call submode#enter_with('BUFMOVE', 'n', '', 'sL', '<C-w>L')
++call submode#enter_with('BUFMOVE', 'n', '', 'sH', '<C-w>H')
++call submode#enter_with('BUFMOVE', 'n', '', 'sw', '<C-w>w')
++call submode#enter_with('BUFMOVE', 'n', '', 'sr', '<C-w>r')
++call submode#enter_with('BUFMOVE', 'n', 's', 'sn', ':bnext<CR>')
++call submode#enter_with('BUFMOVE', 'n', 's', 'sp', ':bprevious<CR>')
++call submode#map('BUFMOVE', 'n', '', 'j', '<C-w>j')
++call submode#map('BUFMOVE', 'n', '', 'k', '<C-w>k')
++call submode#map('BUFMOVE', 'n', '', 'l', '<C-w>l')
++call submode#map('BUFMOVE', 'n', '', 'h', '<C-w>h')
++call submode#map('BUFMOVE', 'n', '', 'J', '<C-w>J')
++call submode#map('BUFMOVE', 'n', '', 'K', '<C-w>K')
++call submode#map('BUFMOVE', 'n', '', 'L', '<C-w>L')
++call submode#map('BUFMOVE', 'n', '', 'H', '<C-w>H')
++call submode#map('BUFMOVE', 'n', '', 'w', '<C-w>w')
++call submode#map('BUFMOVE', 'n', '', 'r', '<C-w>r')
++call submode#map('BUFMOVE', 'n', 's', 'n', ':bnext<CR>')
++call submode#map('BUFMOVE', 'n', 's', 'p', ':bprevious<CR>')
 '''
