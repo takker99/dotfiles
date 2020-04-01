@@ -3,7 +3,7 @@
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias vim=nvim
+alias vim='env NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim'
 export EDITOR=vim
 export GIT_EDITOR=vim
 export CC=clang
