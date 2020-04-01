@@ -5,6 +5,7 @@ hook_add = '''
 " statusline に表示するようにしたのでいらない
 " let g:submode_always_show_submode = 1 " show always the current submode
 let g:submode_timeout = 0            " disable time out on submodes
+let g:submode_keep_leaving_key=v:true
 
 " cf. https://qiita.com/tekkoc/items/98adcadfa4bdc8b5a6ca#vimrc
 " s>:windowの幅を増やす
