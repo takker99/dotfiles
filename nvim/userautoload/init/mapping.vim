@@ -176,8 +176,9 @@ cnoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 nnoremap @t :tabe<CR>:terminal<CR>
 " Ctrl + q でターミナルを終了
 tnoremap <C-q> <C-\><C-n>:q<CR>
-" ESCでターミナルモードからノーマルモードへ
+" ESC or jj でターミナルモードからノーマルモードへ
 tnoremap <ESC> <C-\><C-n>
+tnoremap jj <C-\><C-n>
 
 " オートコンパイルする
 " augroup setAutoCompile
