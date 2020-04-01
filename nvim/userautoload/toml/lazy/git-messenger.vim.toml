@@ -1,3 +1,11 @@
 [[plugins]]
 repo = 'rhysd/git-messenger.vim'
+on_cmd=':GitMessenger'
 on_map=['<Plug>(git-messenger']
+hook_add='''
+let g:git_messenger_no_default_mappings=v:true
+nnoremap [GitMode] <Nop>
+nmap <Leader>g [GitMode]
+
+nmap [GitMode]m <Plug>(git-messenger)
+'''
