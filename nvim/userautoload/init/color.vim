@@ -54,7 +54,7 @@ colorscheme solarized8_dark_low
 set background=dark
 
 " Floating Window の色設定
-highlight! NormalFloat ctermbg=NONE guibg=#808080
+highlight! NormalFloat ctermbg=NONE guibg=#505050
 set winblend=20
 
 " 無色透明にする

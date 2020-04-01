@@ -133,29 +133,16 @@ nmap <silent> <expr> p <sid>Repl()
 " c.f. https://qiita.com/tekkoc/items/98adcadfa4bdc8b5a6ca
 " c.f. http://ivxi.hatenablog.com/entry/2013/05/23/163825
 nnoremap s <Nop>
-nnoremap sj <C-w>j
-nnoremap sk <C-w>k
-nnoremap sl <C-w>l
-nnoremap sh <C-w>h
-nnoremap sJ <C-w>J
-nnoremap sK <C-w>K
-nnoremap sL <C-w>L
-nnoremap sH <C-w>H
-nnoremap sr <C-w>r
 nnoremap s= <C-w>=
-nnoremap sw <C-w>w
 nnoremap so <C-w>_<C-w>|
 nnoremap sO <C-w>=
-nnoremap <silent>sn :bnext<CR>
-nnoremap <silent>sp :bprevious<CR>
 nnoremap <silent>sd :bd<CR>
 nnoremap ss :<C-u>sp<CR>
 nnoremap sv :<C-u>vs<CR>
 nnoremap <silent>st :tabnew<CR>
 nnoremap <silent>sx :tabclose<CR>
-nnoremap sN gt
-nnoremap sP gT
-
+nnoremap <M-l> gt
+nnoremap <M-h> gT
 " function key 関連
 
 " cf.
@@ -176,8 +163,9 @@ cnoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 nnoremap @t :tabe<CR>:terminal<CR>
 " Ctrl + q でターミナルを終了
 tnoremap <C-q> <C-\><C-n>:q<CR>
-" ESCでターミナルモードからノーマルモードへ
+" ESC or jj でターミナルモードからノーマルモードへ
 tnoremap <ESC> <C-\><C-n>
+tnoremap jj <C-\><C-n>
 
 " オートコンパイルする
 " augroup setAutoCompile
