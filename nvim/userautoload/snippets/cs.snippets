@@ -44,3 +44,91 @@ public $1 ${3:Value}
 	}
 }
 endsnippet
+
+snippet prismapp "entry point of prism application" b
+using Prism.Ioc;
+using Prism.Mvvm;
+using Prism.Unity;
+using System;
+using System.Reflection;
+using System.Windows;
+using ${1:Application}.${2:Views};
+
+namespace $1
+{
+	/// <summary>
+	/// Interaction logic for App.xaml
+	/// </summary>
+	public partial class App : PrismApplication
+	{
+		protected override Window CreateShell() => Container.Resolve<MainWindow>();
+
+		protected override void RegisterTypes(IContainerRegistry containerRegistry) { }
+
+		// "...Views.hogehoge.xaml" という View の View Model を "...ViewModels.hogehoge.cs" に自動で設定する
+		protected override void ConfigureViewModelLocator()
+		{
+			base.ConfigureViewModelLocator();
+
+			ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
+			{
+				// "...$1.Views.MainWindow" を "...$1.ViewModels.MainWindow" に置き換える
+				var viewName = viewType.FullName.Replace(".Views.",".ViewModels.");
+				var viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
+				var viewModelName = $"{viewName}, {viewAssemblyName}";
+				return Type.GetType(viewModelName);
+			});
+		}
+	}
+}
+endsnippet
+
+snippet viewcs ".cs code for xaml view" b
+using System.Windows;
+
+namespace ${1:Application}.${2:Views}
+{
+    /// <summary>
+    /// Interaction logic for ${3:View}.xaml
+    /// </summary>
+    public partial class $3 : Window
+    {
+        public $3() => InitializeComponent();
+    }
+}
+endsnippet
+snippet viewcsc ".cs code for xaml view" b
+using System.Windows.Controls;
+
+namespace ${1:Application}.${2:Views}
+{
+    /// <summary>
+    /// Interaction logic for ${3:View}.xaml
+    /// </summary>
+    public partial class $3 : UserControl
+    {
+        public $3() => InitializeComponent();
+    }
+}
+endsnippet
+
+snippet prismmodule "Prism module code" b
+using ${1:Module};
+using Prism.Ioc;
+using Prism.Modularity;
+using Prism.Regions;
+
+namespace $1
+{
+    public class ${2:Module} : IModule
+    {
+        public void OnInitialized(IContainerProvider containerProvider)
+        {
+            var regionManager = containerProvider.Resolve<IRegionManager>();
+            regionManager.RegisterViewWithRegion("${3:ContentRegion}", typeof(Views.${4:View}));
+        }
+
+        public void RegisterTypes(IContainerRegistry containerRegistry) { }
+    }
+}
+endsnippet
