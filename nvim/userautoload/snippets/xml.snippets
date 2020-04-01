@@ -38,3 +38,54 @@ snippet empty_elm "<element ... />" b
 <${1:TAG} ${2:VISUAL} />
 endsnippet
 
+snippet appxaml "xaml code for entry point" b
+<prism:PrismApplication x:Class="${1:Application}.App"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:prism="http://prismlibrary.com/"
+			 xmlns:local="clr-namespace:${1:Application}">
+	<Application.Resources>
+		 ${2:VISUAL}
+	</Application.Resources>
+</prism:PrismApplication>
+endsnippet
+
+snippet growdef "Grid Row Definitions" b
+<Grid.RowDefinitions>
+${1:CONTENT}
+</Grid.RowDefinitions>
+endsnippet
+
+snippet gcoldef "Grid Column Definitions" b
+<Grid.ColumnDefinitions>
+${1:CONTENT}
+</Grid.ColumnDefinitions>
+endsnippet
+
+snippet rowdef "Row Definition" b
+<RowDefinition ${1:Height="${2:Auto}"} />
+endsnippet
+
+snippet coldef "Column Definition" b
+<ColumnDefinition ${1:Width="${2:Auto}"} />
+endsnippet
+
+snippet gr "Specify the location in Grid"
+${1:Grid.Row="${2:0}"}
+endsnippet
+
+snippet grs "Specify the location in Grid"
+${1:Grid.RowSpan="${2:0}"}
+endsnippet
+
+snippet gc "Specify the location in Grid"
+${1:Grid.Column="${2:0}"}
+endsnippet
+
+snippet gcs "Specify the location in Grid"
+${1:Grid.ColumnSpan="${2:0}"}
+endsnippet
+
+snippet contentcontrol "element for Prism Region" b
+<ContentControl prism:RegionManager.RegionName="${1:ContentRegion}" ${2:x:Name="${3:ContentRegion}"}/>
+endsnippet
