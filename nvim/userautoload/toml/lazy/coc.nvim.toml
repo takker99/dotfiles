@@ -64,20 +64,15 @@ nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<C
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
-" call submode#enter_with('COCMODE', 'n', '', '<leader>c', '<C-w>>')
-" call submode#enter_with('COCMODE', 'n', '', 's<', '<C-w><')
-" call submode#enter_with('COCMODE', 'n', '', 's+', '<C-w>+')
-" call submode#enter_with('COCMODE', 'n', '', 's-', '<C-w>-')
-" call submode#map('COCMODE', 'n', '', '>', '<C-w>>')
-" call submode#map('COCMODE', 'n', '', '<', '<C-w><')
-" call submode#map('COCMODE', 'n', '', '+', '<C-w>+')
-" call submode#map('COCMODE', 'n', '', '-', '<C-w>-')
+nnoremap [LangServer] <Nop>
+nmap <Leader>d [LangServer]
+
 "スペースhでHover
 "
 nnoremap <silent> <leader>h :<C-u>call CocAction('doHover')<cr>
 ""スペースdfでDefinition
 "スペースrfでReferences
-nmap <silent> <leader>rf <Plug>(coc-references)
+nmap <silent> <leader>cr <Plug>(coc-references)
 nmap <silent>  <Plug>(coc-rename)
 "スペースfmtでFormat
 nmap <silent> =G <Plug>(coc-format)
