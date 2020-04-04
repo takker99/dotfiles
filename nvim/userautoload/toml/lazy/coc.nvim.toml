@@ -52,6 +52,9 @@ imap <C-j> <Plug>(coc-snippets-expand-jump)
 let g:coc_snippet_next = '<C-j>'
 let g:coc_snippet_prev = '<C-k>'
 
+nnoremap [LangServer] <Nop>
+nmap <Leader>c [LangServer]
+
 " coc-actions
 " Remap for do codeAction of selected region
 function! s:cocActionsOpenFromSelected(type) abort
@@ -64,16 +67,20 @@ nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<C
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
-nnoremap [LangServer] <Nop>
-nmap <Leader>d [LangServer]
-
 "スペースhでHover
-"
-nnoremap <silent> <leader>h :<C-u>call CocAction('doHover')<cr>
+nnoremap <silent> [LangServer]h :<C-u>call CocAction('doHover')<cr>
 ""スペースdfでDefinition
 "スペースrfでReferences
-nmap <silent> <leader>cr <Plug>(coc-references)
-nmap <silent>  <Plug>(coc-rename)
-"スペースfmtでFormat
-nmap <silent> =G <Plug>(coc-format)
+nmap <silent> [LangServe]r <Plug>(coc-references)
+nmap <silent> [LangServer]f <Plug>(coc-rename)
+
+command! -nargs=0 CocFormat :call CocAction('format')
+function! s:cocFormatMapping()
+    if CocHasProvider("format")
+        return ":\<C-u>CocFormat\<CR>"
+    else
+        return "=G"
+    endif
+endfunction
+nnoremap <silent><expr> =G <SID>cocFormatMapping()
 '''
