@@ -4,16 +4,24 @@ hook_add='''
 nnoremap [Denite] <Nop>
 nmap <Leader>d [Denite]
 
+" 大文字のときは検索を自動で開始させておく
 nnoremap <silent> [Denite]a :<C-u>Denite file buffer file:new<CR>
+nnoremap <silent> [Denite]A :<C-u>Denite file buffer file:new -start-filter<CR>
 nnoremap <silent> [Denite]b :<C-u>Denite buffer file:new<CR>
+nnoremap <silent> [Denite]B :<C-u>Denite buffer file:new -start-filter<CR>
 nnoremap <silent> [Denite]o :<C-u>Denite file/old file:new<CR>
+nnoremap <silent> [Denite]O :<C-u>Denite file/old file:new -start-filter<CR>
 nnoremap <silent> [Denite]f :<C-u>Denite file file:new<CR>
+nnoremap <silent> [Denite]F :<C-u>Denite file file:new -start-filter<CR>
 nnoremap <silent> [Denite]r :<C-u>Denite file/rec file:new<CR>
+nnoremap <silent> [Denite]R :<C-u>Denite file/rec file:new -start-filter<CR>
 nnoremap <silent> [Denite]gr :<C-u>Denite grep -buffer-name=search<CR>
 nnoremap <silent> [Denite], :<C-u>DeniteCursorWord grep -buffer-name=search line<CR>
 nnoremap <silent> [Denite]gs :<C-u>Denite -resume -buffer-name=search<CR>
 nnoremap <silent> [Denite]c :<C-u>Denite command_history<CR>
+nnoremap <silent> [Denite]C :<C-u>Denite command_history -start-filter<CR>
 nnoremap <silent> [Denite]l :<C-u>Denite coc-command<CR>
+nnoremap <silent> [Denite]H :<C-u>Denite help -start-filter<CR>
 '''
 hook_source='''
 " Denite の default options
