@@ -22,6 +22,8 @@ nnoremap <silent> [Denite], :<C-u>DeniteCursorWord grep -buffer-name=search line
 nnoremap <silent> [Denite]gs :<C-u>Denite -resume -buffer-name=search<CR>
 "  Neovim内で実行したコマンドを表示
 nnoremap <silent> [Denite]c :<C-u>Denite command_history<CR>
+" coc source を表示
+nnoremap <silent> [Denite]l :<C-u>Denite coc-command<CR>
 '''
 hook_source='''
 " Denite の default options
