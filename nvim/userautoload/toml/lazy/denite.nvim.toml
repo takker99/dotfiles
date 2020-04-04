@@ -4,25 +4,15 @@ hook_add='''
 nnoremap [Denite] <Nop>
 nmap <Leader>d [Denite]
 
-" カレントディレクトリとバッファを表示
 nnoremap <silent> [Denite]a :<C-u>Denite file buffer file:new<CR>
-" バッファを表示
 nnoremap <silent> [Denite]b :<C-u>Denite buffer file:new<CR>
-"  最近使ったファイルを表示
 nnoremap <silent> [Denite]o :<C-u>Denite file/old file:new<CR>
-"  current directoryを表示
 nnoremap <silent> [Denite]f :<C-u>Denite file file:new<CR>
-"  カレントディレクトリ以下を再帰的に表示
 nnoremap <silent> [Denite]r :<C-u>Denite file/rec file:new<CR>
-"  カレントディレクトリ以下のファイルから指定した文字列を検索
 nnoremap <silent> [Denite]gr :<C-u>Denite grep -buffer-name=search<CR>
-"  カレントディレクトリ以下のファイルからカーソル下の文字列を検索
 nnoremap <silent> [Denite], :<C-u>DeniteCursorWord grep -buffer-name=search line<CR>
-"  grepした結果を再表示
 nnoremap <silent> [Denite]gs :<C-u>Denite -resume -buffer-name=search<CR>
-"  Neovim内で実行したコマンドを表示
 nnoremap <silent> [Denite]c :<C-u>Denite command_history<CR>
-" coc source を表示
 nnoremap <silent> [Denite]l :<C-u>Denite coc-command<CR>
 '''
 hook_source='''
@@ -33,6 +23,7 @@ let s:denite_win_height_percent = 0.7
 let s:denite_default_options = {
     \ 'split': 'floating_relative',
     \ 'floating-preview': v:true,
+    \ 'vertical-preview': v:true,
     \ 'filter-split-direction': 'floating',
     " \ 'winwidth': float2nr(&columns * s:denite_win_width_percent),
     " \ 'wincol': float2nr((&columns - (&columns * s:denite_win_width_percent)) / 2),
