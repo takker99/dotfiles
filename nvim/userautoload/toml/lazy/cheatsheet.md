@@ -136,10 +136,10 @@
 
 ### tab
 
-- `st`       : 空タブを新規作成
-- `sN`       : 次へ
-- `sP`       : 前へ
-- `sx`       : 削除
+- `st`    : 空タブを新規作成
+- `<M-l>` : 次へ
+- `<M-h>` : 前へ
+- `sx`    : 削除
 
 ### macro
 
@@ -209,12 +209,13 @@
 
 - `q` : defx を閉じる
 
-### vim-fugitve
+### git
 
-- `:Gstatus`      : statusの表示
-- `:Glog | copen` : git logをquickfixで表示
-- `:Gdiff`        : diffをvimdiffで表示
-- `:Gblame`       : git blame
+- `<Leader>gs`      : statusを表示
+- `<Leader>gb`      : branchを表示
+- `<Leader>gl`      : logを表示
+- `<Leader>gc`      : commit編集windowを表示
+- `<Leader>gm`      : cursor位置に関するcommit messageを表示
 
 ### vim-go
 
