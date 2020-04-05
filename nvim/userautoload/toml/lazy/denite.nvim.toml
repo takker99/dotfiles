@@ -53,6 +53,7 @@ function! s:denite_my_settings() abort
   nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
   nnoremap <silent><buffer><expr> o  denite#do_map('do_action')
   nnoremap <silent><buffer><expr> l  denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> h  denite#do_map('move_up_path')
   " 【s】 ウィンドウを水平分割してファイルを開く
   nnoremap <silent><buffer><expr> s denite#do_map('do_action', 'split')
   " 【v】 ウィンドウを垂直分割してファイルを開く
