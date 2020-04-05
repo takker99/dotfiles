@@ -71,8 +71,8 @@ nmap <silent> ]c <Plug>(coc-diagnostic-next)
 nnoremap <silent> [LangServer]h :<C-u>call CocAction('doHover')<cr>
 ""スペースdfでDefinition
 "スペースrfでReferences
-nmap <silent> [LangServer]r <Plug>(coc-references)
-nmap <silent> [LangServer]f <Plug>(coc-rename)
+nmap <silent> [LangServer]f <Plug>(coc-references)
+nmap <silent> [LangServer]r <Plug>(coc-rename)
 
 command! -nargs=0 CocFormat :call CocAction('format')
 function! s:cocFormatMapping()
