@@ -35,14 +35,6 @@ let g:lightline = {
 " 特殊バッファとして認識するfiletypes
 let s:ignore_types='defx\|help\|undotree\|gina-*'
 
-function! CocCurrentFunction()
-    return &filetype =~ s:ignore_types ? '' : get(b:, 'coc_current_function', '')
-endfunction
-
-function! CocStatus()
-    return &filetype =~ s:ignore_types ? '' : get(g:, 'coc_status', '')
-endfunction
-
 function! LightLineMode()
     if exists('*submode#current')
         let _ = submode#current()
@@ -57,6 +49,21 @@ function! LightLineMode()
                 \ &filetype ==  'gina-commit' ? 'GCOMMIT':
                 \ &filetype ==  'gina-log' ? 'GLOG':
                 \ winwidth(0) > 60 ?  lightline#mode() : ''
+endfunction
+
+function! LightLineGitBranch()
+    " if &ft !~ s:ignore_types && exists('*gina#component#repo#branch')
+    try
+        let status = get(g:, 'coc_git_status', '')
+        return winwidth(0) > 70 ? status : ''
+    catch
+    endtry
+    return ''
+endfunction
+
+function! LightLineGitGutter()
+    let status = get(b:, 'coc_git_status', '')
+    return winwidth(0) > 70 ? status : ''
 endfunction
 
 " 特殊バッファと読み取り専用ファイルに対して、読み取り専用マークを表示する。
@@ -76,31 +83,12 @@ function! LightLineFilename()
         \ (''!= LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
 
-function! LightLineFiletype()
-    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+function! CocStatus()
+    return &filetype =~ s:ignore_types ? '' : get(g:, 'coc_status', '')
 endfunction
 
-function! LightLineGitBranch()
-    " if &ft !~ s:ignore_types && exists('*gina#component#repo#branch')
-    try
-        let status = get(g:, 'coc_git_status', '')
-        return winwidth(0) > 70 ? status : ''
-    catch
-    endtry
-    return ''
-endfunction
-
-function! LightLineGitGutter()
-    let status = get(b:, 'coc_git_status', '')
-    return winwidth(0) > 70 ? status : ''
-endfunction
-
-function! LightLineFileformat()
-    return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
-endfunction
-
-function! LightLineFileencoding()
-    return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+function! CocCurrentFunction()
+    return &filetype =~ s:ignore_types ? '' : get(b:, 'coc_current_function', '')
 endfunction
 
 " https://github.com/Lokaltog/vim-powerline/blob/develop/autoload/Powerline/Functions.vim
@@ -137,6 +125,18 @@ function! MyCharCode()
     let nr = printf(nrformat, nr)
 
     return "'". char ."' ". nr
+endfunction
+
+function! LightLineFileformat()
+    return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+endfunction
+
+function! LightLineFileencoding()
+    return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+endfunction
+
+function! LightLineFiletype()
+    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
 endfunction
 
 " tabline integration
