@@ -48,7 +48,6 @@ set virtualedit=onemore   " 行末の1文字先までカーソルを移動でき
 set visualbell            " ビープ音を可視化
 set showmatch             " 括弧入力時の対応する括弧を表示
 set matchtime=1
-set matchpairs
 set matchpairs+=<:>
 set showcmd               " 入力中のコマンドをステータスに表示する
 set noshowmode
