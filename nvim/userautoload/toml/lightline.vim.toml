@@ -2,38 +2,43 @@
 repo = 'itchyny/lightline.vim'
 hook_add = '''
 let g:lightline = {
-    \ 'mode_map': {'c': 'NORMAL'},
-    \ 'colorscheme':'solarized',
-    \ 'active': {
-    \   'left': [
-    \     ['mode', 'paste'],
-    \     ['gitbranch', 'gitgutter','filename'],
-    \     ['cocstatus', 'currentfunction'],
-    \   ],
-    \   'right': [
-    \     ['percent', 'lineinfo'],
-    \     ['charcode', 'fileformat', 'fileencoding', 'filetype'],
-    \   ]
-    \ },
-    \ 'component_function': {
-    \   'mode': 'LightLineMode',
-    \   'readonly': 'LightLineReadonly',
-    \   'fileformat': 'LightLineFileformat',
-    \   'filetype': 'LightLineFiletype',
-    \   'filename': 'LightLineFilename',
-    \   'fileencoding': 'LightLineFileencoding',
-    \   'gitbranch': 'LightLineGitBranch',
-    \   'gitgutter': 'LightLineGitGutter',
-    \   'cocstatus': 'CocStatus',
-    \   'currentfunction':'CocCurrentFunction',
-    \   'charcode':'MyCharCode',
-    \ },
-    \ 'separator': { 'left': '', 'right': '' },
-    \ 'subseparator': { 'left': '', 'right': '' }
-    \ }
+            \ 'mode_map': {'c': 'NORMAL'},
+            \ 'colorscheme':'solarized',
+            \ 'active': {
+            \   'left': [
+            \     ['mode', 'paste'],
+            \     ['gitbranch', 'gitgutter','filename'],
+            \     ['cocstatus', 'currentfunction'],
+            \   ],
+            \   'right': [
+            \     ['percent', 'lineinfo'],
+            \     ['charcode', 'fileformat', 'fileencoding', 'filetype'],
+            \   ]
+            \ },
+            \ 'component_function': {
+            \   'mode': 'LightLineMode',
+            \   'readonly': 'LightLineReadonly',
+            \   'fileformat': 'LightLineFileformat',
+            \   'filetype': 'LightLineFiletype',
+            \   'filename': 'LightLineFilename',
+            \   'fileencoding': 'LightLineFileencoding',
+            \   'gitbranch': 'LightLineGitBranch',
+            \   'gitgutter': 'LightLineGitGutter',
+            \   'cocstatus': 'CocStatus',
+            \   'currentfunction':'CocCurrentFunction',
+            \   'charcode':'MyCharCode',
+            \ },
+            \ 'separator': { 'left': '', 'right': '' },
+            \ 'subseparator': { 'left': '', 'right': '' }
+            \ }
 
 " 特殊バッファとして認識するfiletypes
 let s:ignore_types='defx\|help\|undotree\|gina-*'
+
+" winwidth に関するメモ：
+" - winwidth >130: 通常モード
+" - winwidth > 100: 短縮表示
+" - otherwise     : 表示しない
 
 function! LightLineMode()
     if exists('*submode#current')
@@ -79,8 +84,8 @@ endfunction
 function! LightLineFilename()
     return ('' != LightLineReadonly() ? LightLineReadonly().' ' : '').
                 \ (&filetype =~ s:ignore_types ? '' :
-        \ '' != expand('%:t') ? expand('%:t') : '[No Name]').
-        \ (''!= LightLineModified() ? ' ' . LightLineModified() : '')
+                \ '' != expand('%:t') ? expand('%:t') : '[No Name]').
+                \ (''!= LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
 
 function! CocStatus()
@@ -93,7 +98,7 @@ endfunction
 
 " https://github.com/Lokaltog/vim-powerline/blob/develop/autoload/Powerline/Functions.vim
 function! MyCharCode()
-    if winwidth('.') <= 70
+    if winwidth('.') <= 100
         return ''
     endif
 
@@ -124,39 +129,52 @@ function! MyCharCode()
     " Format the numeric value
     let nr = printf(nrformat, nr)
 
-    return "'". char ."' ". nr
+    let _ ="'".char."'"
+    if winwidth(0) > 130
+        return _." ".nr
+    else
+        return _
+    endif
 endfunction
 
 function! LightLineFileformat()
-    return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+    return winwidth(0) > 100 ?
+                \ (winwidth(0) >130 ?
+                \ (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()):
+                \ WebDevIconsGetFileFormatSymbol()):
+                \ ''
 endfunction
 
 function! LightLineFileencoding()
-    return winwidth('.') > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+    return winwidth('.') > 130 ? (strlen(&fenc) ? &fenc : &enc) : ''
 endfunction
 
 function! LightLineFiletype()
-    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+    return winwidth(0) > 100 ?
+                \ (winwidth(0) >130 ?
+                \ (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft'):
+                \ (strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() : 'no ft')):
+                \ ''
 endfunction
 
 " tabline integration
 " cf.https://qiita.com/t-mochizuki/items/15f4a8d8f52d620cdc05
 let g:lightline.tab = {
-      \ 'active': [ 'tabnum', 'filename', 'modified' ],
-      \ 'inactive': [ 'tabnum', 'filename', 'modified' ]
-      \ }
+            \ 'active': [ 'tabnum', 'filename', 'modified' ],
+            \ 'inactive': [ 'tabnum', 'filename', 'modified' ]
+            \ }
 
 let g:lightline.tab_component_function = {
-      \ 'filename': 'LightlineTabFilename',
-      \ 'modified': 'lightline#tab#modified',
-      \ 'readonly': 'lightline#tab#readonly',
-      \ 'tabnum': 'lightline#tab#tabnum' }
+            \ 'filename': 'LightlineTabFilename',
+            \ 'modified': 'lightline#tab#modified',
+            \ 'readonly': 'lightline#tab#readonly',
+            \ 'tabnum': 'lightline#tab#tabnum' }
 
 function! LightlineTabFilename(n) abort
-  let buflist = tabpagebuflist(a:n)
-  let winnr = tabpagewinnr(a:n)
-  let _ = pathshorten(expand('#'.buflist[winnr - 1].':f'))
-  return _ !=# '' ? _ : '[No Name]'
+    let buflist = tabpagebuflist(a:n)
+    let winnr = tabpagewinnr(a:n)
+    let _ = pathshorten(expand('#'.buflist[winnr - 1].':f'))
+    return _ !=# '' ? _ : '[No Name]'
 endfunction
 
 " Use auocmd to force lightline update.
