@@ -18,6 +18,7 @@ let g:lightline = {
             \ 'component_function': {
             \   'mode': 'LightLineMode',
             \   'readonly': 'LightLineReadonly',
+            \   'lineinfo': 'LightLineLineInfo',
             \   'fileformat': 'LightLineFileformat',
             \   'filetype': 'LightLineFiletype',
             \   'filename': 'LightLineFilename',
@@ -41,6 +42,20 @@ let s:ignore_types='defx\|help\|undotree\|gina-*'
 " - otherwise     : 表示しない
 
 function! LightLineMode()
+    " windowの幅が狭いときは、modeを短縮表示する
+    if winwidth(0)>100
+        let mode_name=lightline#mode()
+    else
+        if mode() =~ 'i'
+            let mode_name = 'I'
+        elseif mode() =~ 'n'
+            let mode_name = 'N'
+        elseif mode() =~ 'R'
+            let mode_name = 'R'
+        else
+            let mode_name = 'V'
+        endif
+    endif
     if exists('*submode#current')
         let _ = submode#current()
         if strlen(_)
@@ -53,14 +68,14 @@ function! LightLineMode()
                 \ &filetype ==  'gina-branch' ? 'GBRANCH':
                 \ &filetype ==  'gina-commit' ? 'GCOMMIT':
                 \ &filetype ==  'gina-log' ? 'GLOG':
-                \ winwidth(0) > 60 ?  lightline#mode() : ''
+                \ mode_name
 endfunction
 
 function! LightLineGitBranch()
     " if &ft !~ s:ignore_types && exists('*gina#component#repo#branch')
     try
         let status = get(g:, 'coc_git_status', '')
-        return winwidth(0) > 70 ? status : ''
+        return winwidth(0) > 80 ? status : ''
     catch
     endtry
     return ''
@@ -68,7 +83,7 @@ endfunction
 
 function! LightLineGitGutter()
     let status = get(b:, 'coc_git_status', '')
-    return winwidth(0) > 70 ? status : ''
+    return winwidth(0) > 80 ? status : ''
 endfunction
 
 function! CocStatus()
@@ -77,6 +92,10 @@ endfunction
 
 function! CocCurrentFunction()
     return &filetype =~ s:ignore_types ? '' : get(b:, 'coc_current_function', '')
+endfunction
+
+function! LightLineLineInfo()
+    return winwidth(0) > 100 ? line(".").":".col(".") : ''
 endfunction
 
 " https://github.com/Lokaltog/vim-powerline/blob/develop/autoload/Powerline/Functions.vim
