@@ -7,8 +7,8 @@ scriptencoding utf-8
 "     let g:python_host_prog = 'C:\Python27amd64\python.exe'
 " endif
 
-" let s:script_path = expand('<sfile>:p')
-" echom '[debug]enter ' . s:script_path
+" gitで管理しているnvimへのdirectory path
+let g:nvim_git_dir_path = expand('<sfile>:p:h:h:h')
 
 " encodings
 set fileencoding=utf-8
@@ -87,6 +87,13 @@ set foldcolumn=3       "左端に折りたたみ状態を表示する領域を�
 set wildmenu
 set wildmode=longest:full,full " コマンドラインの補完
 set pumheight=10          "変換候補で一度に表示される数を設定する
+set infercase             " 補完時に大文字小文字をいい感じに調節してくれる
+
+" 言語ごとに追加の辞書を登録する
+augroup fileTypeDictionary
+    autocmd!
+    autocmd FileType * execute 'setlocal dictionary+='. g:nvim_git_dir_path.'/userautoload/dictionary/'.&filetype.'.txt'
+augroup END
 
 " Tab系
 set expandtab               " Tab文字を半角スペースにする
