@@ -159,6 +159,9 @@ endfunction
 
 " tabline integration
 " cf.https://qiita.com/t-mochizuki/items/15f4a8d8f52d620cdc05
+"
+" always show the tabline
+set showtabline=2
 let g:lightline.tab = {
             \ 'active': [ 'tabnum', 'filename', 'modified' ],
             \ 'inactive': [ 'tabnum', 'filename', 'modified' ]
