@@ -1,9 +1,8 @@
 # bash及びfish共通設定
 
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-alias vim=nvim
+alias ls='exa --icons --color-scale --git'
+alias la='ls -Gla'
+alias vim='NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim'
 export EDITOR=vim
 export GIT_EDITOR=vim
 export CC=clang
@@ -13,6 +12,11 @@ export PATH="$HOME/.local/bin:$PATH"
 export LD_LIBRARY_PATH=$HOME/.local/lib/:$LD_LIBRARY_PATH
 export DISPLAY=:0.0
 export PATH=$HOME/.nodebrew/current/bin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
+
+# bat の設定
+export BAT_THEME=OneHalfLight
+alias cat=bat
 
 # gitをhubに置き換える
 eval "$(hub alias -s)"
