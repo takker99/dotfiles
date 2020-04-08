@@ -7,7 +7,7 @@ let g:lightline = {
             \ 'active': {
             \   'left': [
             \     ['mode', 'paste'],
-            \     ['gitbranch', 'gitgutter','filename'],
+            \     ['gitbranch', 'gitgutter'],
             \     ['cocstatus', 'currentfunction'],
             \   ],
             \   'right': [
@@ -69,23 +69,6 @@ endfunction
 function! LightLineGitGutter()
     let status = get(b:, 'coc_git_status', '')
     return winwidth(0) > 70 ? status : ''
-endfunction
-
-" 特殊バッファと読み取り専用ファイルに対して、読み取り専用マークを表示する。
-function! LightLineReadonly()
-    return &filetype =~ s:ignore_types || &readonly ? '' :&filetype ==  ''
-endfunction
-
-" 保存していない変更があったら+マークを表示する
-function! LightLineModified()
-    return &filetype !~s:ignore_types && &modified ? '+' : ''
-endfunction
-
-function! LightLineFilename()
-    return ('' != LightLineReadonly() ? LightLineReadonly().' ' : '').
-                \ (&filetype =~ s:ignore_types ? '' :
-                \ '' != expand('%:t') ? expand('%:t') : '[No Name]').
-                \ (''!= LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
 
 function! CocStatus()
@@ -160,26 +143,46 @@ endfunction
 " tabline integration
 " cf.https://qiita.com/t-mochizuki/items/15f4a8d8f52d620cdc05
 "
-" always show the tabline
-set showtabline=2
+
+set showtabline=2 " always show the tabline
 let g:lightline.tab = {
             \ 'active': [ 'tabnum', 'filename', 'modified' ],
             \ 'inactive': [ 'tabnum', 'filename', 'modified' ]
             \ }
 
 let g:lightline.tab_component_function = {
-            \ 'filename': 'LightlineTabFilename',
+            \ 'filename': 'LightlineFilename',
             \ 'modified': 'lightline#tab#modified',
             \ 'readonly': 'lightline#tab#readonly',
             \ 'tabnum': 'lightline#tab#tabnum' }
 
-function! LightlineTabFilename(n) abort
+" 特殊バッファと読み取り専用ファイルに対して、読み取り専用マークを表示する。
+function! LightLineReadonly()
+    return &filetype =~ s:ignore_types || &readonly ? '' :&filetype ==  ''
+endfunction
+
+" 保存していない変更があったら+マークを表示する
+function! LightLineModified()
+    return &filetype !~s:ignore_types && &modified ? '+' : ''
+endfunction
+
+function! LightlineFilename(n) abort
     let buflist = tabpagebuflist(a:n)
     let winnr = tabpagewinnr(a:n)
     let _ = pathshorten(expand('#'.buflist[winnr - 1].':f'))
-    return _ !=# '' ? _ : '[No Name]'
-endfunction
+    if _ !=# ''
+        if LightLineReadonly() != ''
+            let _ =LightLineReadonly() . ' ' . _
+        endif
 
-" Use auocmd to force lightline update.
-autocmd User CocStatusChange,CocDiagnosticChange,CocGitStatusChange call lightline#update()
-'''
+        if LightLineModified() != ''
+            let _ = _ . ' ' . LightLineModified()
+        endif
+        return _
+    else
+        return '[No Name]'
+    endfunction
+
+    " Use auocmd to force lightline update.
+    autocmd User CocStatusChange,CocDiagnosticChange,CocGitStatusChange call lightline#update()
+    '''
