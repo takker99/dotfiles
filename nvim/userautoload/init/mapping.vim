@@ -33,8 +33,8 @@ nnoremap gj  j
 vnoremap gk  k
 vnoremap gj  j
 
-" ESC連打でハイライト解除
-nmap <Esc><Esc> :nohlsearch<CR><Esc>
+" <C-l>にハイライト消去効果を追加
+nnoremap <C-l> :nohlsearch<CR><Esc><C-l>
 " 検索で使う規定の正規表現を Very Magic にする
 nmap / /\v
 
