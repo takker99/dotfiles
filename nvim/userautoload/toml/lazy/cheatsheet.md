@@ -70,6 +70,37 @@
 - `<C-b>`, `<PageUp>`   : 1画面分上へスクロール
 - `<C-f>`, `<PageDown>` : 1画面分下へスクロール
 
+#### mark
+
+integrated with  `kshenoy\vim-signature`
+cf. https://github.com/kshenoy/vim-signature/blob/master/README.md
+
+- `mx`           : Toggle mark 'x' and display it in the leftmost column
+- `dmx`          : Remove mark 'x' where x is a-zA-Z
+
+- `m,`           : Place the next available mark
+- `m.`           : If no mark on line, place the next available mark. Otherwise, remove (first) existing mark.
+- `m-`           : Delete all marks from the current line
+- `m<Space>`     : Delete all marks from the current buffer
+- ``]` ``          : Jump to next mark
+- ``[` ``          : Jump to prev mark
+- `]'`           : Jump to start of next line containing a mark
+- `['`           : Jump to start of prev line containing a mark
+- `` `]``          : Jump by alphabetical order to next mark
+- `` `[``          : Jump by alphabetical order to prev mark
+- `']`           : Jump by alphabetical order to start of next line having a mark
+- `'[`           : Jump by alphabetical order to start of prev line having a mark
+- `m/`           : Open location list and display marks from current buffer
+
+- `m[0-9]`       : Toggle the corresponding marker `!@#$%^&*()`
+- `m<S-[0-9]>`   : Remove all markers of the same type
+- `]-`           : Jump to next line having a marker of the same type
+- `[-`           : Jump to prev line having a marker of the same type
+- `]=`           : Jump to next line having a marker of any type
+- `[=`           : Jump to prev line having a marker of any type
+- `m?`           : Open location list and display markers from current buffer
+- `m<BS>`        : Remove all markers
+
 #### other
 
 - `gg` : ファイル先頭へ
@@ -171,6 +202,7 @@
 - `<C-]>`                  : 項目へジャンプ
 - `<C-o>`                  : 元の場所へ戻る
 - `K`                      : カーソル位置のキーワードを調べる
+- `<F1>`                   : このcheat sheetを開閉する
 
 ### EasyMotion
 
@@ -199,13 +231,23 @@
 - `j`       : 下に進む
 - `k`       : 上に戻る
 - `l`, `<CR>` : cursor 行の file/directory を開く
+- `E`      : windowを垂直分割してfileを左のpaneで開く
 - `~`       : root directory に飛ぶ
 - `o`       : file tree の展開の切り替え
 - `N`       : file を新規作成
+- `M`       : file を新規作成 (複数個)
 - `K`       : directory を新規作成
 - `r`       : 名前変更
+- `d`       : file/directoryを削除
+- `c`       : file/directoryをcopy
+- `m`       : file/directoryを切り取る
+- `p`       : copy・切り取りしたfile/directoryを貼り付ける
 - `C`       : 詳細情報の表示切り替え
+- `S`        : 更新日時順に並び替える
 - `cd`      : 現在地点を vim の current directory にする
+- `!{command}<CR>`: shell commandを実行する
+- `yy`           : cursor行のfile/directoryのpathをyankする
+- `<Space>`        : cursor行のfile/directoryを選択肢しcursorを一つ下に移動させる
 
 - `q` : defx を閉じる
 
