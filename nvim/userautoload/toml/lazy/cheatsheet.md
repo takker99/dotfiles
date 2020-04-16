@@ -231,13 +231,23 @@ cf. https://github.com/kshenoy/vim-signature/blob/master/README.md
 - `j`       : 下に進む
 - `k`       : 上に戻る
 - `l`, `<CR>` : cursor 行の file/directory を開く
+- `E`      : windowを垂直分割してfileを左のpaneで開く
 - `~`       : root directory に飛ぶ
 - `o`       : file tree の展開の切り替え
 - `N`       : file を新規作成
+- `M`       : file を新規作成 (複数個)
 - `K`       : directory を新規作成
 - `r`       : 名前変更
+- `d`       : file/directoryを削除
+- `c`       : file/directoryをcopy
+- `m`       : file/directoryを切り取る
+- `p`       : copy・切り取りしたfile/directoryを貼り付ける
 - `C`       : 詳細情報の表示切り替え
+- `S`        : 更新日時順に並び替える
 - `cd`      : 現在地点を vim の current directory にする
+- `!{command}<CR>`: shell commandを実行する
+- `yy`           : cursor行のfile/directoryのpathをyankする
+- `<Space>`        : cursor行のfile/directoryを選択肢しcursorを一つ下に移動させる
 
 - `q` : defx を閉じる
 
