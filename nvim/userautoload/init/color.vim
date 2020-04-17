@@ -74,5 +74,8 @@ highlight! DiffDelete ctermbg=NONE guibg=NONE
 " Comment を緑色にして見やすくする
 highlight! Comment ctermfg=22 guifg=#3DB680
 
+" git commit のコメントを見やすくする
+highlight! gitcommitComment ctermfg=22, guifg=#3DB680
+
 " cterm ではなく gui の色を使用する
 set termguicolors
