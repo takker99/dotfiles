@@ -79,7 +79,7 @@ function! s:cocFormatMapping()
     if CocHasProvider("format")
         return ":\<C-u>CocFormat\<CR>"
     else
-        return "=G"
+        return &filetype == 'markdown' ? ":\<C-u>CocCommand markdownlint.fixAll\<CR>" : "=G"
     endif
 endfunction
 nnoremap <silent><expr> =G <SID>cocFormatMapping()
