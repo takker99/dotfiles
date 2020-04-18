@@ -18,6 +18,9 @@ export PATH=$HOME/.cargo/bin:$PATH
 export BAT_THEME=OneHalfLight
 alias cat=bat
 
+# dotnetをwindows環境のものに置き換える
+alias dotnet='dotnet.exe'
+
 # gitをhubに置き換える
 eval "$(hub alias -s)"
 
