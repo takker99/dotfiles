@@ -13,6 +13,11 @@
 # :bug:               Fixing a Bug
 # :rotating_light:    Removing Linter Warnings
 #
+# :lipstick:          Updating the UI and style files
+# :white_check_mark:  Updating tests
+# :clown_face:         Mocking things.
+# :alembic:           Experimenting new things
+#
 # :recycle:           Refactoring Code
 # :truck:             Moving or Renaming Files
 # :fire:              Removing Code or Files
@@ -20,8 +25,13 @@
 # :construction:      WIP (Work In Progress)
 # :tada:              Initial Commit
 # :bookmark:          Version Tag
-# :speech_balloon:    Updating Comments, Text and Literals
+#
+# :bulb:              Documenting source code
 # :page_facing_up:    Adding or Updating License
+# ::wrench:           Changing configuration files
+# :see_no_evil:       Adding or updating a .gitignore file
+# :speech_balloon:    Updating Comments, Text and Literals
+# :pencil:            Writing docs
 #
 # ==== Good Commit Message Examples ====
 #
