@@ -46,6 +46,7 @@
     "javascript.format.placeOpenBraceOnNewLineForFunctions":true,
     "javascript.format.placeOpenBraceOnNewLineForControlBlocks":true,
 
+    "python.jediEnabled":false,
 
     // coc-git setting
 
