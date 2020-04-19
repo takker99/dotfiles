@@ -61,7 +61,8 @@ namespace $1
 	/// </summary>
 	public partial class App : PrismApplication
 	{
-		protected override Window CreateShell() => Container.Resolve<MainWindow>();
+		protected override Window CreateShell()
+			=> this.Container.Resolve<MainWindow>();
 
 		protected override void RegisterTypes(IContainerRegistry containerRegistry) { }
 
@@ -70,7 +71,8 @@ namespace $1
 		{
 			base.ConfigureViewModelLocator();
 
-			ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
+			ViewModelLocationProvider.
+				SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
 			{
 				// "...$1.Views.MainWindow" を "...$1.ViewModels.MainWindow" に置き換える
 				var viewName = viewType.FullName.Replace(".Views.",".ViewModels.");
