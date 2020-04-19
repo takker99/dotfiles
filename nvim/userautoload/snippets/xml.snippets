@@ -50,6 +50,19 @@ snippet appxaml "xaml code for entry point" b
 </prism:PrismApplication>
 endsnippet
 
+snippet prismview "view using Prism" b
+<Window x:Class="${1:Module}.Views.${2:ViewName}"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:prism="http://prismlibrary.com/"
+		prism:ViewModelLocator.AutoWireViewModel="True"
+		Title="{Binding Title}" Height="350" Width="525">
+    <Grid ShowGridLines="True">
+		${3:VISUAL}
+    </Grid>
+</Window>
+endsnippet
+
 snippet growdef "Grid Row Definitions" b
 <Grid.RowDefinitions>
 ${1:CONTENT}
