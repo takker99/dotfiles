@@ -75,9 +75,9 @@ namespace $1
 				SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
 			{
 				// "...$1.Views.MainWindow" を "...$1.ViewModels.MainWindow" に置き換える
-				var viewName = viewType.FullName.Replace(".Views.",".ViewModels.");
-				var viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
-				var viewModelName = $"{viewName}, {viewAssemblyName}";
+				string viewName = viewType.FullName.Replace(".Views.",".ViewModels.");
+				string viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
+				string viewModelName = $"{viewName}, {viewAssemblyName}";
 				return Type.GetType(viewModelName);
 			});
 		}
