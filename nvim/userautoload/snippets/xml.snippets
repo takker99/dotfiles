@@ -51,16 +51,20 @@ snippet appxaml "xaml code for entry point" b
 endsnippet
 
 snippet prismview "view using Prism" b
-<Window x:Class="${1:Module}.Views.${2:ViewName}"
+<${1:Windows} x:Class="${2:Module}.Views.${3:ViewName}"
 		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:local="clr-namespace:$2.Views"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
 		xmlns:prism="http://prismlibrary.com/"
 		prism:ViewModelLocator.AutoWireViewModel="True"
 		Title="{Binding Title}" Height="350" Width="525">
     <Grid ShowGridLines="True">
-		${3:VISUAL}
+		${4:VISUAL}
     </Grid>
-</Window>
+</$1>
 endsnippet
 
 snippet growdef "Grid Row Definitions" b
