@@ -45,6 +45,14 @@ public $1 ${3:Value}
 }
 endsnippet
 
+snippet propr "properties using ReactiveProperty" b
+${1:public} ReactiveProperty<${2:int}> ${3:Name} { get; }
+endsnippet
+
+snippet proprs "properties using ReactivePropertySlim" b
+${1:public} ReactivePropertySlim<${2:int}> ${3:Name} { get; }
+endsnippet
+
 snippet prismapp "entry point of prism application" b
 using Prism.Ioc;
 using Prism.Mvvm;
