@@ -33,8 +33,9 @@ nnoremap gj  j
 vnoremap gk  k
 vnoremap gj  j
 
-" <C-l>にハイライト消去効果を追加
-nnoremap <C-l> :nohlsearch<CR><Esc><C-l>
+" <C-l>にハイライト消去・ファイル変更適用効果を追加
+nnoremap <C-l> :nohlsearch<CR>:checktime<CR><Esc><C-l>
+nnoremap <Esc><Esc> :nohlsearch<CR>
 " 検索で使う規定の正規表現を Very Magic にする
 nmap / /\v
 
