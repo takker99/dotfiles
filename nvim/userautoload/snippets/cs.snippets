@@ -93,6 +93,37 @@ namespace $1
 }
 endsnippet
 
+snippet prismview ".cs code for xaml view" b
+using System.Windows;
+
+namespace ${1:Application}.${2:Views}
+{
+    /// <summary>
+    /// Interaction logic for ${3:View}.xaml
+    /// </summary>
+    public partial class $3 : ${4:Window}
+    {
+        public $3() => InitializeComponent();
+    }
+}
+endsnippet
+
+snippet prismviewmodel ".cs code for Prism viewmodel" b
+using Prism.Mvvm;
+using Reactive.Bindings;
+
+namespace ${1:Application}.${2:ViewModels}
+{
+    public class ${3:ViewModel} : BindableBase
+    {
+        public $3()
+		{
+			${4:VISUAL}
+		}
+    }
+}
+endsnippet
+
 snippet viewcs ".cs code for xaml view" b
 using System.Windows;
 
@@ -107,6 +138,7 @@ namespace ${1:Application}.${2:Views}
     }
 }
 endsnippet
+
 snippet viewcs ".cs code for xaml view" b
 using System.Windows.Controls;
 
