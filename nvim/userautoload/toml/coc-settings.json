@@ -49,6 +49,10 @@
 
     "python.jediEnabled":false,
 
+    "latex.build.args":["-pvc"],
+    "latex.forwardSearch.executable":"evince",
+    "latex.lint.onChange":true,
+
     // coc-git setting
 
     "languageserver": {
