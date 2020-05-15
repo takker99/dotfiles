@@ -20,8 +20,6 @@ nnoremap <silent> [Denite]* :<C-u>DeniteCursorWord grep -buffer-name=search line
 nnoremap <silent> [Denite]s :<C-u>Denite -resume -buffer-name=search<CR>
 nnoremap <silent> [Denite]c :<C-u>Denite command_history<CR>
 nnoremap <silent> [Denite]C :<C-u>Denite command_history -start-filter<CR>
-nnoremap <silent> [Denite]l :<C-u>Denite coc-command<CR>
-nnoremap <silent> [Denite]L :<C-u>Denite coc-command -start-filter<CR>
 nnoremap <silent> [Denite]H :<C-u>Denite help -start-filter<CR>
 nnoremap <silent> [Denite]m :<C-u>Denite mark<CR>
 '''
