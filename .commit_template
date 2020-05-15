@@ -7,23 +7,45 @@
 # Commit body...
 #
 # ==== Emojis ====
-# :sparkles:          New Feature
+#
+# Addings
+# :sparkles:              Introducing new feature
+# :art:                   Improving structure or
+#                         format of the code
+# :building_construction: Making architectural changes
+# :boom:                  Introducing breaking changes
+# :poop:                  Writing bad code that needs
+#                         to be improved
+#
+# Removings
+# :truck:             Moving or Renaming Files
+# :fire:              Removing Code or Files
+# :wastebasket:       Deprecating code that
+#                     needs to be cleaned up
+#
+# Changings
 # :+1:                Fixing a feature
+# :lipstick:          Updating the UI and style files
+# :recycle:           Refactoring Code
 # :pencil2:           Fixing Typos
 # :bug:               Fixing a Bug
+# :white_check_mark:  Updating tests
 # :rotating_light:    Removing Linter Warnings
 #
-# :lipstick:          Updating the UI and style files
-# :white_check_mark:  Updating tests
+# Attributes
+# :tada:              Initial Commit
 # :clown_face:         Mocking things.
 # :alembic:           Experimenting new things
 #
-# :recycle:           Refactoring Code
-# :truck:             Moving or Renaming Files
-# :fire:              Removing Code or Files
+# Environments
+# :apple:          Fixing something on macOS
+# :penguin:        Fixing something on Linux
+# :checkered_flag: Fixing something on Windows
+# :robot:          Fixing something on Android
+# :green_apple:    Fixing something on iOS
 #
+# Others
 # :construction:      WIP (Work In Progress)
-# :tada:              Initial Commit
 # :bookmark:          Version Tag
 #
 # :bulb:              Documenting source code
