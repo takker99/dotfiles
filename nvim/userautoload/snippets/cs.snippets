@@ -60,9 +60,8 @@ using Prism.Unity;
 using System;
 using System.Reflection;
 using System.Windows;
-using ${1:Application}.${2:Views};
 
-namespace $1
+namespace ${1:Application}
 {
 	/// <summary>
 	/// Interaction logic for App.xaml
@@ -70,7 +69,7 @@ namespace $1
 	public partial class App : PrismApplication
 	{
 		protected override Window CreateShell()
-			=> this.Container.Resolve<MainWindow>();
+			=> this.Container.Resolve<${2:Views}.MainWindow>();
 
 		protected override void RegisterTypes(IContainerRegistry containerRegistry) { }
 
@@ -82,7 +81,7 @@ namespace $1
 			ViewModelLocationProvider.
 				SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
 			{
-				// "...$1.Views.MainWindow" を "...$1.ViewModels.MainWindow" に置き換える
+				// "...Views.MainWindow" を "...ViewModels.MainWindow" に置き換える
 				string viewName = viewType.FullName.Replace(".Views.",".ViewModels.");
 				string viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
 				string viewModelName = $"{viewName}, {viewAssemblyName}";
@@ -103,7 +102,8 @@ namespace ${1:Application}.${2:Views}
     /// </summary>
     public partial class $3 : ${4:Window}
     {
-        public $3() => InitializeComponent();
+        public $3()
+		=> InitializeComponent();
     }
 }
 endsnippet
@@ -111,6 +111,7 @@ endsnippet
 snippet prismviewmodel ".cs code for Prism viewmodel" b
 using Prism.Mvvm;
 using Reactive.Bindings;
+using Reactive.Bindings.Extensions;
 
 namespace ${1:Application}.${2:ViewModels}
 {
