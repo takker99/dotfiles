@@ -40,7 +40,6 @@ inoremap <silent><expr> <TAB>
 
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-nnoremap <silent> <space><space> :<C-u>CocList<cr>
 
 " " cf. https://qiita.com/maguro_tuna/items/70814d99aef8f1ddc8e9
 " inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
