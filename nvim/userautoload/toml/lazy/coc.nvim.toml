@@ -72,6 +72,10 @@ nnoremap <silent> [LangServer]h :<C-u>call CocAction('doHover')<cr>
 "スペースrfでReferences
 nmap <silent> [LangServer]f <Plug>(coc-references)
 nmap <silent> [LangServer]r <Plug>(coc-rename)
+nnoremap <silent> [LangServer]l :<C-u>CocList<cr>
+nnoremap <silent> [LangServer]e :<C-u>Denite coc-diagnostic<cr>
+nnoremap <silent> [LangServer]c :<C-u>Denite coc-command<CR>
+nnoremap <silent> [LangServer]C :<C-u>Denite coc-command -start-filter<CR>
 
 command! -nargs=0 CocFormat :call CocAction('format')
 function! s:cocFormatMapping()
