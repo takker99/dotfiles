@@ -16,7 +16,7 @@ export PATH=$HOME/.cargo/bin:$PATH
 
 # bat の設定
 export BAT_THEME=OneHalfLight
-alias cat=bat
+alias cat=batcat
 
 # dotnetをwindows環境のものに置き換える
 alias dotnet='dotnet.exe'
