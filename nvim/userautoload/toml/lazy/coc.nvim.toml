@@ -71,6 +71,7 @@ nmap <silent> ]c <Plug>(coc-diagnostic-next)
 nnoremap <silent> [LangServer]h :<C-u>call CocAction('doHover')<cr>
 ""スペースdfでDefinition
 "スペースrfでReferences
+nmap <silent> [LangServer]d <Plug>(coc-definition)
 nmap <silent> [LangServer]f <Plug>(coc-references)
 nmap <silent> [LangServer]r <Plug>(coc-rename)
 nnoremap <silent> [LangServer]l :<C-u>CocList<cr>
