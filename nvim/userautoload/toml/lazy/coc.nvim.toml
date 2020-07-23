@@ -20,6 +20,7 @@ call coc#add_extension(
     \ 'coc-snippets',
     \ 'coc-syntax',
     \ 'coc-tsserver',
+    \ 'coc-eslint',
     \ 'coc-vimlsp',
     \ 'coc-word',
     \ 'coc-xml',
