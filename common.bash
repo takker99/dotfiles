@@ -26,10 +26,10 @@ if !(type yarn > /dev/null 2>&1); then
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
     sudo apt update
-    if type nvm > /dev/null 2>&1); then
+    if type nvm > /dev/null 2>&1; then
         echo "nvm is found"
         sudo apt install --no-install-recommends yarn
-    elif
+    else
         sudo apt install yarn
     fi
 fi
