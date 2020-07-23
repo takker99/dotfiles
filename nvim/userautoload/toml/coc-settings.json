@@ -53,14 +53,11 @@
     "latex.forwardSearch.executable":"evince",
     "latex.lint.onChange":true,
 
+    "yaml.format.enable":true,
+    "yaml.format.singleQuote":true,
+
     // coc-git setting
 
-    "languageserver": {
-        "clangd": {
-            "command": "clangd",
-            "rootPatterns": ["compile_flags.txt", "compile_commands.json"],
-            "args":["--clang-tidy", "--suggest-missing-includes","--header-insertion==iwyu"],
-            "filetypes": ["c", "cpp", "objc", "objcpp"]
-        }
-    }
+    "clangd.arguments":["--clang-tidy","--suggest-missing-includes","--pch-storage=memory","--header-insertion==iwyu"]
+
 }
