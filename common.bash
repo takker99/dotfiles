@@ -16,7 +16,7 @@ export PATH=$HOME/.cargo/bin:$PATH
 
 # bat の設定
 if type batcat > /dev/null 2>&1; then
-    export BAT_THEME=OneHalfLight
+    export BAT_THEME=zenburn
     alias cat=batcat
 fi
 
