@@ -10,6 +10,6 @@ if not functions -q fisher
 end
 
 # 共通 shell settings を読み込む
-if test -f $HOME/git/dotfiles/common.bash
+if test -f $HOME/git/dotfiles/common.bash && functions -q bass
     bass source $HOME/git/dotfiles/common.bash
 end
