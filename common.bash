@@ -10,7 +10,7 @@ export CXX=clang++
 export XDG_CONFIG_HOME=$HOME/.config
 export PATH="$HOME/.local/bin:$PATH"
 export LD_LIBRARY_PATH=$HOME/.local/lib/:$LD_LIBRARY_PATH
-export DISPLAY=:0.0
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
 
@@ -24,9 +24,9 @@ if !(type yarn > /dev/null 2>&1); then
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
     sudo apt update
 #    if type nvm > /dev/null 2>&1); then
-#	sudo apt install --no-install-recommends yarn
+#   sudo apt install --no-install-recommends yarn
 #    elif
-#	sudo apt install yarn
+#   sudo apt install yarn
 #    fi
 fi
 
