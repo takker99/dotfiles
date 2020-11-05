@@ -146,7 +146,7 @@ module.exports = {
         colorOpacity: 0.8
       },
       background: {
-        folder: "C:/Users/elect/AppData/Local/hyper/background/",
+        folder: "%LOCALAPPDATA%/hyper/background/",
         position: "center",
         size: "cover",
         repeat: "no-repeat"
