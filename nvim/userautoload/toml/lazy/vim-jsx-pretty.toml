@@ -1,0 +1,3 @@
+[[plugins]]
+repo='MaxMEllon/vim-jsx-pretty'
+on_ft = ['jsx','tsx']
