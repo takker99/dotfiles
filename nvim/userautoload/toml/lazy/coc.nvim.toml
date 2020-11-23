@@ -21,10 +21,12 @@ call coc#add_extension(
     \ 'coc-syntax',
     \ 'coc-tsserver',
     \ 'coc-eslint',
+    \ 'coc-prettier',
     \ 'coc-vimlsp',
     \ 'coc-word',
     \ 'coc-xml',
-    \ 'coc-git'
+    \ 'coc-git',
+    \ 'coc-actions'
   \ )
 
 let g:coc_filetype_map = {
