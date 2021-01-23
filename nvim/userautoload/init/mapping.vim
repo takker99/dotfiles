@@ -111,10 +111,6 @@ nmap L $
 vmap H ^
 vmap L $
 
-" Enterで行ジャンプ
-" cf. http://deris.hatenablog.jp/entry/2013/05/02/192415
-nnoremap <Enter> G
-
 " vp doesn't replace paste buffer
 " cf. http://deris.hatenablog.jp/entry/2013/05/02/192415
 function! RestoreRegister()
