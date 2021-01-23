@@ -72,11 +72,11 @@ inoremap <Left> <Nop>
 inoremap <Right> <Nop>
 
 " 行を移動
-nnoremap <A-k> :m-2<cr>==
-nnoremap <A-j> :m+<cr>==
+nnoremap <C-k> :m-2<cr>==
+nnoremap <C-j> :m+<cr>==
 " 複数行を移動
-xnoremap <A-k> :m-2<cr>gv=gv
-xnoremap <A-j> :m'>+<cr>gv=gvk
+xnoremap <C-k> :m-2<cr>gv=gv
+xnoremap <C-j> :m'>+<cr>gv=gvk
 
 " Yでカーソル位置から行末までヤンクする
 nnoremap Y y$
