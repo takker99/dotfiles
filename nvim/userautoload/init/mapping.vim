@@ -31,8 +31,6 @@ vnoremap j   gj
 nnoremap gk  k
 nnoremap gj  j
 vnoremap gk  k
-vnoremap gj  j
-
 " <C-l>にハイライト消去・ファイル変更適用効果を追加
 nnoremap <C-l> :nohlsearch<CR>:checktime<CR><Esc><C-l>
 nnoremap <Esc><Esc> :nohlsearch<CR>
@@ -120,12 +118,12 @@ nnoremap <Enter> G
 " vp doesn't replace paste buffer
 " cf. http://deris.hatenablog.jp/entry/2013/05/02/192415
 function! RestoreRegister()
-  let @" = s:restore_reg
-  return ''
+    let @" = s:restore_reg
+    return ''
 endfunction
 function! s:Repl()
-  let s:restore_reg = @"
-  return "p@=RestoreRegister()\<cr>"
+    let s:restore_reg = @"
+    return "p@=RestoreRegister()\<cr>"
 endfunction
 nmap <silent> <expr> p <sid>Repl()
 
@@ -134,6 +132,18 @@ nmap <silent> <expr> p <sid>Repl()
 " c.f. http://ivxi.hatenablog.com/entry/2013/05/23/163825
 nnoremap s <Nop>
 nnoremap s= <C-w>=
+nnoremap sh <C-w>h
+nnoremap sj <C-w>j
+nnoremap sk <C-w>k
+nnoremap sl <C-w>l
+nnoremap sp :bprevious<CR>
+nnoremap sn :bnext<CR>
+nnoremap sr <C-w>r
+nnoremap sw <C-w>w
+nnoremap sH <C-w>H
+nnoremap sJ <C-w>J
+nnoremap sK <C-w>K
+nnoremap sL <C-w>L
 nnoremap so <C-w>_<C-w>|
 nnoremap sO <C-w>=
 nnoremap <silent>sd :bd<CR>
@@ -143,6 +153,7 @@ nnoremap <silent>st :tabnew<CR>
 nnoremap <silent>sx :tabclose<CR>
 nnoremap <M-l> gt
 nnoremap <M-h> gT
+
 " function key 関連
 
 " cf.
@@ -166,6 +177,8 @@ tnoremap <C-q> <C-\><C-n>:q<CR>
 " ESC or jj でターミナルモードからノーマルモードへ
 tnoremap <ESC> <C-\><C-n>
 tnoremap jj <C-\><C-n>
+vnoremap gj  j
+
 
 " オートコンパイルする
 " augroup setAutoCompile
