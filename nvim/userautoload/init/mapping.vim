@@ -71,13 +71,12 @@ inoremap <Down> <Nop>
 inoremap <Left> <Nop>
 inoremap <Right> <Nop>
 
-" cf.https://qiita.com/itmammoth/items/312246b4b7688875d023#6%E8%A1%8C%E3%82%92%E7%A7%BB%E5%8B%95%E3%81%99%E3%82%8B
 " 行を移動
-nnoremap <A-k> "zdd<Up>"zP
-nnoremap <A-j> "zdd"zp
-" " 複数行を移動
-vnoremap <A-k> "zx<Up>"zP`[V`]
-vnoremap <A-j> "zx"zp`[V`]
+nnoremap <A-k> :m-2<cr>==
+nnoremap <A-j> :m+<cr>==
+" 複数行を移動
+xnoremap <A-k> :m-2<cr>gv=gv
+xnoremap <A-j> :m'>+<cr>gv=gvk
 
 " Yでカーソル位置から行末までヤンクする
 nnoremap Y y$
