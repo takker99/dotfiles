@@ -1,5 +1,4 @@
-﻿"文字コードをUFT-8に設定
-set encoding=utf-8
+"文字コードをUFT-8に設定
 scriptencoding utf-8
 
 " if has('win32') || has('win64')
