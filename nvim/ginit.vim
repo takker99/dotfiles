@@ -1,5 +1,4 @@
 "文字コードをUFT-8に設定
-set encoding=utf-8
 scriptencoding utf-8
 
 GuiFont! Consolas:h11
