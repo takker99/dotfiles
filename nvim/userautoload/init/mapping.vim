@@ -7,7 +7,6 @@
 "   →一番下のラインには :b# が表示されない。
 "
 "文字コードをUFT-8に設定
-set encoding=utf-8
 scriptencoding utf-8
 
 " let s:script_path = expand('<sfile>:p')
