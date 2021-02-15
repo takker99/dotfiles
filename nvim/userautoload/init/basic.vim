@@ -62,8 +62,8 @@ set signcolumn=auto
 set switchbuf=useopen
 
 set conceallevel=2
-let g:tex_conceal=""
-set concealcursor="nc"
+let g:tex_conceal=''
+set concealcursor=nc
 
 " 折りたたみ系
 " cf. https://maku77.github.io/vim/advanced/folding.html
