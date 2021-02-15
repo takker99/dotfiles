@@ -102,7 +102,7 @@ set softtabstop=4         " <Tab> の挿入や <BS> の使用等の編集操作�
 " 言語ごとにTabの設定を変える
 augroup fileTypeIndent
     autocmd!
-    autocmd BufNewFile,BufRead *.md setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    autocmd FileType markdown setlocal tabstop=2 softtabstop=2 shiftwidth=2
 augroup END
 
 " 不可視文字を可視化(タブが「?-」と表示される)
