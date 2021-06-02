@@ -7,7 +7,6 @@
 "   →一番下のラインには :b# が表示されない。
 "
 "文字コードをUFT-8に設定
-set encoding=utf-8
 scriptencoding utf-8
 
 " let s:script_path = expand('<sfile>:p')
@@ -31,8 +30,6 @@ vnoremap j   gj
 nnoremap gk  k
 nnoremap gj  j
 vnoremap gk  k
-vnoremap gj  j
-
 " <C-l>にハイライト消去・ファイル変更適用効果を追加
 nnoremap <C-l> :nohlsearch<CR>:checktime<CR><Esc><C-l>
 nnoremap <Esc><Esc> :nohlsearch<CR>
@@ -71,13 +68,12 @@ inoremap <Down> <Nop>
 inoremap <Left> <Nop>
 inoremap <Right> <Nop>
 
-" cf.https://qiita.com/itmammoth/items/312246b4b7688875d023#6%E8%A1%8C%E3%82%92%E7%A7%BB%E5%8B%95%E3%81%99%E3%82%8B
 " 行を移動
-nnoremap <A-k> "zdd<Up>"zP
-nnoremap <A-j> "zdd"zp
-" " 複数行を移動
-vnoremap <A-k> "zx<Up>"zP`[V`]
-vnoremap <A-j> "zx"zp`[V`]
+nnoremap <C-k> :m-2<cr>==
+nnoremap <C-j> :m+<cr>==
+" 複数行を移動
+xnoremap <C-k> :m-2<cr>gv=gv
+xnoremap <C-j> :m'>+<cr>gv=gvk
 
 " Yでカーソル位置から行末までヤンクする
 nnoremap Y y$
@@ -114,19 +110,15 @@ nmap L $
 vmap H ^
 vmap L $
 
-" Enterで行ジャンプ
-" cf. http://deris.hatenablog.jp/entry/2013/05/02/192415
-nnoremap <Enter> G
-
 " vp doesn't replace paste buffer
 " cf. http://deris.hatenablog.jp/entry/2013/05/02/192415
 function! RestoreRegister()
-  let @" = s:restore_reg
-  return ''
+    let @" = s:restore_reg
+    return ''
 endfunction
 function! s:Repl()
-  let s:restore_reg = @"
-  return "p@=RestoreRegister()\<cr>"
+    let s:restore_reg = @"
+    return "p@=RestoreRegister()\<cr>"
 endfunction
 nmap <silent> <expr> p <sid>Repl()
 
@@ -135,6 +127,18 @@ nmap <silent> <expr> p <sid>Repl()
 " c.f. http://ivxi.hatenablog.com/entry/2013/05/23/163825
 nnoremap s <Nop>
 nnoremap s= <C-w>=
+nnoremap sh <C-w>h
+nnoremap sj <C-w>j
+nnoremap sk <C-w>k
+nnoremap sl <C-w>l
+nnoremap sp :bprevious<CR>
+nnoremap sn :bnext<CR>
+nnoremap sr <C-w>r
+nnoremap sw <C-w>w
+nnoremap sH <C-w>H
+nnoremap sJ <C-w>J
+nnoremap sK <C-w>K
+nnoremap sL <C-w>L
 nnoremap so <C-w>_<C-w>|
 nnoremap sO <C-w>=
 nnoremap <silent>sd :bd<CR>
@@ -144,6 +148,7 @@ nnoremap <silent>st :tabnew<CR>
 nnoremap <silent>sx :tabclose<CR>
 nnoremap <M-l> gt
 nnoremap <M-h> gT
+
 " function key 関連
 
 " cf.
@@ -167,6 +172,8 @@ tnoremap <C-q> <C-\><C-n>:q<CR>
 " ESC or jj でターミナルモードからノーマルモードへ
 tnoremap <ESC> <C-\><C-n>
 tnoremap jj <C-\><C-n>
+vnoremap gj  j
+
 
 " オートコンパイルする
 " augroup setAutoCompile

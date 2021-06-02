@@ -1,0 +1,5 @@
+[[plugins]]
+repo = 'kuuote/vim-fuzzyhistory'
+hook_add='''
+nmap <C-f> <Plug>(fuzzy-history)
+'''

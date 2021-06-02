@@ -1,0 +1,7 @@
+[[plugins]]
+repo = 'haya14busa/vim-edgemotion'
+on_map=['<Plug>(edgemotion-']
+hook_add = '''
+" map <C-j> <Plug>(edgemotion-j)
+" map <C-k> <Plug>(edgemotion-k)
+'''
