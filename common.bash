@@ -13,6 +13,8 @@ export LD_LIBRARY_PATH=$HOME/.local/lib/:$LD_LIBRARY_PATH
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
+export PATH=$HOME/.deno/bin:$PATH
+export PATH=$HOME/.yarn/bin:$PATH
 
 # bat の設定
 if type batcat > /dev/null 2>&1; then
