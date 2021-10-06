@@ -11,7 +11,8 @@ sed -i.bak -e \
   /etc/apt/sources.list
 echo Asia/Tokyo > /etc/timezone
 dpkg-reconfigure --frontend noninteractive tzdata
-EOS)
+EOS
+)
 sudo sh -c "${CODE}"
 unset CODE
 
