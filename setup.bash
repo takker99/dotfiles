@@ -66,11 +66,12 @@ if ! [ -d ~/git/dotfiles ]; then
   ln -sb ~/git/dotfiles/.gitconfig ~/.gitconfig
   
   if ! [ -e ~/.ssh/config ]; then
-    ln -s ~/git/dotfiles/ssh/config ~/.ssh/config
+    ln -s ~/git/dotfiles/.ssh/config ~/.ssh/config
   fi
   
   ssh -T github
   
+  cd dotfiles
   git remote set-url origin git@github.com:takker99/dotfiles.git
   popd
 fi
