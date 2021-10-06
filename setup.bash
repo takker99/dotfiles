@@ -29,13 +29,14 @@ if !(type "nvim" > /dev/null 2>&1) \
   echo "Successfully installed."
 fi
 
-SSH_GITHUB_NAME="$HOME/.ssh/id_github_takker99"
-if ! [ -e "${SSH_GITHUB_NAME}") ] || ! [ -e "${SSH_GITHUB_NAME}.pub" ]; then
+SSH_GITHUB_NAME="id_github_takker99"
+SSH_GITHUB_PATH="$HOME/.ssh/${SSH_GITHUB_NAME}"
+if ! [ -e "${SSH_GITHUB_PATH}" ] || ! [ -e "${SSH_GITHUB_PATH}.pub" ]; then
   echo "SSH keys for GitHub aren't found. Creating SSH keys..."
   
   # 秘密鍵の中身を取り出す
   copyKey() {
-    KEY=$(cat "${SSH_GITHUB_NAME}.pub")
+    KEY=$(cat "${SSH_GITHUB_PATH}.pub")
     if type "clip.exe" > /dev/null 2>&1; then
       echo "${KEY}" | clip.exe
     else
@@ -44,7 +45,7 @@ if ! [ -e "${SSH_GITHUB_NAME}") ] || ! [ -e "${SSH_GITHUB_NAME}.pub" ]; then
   }
   
   mkdir -p ~/.ssh
-  ssh-keygen -t ed25519 -C "37929109+takker99@users.noreply.github.com" -f "${SSH_GITHUB_NAME}" -P "" -N ""
+  ssh-keygen -t ed25519 -C "37929109+takker99@users.noreply.github.com" -f "${SSH_GITHUB_PATH}" -P "" -N ""
   copyKey
   echo "Copied the SSH public key to your clipboard. Please register it at https://github.com/settings/ssh/new";
   select i in Registered CopyAgain
@@ -55,8 +56,8 @@ if ! [ -e "${SSH_GITHUB_NAME}") ] || ! [ -e "${SSH_GITHUB_NAME}.pub" ]; then
       *)          echo "Either \"Registered\" or \"CopyAgain\" can be selected.";;
     esac
   done
-fi
-    
+fi    
+
 if ! [ -d ~/git/dotfiles ]; then
   echo "Downloading takker99/dotfiles..."
   mkdir -p ~/git
