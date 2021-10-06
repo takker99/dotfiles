@@ -5,11 +5,15 @@ catch () {
 }
 trap catch ERR
 
-sudo sed -i.bak -e \
+CODE = $(cat << EOS
+sed -i.bak -e \
   "s/http:\/\/archive\.ubuntu\.com/http:\/\/jp\.archive\.ubuntu\.com/g" \
   /etc/apt/sources.list
-sudo echo Asia/Tokyo > /etc/timezone
-sudo dpkg-reconfigure --frontend noninteractive tzdata
+echo Asia/Tokyo > /etc/timezone
+dpkg-reconfigure --frontend noninteractive tzdata
+EOS)
+sudo sh -c "${CODE}"
+unset CODE
 
 if [[!(type "nvim" > /dev/null 2>&1) \
   || !(type "batcat" > /dev/null 2>&1) \
