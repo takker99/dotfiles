@@ -29,7 +29,7 @@ if !(type "nvim" > /dev/null 2>&1) \
   echo "Successfully installed."
 fi
 
-SSH_GITHUB_NAME="~/.ssh/id_github_takker99"
+SSH_GITHUB_NAME="$HOME/.ssh/id_github_takker99"
 if [[ !(-e ${SSH_GITHUB_NAME}) || !(-e "${SSH_GITHUB_NAME}.pub")]]; then
   echo "SSH keys for GitHub aren't found. Creating SSH keys..."
   
