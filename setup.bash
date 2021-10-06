@@ -69,7 +69,7 @@ if ! [ -d ~/git/dotfiles ]; then
     ln -s ~/git/dotfiles/.ssh/config ~/.ssh/config
   fi
   
-  ssh -T github
+  ssh github || :
   
   cd dotfiles
   git remote set-url origin git@github.com:takker99/dotfiles.git
