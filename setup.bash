@@ -52,7 +52,7 @@ if ! [ -e "${SSH_GITHUB_PATH}" ] || ! [ -e "${SSH_GITHUB_PATH}.pub" ]; then
   do
     case $i in
       Registered) break;;
-      CopyAgain)  copyKey;;
+      CopyAgain)  echo "Copied again. Please register it"; copyKey;;
       *)          echo "Either \"Registered\" or \"CopyAgain\" can be selected.";;
     esac
   done
