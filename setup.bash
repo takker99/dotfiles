@@ -5,7 +5,7 @@ catch () {
 }
 trap catch ERR
 
-CODE = $(cat << EOS
+CODE=$(cat << EOS
 sed -i.bak -e \
   "s/http:\/\/archive\.ubuntu\.com/http:\/\/jp\.archive\.ubuntu\.com/g" \
   /etc/apt/sources.list
