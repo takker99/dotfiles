@@ -49,6 +49,7 @@ if [[ !(-d ~/git/dotfiles) ]]; then
   
   if [[ !(-e ${SSH_GITHUB_NAME}) || !(-e "${SSH_GITHUB_NAME}.pub")]]; then
     echo "SSH keys for GitHub aren't found. Creating SSH keys..."
+    mkdir -p ~/.ssh
     ssh-keygen -t ed25519 -C "37929109+takker99@users.noreply.github.com" -f "${SSH_GITHUB_NAME}" -P "" -N ""
     copyKey
     echo "Copied the SSH public key to your clipboard. Please register it at https://github.com/settings/ssh/new";
