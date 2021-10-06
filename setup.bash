@@ -16,13 +16,12 @@ EOS
 sudo sh -c "${CODE}"
 unset CODE
 
-if [[!(type "nvim" > /dev/null 2>&1) \
+if !(type "nvim" > /dev/null 2>&1) \
   || !(type "batcat" > /dev/null 2>&1) \
   || !(type "unzip" > /dev/null 2>&1) \
   || !(type "fish" > /dev/null 2>&1) \
   || !(type "clang" > /dev/null 2>&1) \
-  || !(type "xsel" > /dev/null 2>&1) \
-]]; then
+  || !(type "xsel" > /dev/null 2>&1); then
   echo "Install some apps...";
   sudo add-apt-repository ppa:fish-shell/release-3
   sudo apt-get update
