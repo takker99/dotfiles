@@ -31,7 +31,8 @@ fi
     
 if [[ !(-d ~/git/dotfiles) ]]; then
   echo "Downloading takker99/dotfiles..."
-  mkdir -p git
+  mkdir -p ~/git
+  pushd git
   git clone https://github.com/takker99/dotfiles.git
 
   SSH_GITHUB_NAME="~/.ssh/id_github_takker99"
@@ -70,6 +71,7 @@ if [[ !(-d ~/git/dotfiles) ]]; then
   ln -sb ~/git/dotfiles/.gitconfig ~/.gitconfig
   
   git remote set-url origin git@github.com:takker99/dotfiles.git
+  popd
 fi
 
 . ~/git/dotfiles/.bashrc
