@@ -30,7 +30,7 @@ if !(type "nvim" > /dev/null 2>&1) \
 fi
 
 SSH_GITHUB_NAME="$HOME/.ssh/id_github_takker99"
-if [ !(-e "${SSH_GITHUB_NAME}") || !(-e "${SSH_GITHUB_NAME}.pub") ]; then
+if ! [ -e "${SSH_GITHUB_NAME}") ] || ! [ -e "${SSH_GITHUB_NAME}.pub" ]; then
   echo "SSH keys for GitHub aren't found. Creating SSH keys..."
   
   # 秘密鍵の中身を取り出す
@@ -57,14 +57,14 @@ if [ !(-e "${SSH_GITHUB_NAME}") || !(-e "${SSH_GITHUB_NAME}.pub") ]; then
   done
 fi
     
-if [ !(-d ~/git/dotfiles) ]; then
+if ! [ -d ~/git/dotfiles ]; then
   echo "Downloading takker99/dotfiles..."
   mkdir -p ~/git
   pushd ~/git
   git clone https://github.com/takker99/dotfiles.git
   ln -sb ~/git/dotfiles/.gitconfig ~/.gitconfig
   
-  if [ !(-e ~/.ssh/config) ]; then
+  if ! [ -e ~/.ssh/config ]; then
     ln -s ~/git/dotfiles/ssh/config ~/.ssh/config
   fi
   
