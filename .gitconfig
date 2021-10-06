@@ -15,4 +15,4 @@
 
 [alias]
 [commit]
-	template = /mnt/c/linux_home/.commit_template
+	template = ~/git/dotfiles/.commit_template
