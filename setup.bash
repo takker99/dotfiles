@@ -32,7 +32,7 @@ fi
 if [[ !(-d ~/git/dotfiles) ]]; then
   echo "Downloading takker99/dotfiles..."
   mkdir -p ~/git
-  pushd git
+  pushd ~/git
   git clone https://github.com/takker99/dotfiles.git
 
   SSH_GITHUB_NAME="~/.ssh/id_github_takker99"
