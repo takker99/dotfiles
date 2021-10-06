@@ -86,17 +86,15 @@ if !(type "deno" > /dev/null 2>&1); then
   echo "Successfully installed deno."
 fi
 
-# required to install npm
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm 
 if !(type "nvm" > /dev/null 2>&1); then
   echo "`nvm` is not installed. Install nvm..."
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
   echo "Successfully installed nvm."
 fi
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm
 
-# required to install npm
 if !(type "node" > /dev/null 2>&1); then
   echo "Node.js is not installed. Install Node.js..."
   nvm install node
