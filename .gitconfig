@@ -1,0 +1,18 @@
+[use]
+	email = "37929109+takker99@users.noreply.github.com"
+	name = takker99
+
+[gui]
+	encoding = utf-8
+
+[core]
+	editor = nvim
+	filemode = false
+	quotepath = false
+
+[grep]
+	lineNumber = true
+
+[alias]
+[commit]
+	template = /mnt/c/linux_home/.commit_template
