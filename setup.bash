@@ -28,13 +28,9 @@ if !(type "nvim" > /dev/null 2>&1) \
   sudo apt-get install neovim bat unzip fish clang build-essential x11-apps x11-utils x11-xserver-utils dbus-x11 -y
   echo "Successfully installed."
 fi
-    
-if [[ !(-d ~/git/dotfiles) ]]; then
-  echo "Downloading takker99/dotfiles..."
-  mkdir -p ~/git
-  pushd ~/git
-  git clone https://github.com/takker99/dotfiles.git
 
+if [[ !(-e ${SSH_GITHUB_NAME}) || !(-e "${SSH_GITHUB_NAME}.pub")]]; then
+  echo "SSH keys for GitHub aren't found. Creating SSH keys..."
   SSH_GITHUB_NAME="~/.ssh/id_github_takker99"
   
   # 秘密鍵の中身を取り出す
@@ -47,29 +43,32 @@ if [[ !(-d ~/git/dotfiles) ]]; then
     fi
   }
   
-  if [[ !(-e ${SSH_GITHUB_NAME}) || !(-e "${SSH_GITHUB_NAME}.pub")]]; then
-    echo "SSH keys for GitHub aren't found. Creating SSH keys..."
-    mkdir -p ~/.ssh
-    ssh-keygen -t ed25519 -C "37929109+takker99@users.noreply.github.com" -f "${SSH_GITHUB_NAME}" -P "" -N ""
-    copyKey
-    echo "Copied the SSH public key to your clipboard. Please register it at https://github.com/settings/ssh/new";
-    select i in Registered CopyAgain
-    do
-      case $i in
-        Registered) break;;
-        CopyAgain)  copyKey;;
-        *)          echo "Either \"Registered\" or \"CopyAgain\" can be selected.";;
-      esac
-    done
-  fi
+  mkdir -p ~/.ssh
+  ssh-keygen -t ed25519 -C "37929109+takker99@users.noreply.github.com" -f "${SSH_GITHUB_NAME}" -P "" -N ""
+  copyKey
+  echo "Copied the SSH public key to your clipboard. Please register it at https://github.com/settings/ssh/new";
+  select i in Registered CopyAgain
+  do
+    case $i in
+      Registered) break;;
+      CopyAgain)  copyKey;;
+      *)          echo "Either \"Registered\" or \"CopyAgain\" can be selected.";;
+    esac
+  done
+fi
+    
+if [[ !(-d ~/git/dotfiles) ]]; then
+  echo "Downloading takker99/dotfiles..."
+  mkdir -p ~/git
+  pushd ~/git
+  git clone https://github.com/takker99/dotfiles.git
+  ln -sb ~/git/dotfiles/.gitconfig ~/.gitconfig
   
   if [[ !(-e ~/.ssh/config) ]]; then
     ln -s ~/git/dotfiles/ssh/config ~/.ssh/config
   fi
   
   ssh -T github
-
-  ln -sb ~/git/dotfiles/.gitconfig ~/.gitconfig
   
   git remote set-url origin git@github.com:takker99/dotfiles.git
   popd
