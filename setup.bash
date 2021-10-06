@@ -37,9 +37,9 @@ if [[ !(-e "${SSH_GITHUB_NAME}") || !(-e "${SSH_GITHUB_NAME}.pub")]]; then
   copyKey() {
     KEY=$(cat "${SSH_GITHUB_NAME}.pub")
     if type "clip.exe" > /dev/null 2>&1; then
-      clip.exe "${KEY}"
+      echo "${KEY}" | clip.exe
     else
-      xsel "${KEY}"
+      echo "${KEY}" | xsel
     fi
   }
   
