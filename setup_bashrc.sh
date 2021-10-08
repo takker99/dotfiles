@@ -13,6 +13,9 @@ fi
 if [ -e ~/git/dotfiles/auto_install.sh ]; then
   bash ~/git/dotfiles/auto_install.sh
 fi
+if [ -e ~/git/dotfiles/alias.sh ]; then
+  . ~/git/dotfiles/alias.sh
+fi
 
 if type "fish" > /dev/null 2>&1 ; then
   exec fish
