@@ -8,15 +8,26 @@ trap catch ERR
 if !(type "nvim" > /dev/null 2>&1) \
   || !(type "batcat" > /dev/null 2>&1) \
   || !(type "unzip" > /dev/null 2>&1) \
-  || !(type "fish" > /dev/null 2>&1) \
   || !(type "clang" > /dev/null 2>&1) \
   || !(type "pdftoppm" > /dev/null 2>&1) \
   || !(type "xsel" > /dev/null 2>&1); then
   echo "Install some apps...";
+  sudo apt-get update
+  sudo apt-get install neovim bat unzip clang build-essential x11-apps x11-utils x11-xserver-utils dbus-x11 ffmpeg poppler-utils -y
+  echo "Successfully installed."
+fi
+
+if !(type "fish" > /dev/null 2>&1); then
+  echo "fish shell is not installed. Install fish..."
   sudo add-apt-repository ppa:fish-shell/release-3
   sudo apt-get update
-  sudo apt-get install neovim bat unzip fish clang build-essential x11-apps x11-utils x11-xserver-utils dbus-x11 ffmpeg poppler-utils -y
-  echo "Successfully installed."
+  sudo apt-get install fish
+  echo "Successfully installed fish."
+fi
+if ! [ -L ~/.config/fish/config.fish ]; then
+  echo "Replace \"~/.config/fish/config.fish\" to \"~/git/dotfiles/config.fish\""
+  ln -sb ~/git/dotfiles/config.fish ~/.config/fish/config.fish
+  echo "Replaced."
 fi
 
 if !(type "deno" > /dev/null 2>&1); then
