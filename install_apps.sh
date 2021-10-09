@@ -33,6 +33,11 @@ if ! [ -L ~/.config/fish/config.fish ]; then
   echo "Replaced."
 fi
 
+if ! [ -e ~/.config/nvim/init.vim ]; then
+  mkdir -p ~/.config/nvim
+  echo 'source $HOME/git/dotfiles/nvim/init.vim' > ~/.config/nvim/init.vim
+fi
+
 if !(type "deno" > /dev/null 2>&1); then
   echo "deno is not installed. Install deno..."
   curl -fsSL https://deno.land/x/install/install.sh | sh
