@@ -1,0 +1,6 @@
+[[plugins]]
+repo = 'matsui54/ddc-nvim-lsp-doc'
+on_source = 'Shougo/ddc-nvim-lsp'
+hook_source = '''
+call ddc_nvim_lsp_doc#enable()
+'''
