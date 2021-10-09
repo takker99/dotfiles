@@ -1,5 +1,0 @@
-[[plugins]]
-repo = 'sjl/gundo.vim'
-hook_add = '''
-nnoremap <F5> :GundoToggle<CR>
-'''

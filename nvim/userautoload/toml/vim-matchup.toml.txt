@@ -1,5 +1,0 @@
-[[plugins]]
-repo='andymass/vim-matchup'
-hook_add='''
-" let g:matchup_matchparen_offscreen=0
-'''
