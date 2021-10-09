@@ -31,7 +31,7 @@ if ! [ -L ~/.config/fish/config.fish ]; then
 fi
 
 if !(type "deno" > /dev/null 2>&1); then
-  echo "`deno` is not installed. Install deno..."
+  echo "deno is not installed. Install deno..."
   curl -fsSL https://deno.land/x/install/install.sh | sh
   echo "Successfully installed deno."
 fi
@@ -46,7 +46,7 @@ if !(type "node" > /dev/null 2>&1); then
   echo "Successfully installed node and npm."
 fi
 if !(type "yarn" > /dev/null 2>&1); then
-  echo "`yarn` is not installed. Install yarn..."
+  echo "yarn is not installed. Install yarn..."
   npm install -g yarn
   # use yarn V2
   yarn set version berry
