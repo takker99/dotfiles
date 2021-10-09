@@ -8,7 +8,6 @@ let g:lightline = {
             \   'left': [
             \     ['mode', 'paste'],
             \     ['gitbranch', 'gitgutter'],
-            \     ['cocstatus', 'currentfunction'],
             \   ],
             \   'right': [
             \     ['percent', 'lineinfo'],
@@ -25,8 +24,6 @@ let g:lightline = {
             \   'fileencoding': 'LightLineFileencoding',
             \   'gitbranch': 'LightLineGitBranch',
             \   'gitgutter': 'LightLineGitGutter',
-            \   'cocstatus': 'CocStatus',
-            \   'currentfunction':'CocCurrentFunction',
             \   'charcode':'MyCharCode',
             \ },
             \ 'separator': { 'left': '', 'right': '' },
@@ -84,14 +81,6 @@ endfunction
 function! LightLineGitGutter()
     let status = get(b:, 'coc_git_status', '')
     return winwidth(0) > 80 ? status : ''
-endfunction
-
-function! CocStatus()
-    return &filetype =~ s:ignore_types ? '' : get(g:, 'coc_status', '')
-endfunction
-
-function! CocCurrentFunction()
-    return &filetype =~ s:ignore_types ? '' : get(b:, 'coc_current_function', '')
 endfunction
 
 function! LightLineLineInfo()
@@ -203,6 +192,4 @@ function! LightlineFilename(n) abort
     endif
 endfunction
 
-" Use auocmd to force lightline update.
-autocmd User CocStatusChange,CocDiagnosticChange,CocGitStatusChange call lightline#update()
 '''
