@@ -4,7 +4,7 @@ catch () {
   echo "Some error have occurred. Terminate the installation."
 }
 trap catch ERR
- 
+
 if !(type "nvim" > /dev/null 2>&1) \
   || !(type "batcat" > /dev/null 2>&1) \
   || !(type "unzip" > /dev/null 2>&1) \
@@ -13,6 +13,7 @@ if !(type "nvim" > /dev/null 2>&1) \
   || !(type "pip" > /dev/null 2>&1) \
   || !(type "xsel" > /dev/null 2>&1); then
   echo "Install some apps...";
+  sudo add-apt-repository ppa:neovim-ppa/unstable
   sudo apt-get update
   sudo apt-get install neovim bat unzip clang build-essential x11-apps x11-utils x11-xserver-utils dbus-x11 ffmpeg poppler-utils python3-pip -y
   pip install --upgrade pynvim
@@ -48,7 +49,7 @@ if !(type "node" > /dev/null 2>&1); then
   echo "Node.js is not installed. Install Node.js..."
   curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
   sudo apt install nodejs
-  
+
   mkdir -p ~/.npm-global
   npm config set prefix '~/.npm-global'
   echo "Successfully installed node and npm."
