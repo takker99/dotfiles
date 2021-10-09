@@ -20,7 +20,7 @@ if !isdirectory(s:dein_repo_dir)
     execute '!git clone ' . dein_url s:dein_repo_dir
 endif
 " dein.vimをruntimepathへ追加
-let &runtimepath = s:dein_repo_dir . "," . &runtimepath
+let &runtimepath = s:dein_repo_dir . ',' . &runtimepath
 
 
 " 設定開始
@@ -34,12 +34,12 @@ if dein#load_state(s:dein_dir)
 
     " プラグインリストを読み込みキャッシュする
     let s:toml_list = glob(s:toml_dir.'*.toml')
-    let s:splitted = split(s:toml_list, "\n")
+    let s:splitted = split(s:toml_list, '\n')
     for file in s:splitted
         call dein#load_toml(file, {'lazy': 0})
     endfor
     let s:toml_list = glob(s:lazy_toml_dir.'*.toml')
-    let s:splitted = split(s:toml_list, "\n")
+    let s:splitted = split(s:toml_list, '\n')
     for file in s:splitted
         call dein#load_toml(file, {'lazy': 1})
     endfor
