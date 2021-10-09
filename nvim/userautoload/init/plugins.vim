@@ -49,17 +49,10 @@ if dein#load_state(s:dein_dir)
   call dein#save_state()
 endif
 
+filetype plugin indent on
+syntax enable
+
 " 未インストールのプラグインがある場合はインストール
 if dein#check_install()
   call dein#install()
 endif
-
-" let g:is_check_update = 0
-" if ( strftime("%w") == 0 ) && ( g:is_check_update == 0 )
-"   call dein#update()
-"   let g:is_check_update=1
-" endif
-"
-" if ( strftime("%w") != 0  ) && ( g:is_check_update == 1 )
-"     let g:is_check_update=0
-" endif
