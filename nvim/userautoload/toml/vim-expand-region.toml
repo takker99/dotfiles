@@ -1,6 +1,0 @@
-[[plugins]]
-repo = 'terryma/vim-expand-region'
-hook_add='''
-vnoremap v <Plug>(expand_region_expand)
-vnoremap <C-v> <Plug>(expand_region_shrink)
-'''
