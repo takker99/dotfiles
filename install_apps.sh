@@ -28,7 +28,8 @@ if !(type "fish" > /dev/null 2>&1); then
 fi
 if ! [ -L ~/.config/fish/config.fish ]; then
   echo "Replace \"~/.config/fish/config.fish\" to \"~/git/dotfiles/config.fish\""
-  ln -sb ~/git/dotfiles/config.fish ~/.config/fish/config.fish
+  mkdir -p ~/.config/fish
+  ln -sbv ~/git/dotfiles/config.fish ~/.config/fish/config.fish
   echo "Replaced."
 fi
 
