@@ -1,6 +1,0 @@
-[[plugins]]
-repo='ryanoasis/vim-devicons'
-hook_add='''
-let g:webdevicons_enable_nerdtree = 1
-let g:webdevicons_conceal_nerdtree_brackets = 1
-'''
