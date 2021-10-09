@@ -10,10 +10,12 @@ if !(type "nvim" > /dev/null 2>&1) \
   || !(type "unzip" > /dev/null 2>&1) \
   || !(type "clang" > /dev/null 2>&1) \
   || !(type "pdftoppm" > /dev/null 2>&1) \
+  || !(type "pip" > /dev/null 2>&1) \
   || !(type "xsel" > /dev/null 2>&1); then
   echo "Install some apps...";
   sudo apt-get update
-  sudo apt-get install neovim bat unzip clang build-essential x11-apps x11-utils x11-xserver-utils dbus-x11 ffmpeg poppler-utils -y
+  sudo apt-get install neovim bat unzip clang build-essential x11-apps x11-utils x11-xserver-utils dbus-x11 ffmpeg poppler-utils python3-pip -y
+  pip install --upgrade pynvim
   echo "Successfully installed."
 fi
 
