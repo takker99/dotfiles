@@ -1,6 +1,6 @@
 [[plugins]]
-repo = 'Shougo/ddc-nvim-lsp'
-on_source = ['ddc.vim', 'kabouzeid/nvim-lspinstall']
+repo = 'shun/ddc-vim-lsp'
+on_source = ['ddc.vim', 'vim-lsp']
 
 [[plugins]]
 repo = 'Shougo/ddc-around'
@@ -20,19 +20,17 @@ on_source = 'ddc.vim'
 
 [[plugins]]
 repo = 'Shougo/ddc.vim'
+depends = ['denops.vim', 'context_filetype.vim']
 on_event = 'InsertEnter'
 hook_source = '''
 call ddc#custom#patch_global('sources', [
-      \ 'nvim-lsp',
-      \ 'around'
+      \ 'vim-lsp',
+      \ 'buffer'
       \])
-
 call ddc#custom#patch_global('sourceOptions', {
-      \ 'nvim-lsp': {
-      \   'mark': 'lsp',
-      \   'forceCompletionPattern': '\.\w*|:\w*|->\w*'
-      \ },
+      \ 'vim-lsp': {'mark': 'lsp'},
       \ 'around': {'mark': 'A'},
+      \ 'buffer': {'mark': 'B'},
       \ '_': {
       \   'matchers': ['matcher_fuzzy'],
       \   'sorters': ['sorter_fuzzy'],
