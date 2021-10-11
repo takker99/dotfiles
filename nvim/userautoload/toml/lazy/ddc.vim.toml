@@ -1,0 +1,52 @@
+[[plugins]]
+repo = 'shun/ddc-vim-lsp'
+on_source = ['ddc.vim', 'vim-lsp']
+
+[[plugins]]
+repo = 'Shougo/ddc-around'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'matsui54/ddc-buffer'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'matsui54/ddc-dictionary'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'tani/ddc-fuzzy'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc.vim'
+depends = ['denops.vim', 'context_filetype.vim']
+on_event = 'InsertEnter'
+hook_source = '''
+call ddc#custom#patch_global('sources', [
+      \ 'vim-lsp',
+      \ 'buffer'
+      \])
+call ddc#custom#patch_global('sourceOptions', {
+      \ 'vim-lsp': {'mark': 'lsp'},
+      \ 'around': {'mark': 'A'},
+      \ 'buffer': {'mark': 'B'},
+      \ '_': {
+      \   'matchers': ['matcher_fuzzy'],
+      \   'sorters': ['sorter_fuzzy'],
+      \   'converters': ['converter_fuzzy']
+      \ }
+      \})
+
+" mappings
+" <TAB>: completion.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? '<C-n>' :
+      \ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
+      \ '<TAB>' : ddc#map#manual_complete()
+
+" <S-TAB>: completion back.
+inoremap <expr><S-TAB>  pumvisible() ? '<C-p>' : '<C-h>'
+
+call ddc#enable()
+'''
