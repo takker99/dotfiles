@@ -1,0 +1,4 @@
+[[plugins]]
+repo = 'higashi000/dps-kakkonan'
+depends = ['denops.vim']
+on_event = 'InsertEnter'
