@@ -34,7 +34,8 @@ call ddc#custom#patch_global('sourceParams', {
     \ '/usr/share/dict/words'],
     \ 'smartCase': v:true,
     \ 'showMenu': v:false,
-  \ }
+  \ },
+  \ 'buffer': {'requireSameFiletype': v:false},
 \})
 call ddc#custom#patch_global('sourceOptions', {
   \ 'vim-lsp': {'mark': 'lsp'},
