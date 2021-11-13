@@ -24,21 +24,32 @@ depends = ['denops.vim', 'context_filetype.vim']
 on_event = 'InsertEnter'
 hook_source = '''
 call ddc#custom#patch_global('sources', [
-      \ 'vim-lsp',
-      \ 'buffer'
-      \])
+  \ 'vim-lsp',
+  \ 'buffer',
+  \ 'dictionary'
+\])
+call ddc#custom#patch_global('sourceParams', {
+  \ 'dictionary': {'dictPaths': 
+    \ ['/usr/share/dict/american-english',
+    \ '/usr/share/dict/words'],
+    \ 'smartCase': v:true,
+    \ 'showMenu': v:false,
+  \ }
+\})
 call ddc#custom#patch_global('sourceOptions', {
-      \ 'vim-lsp': {'mark': 'lsp'},
-      \ 'around': {'mark': 'A'},
-      \ 'buffer': {'mark': 'B'},
-      \ '_': {
-      \   'ignoreCase': v:true,
-      \   'minAutoCompleteLength': 1,
-      \   'matchers': ['matcher_fuzzy'],
-      \   'sorters': ['sorter_fuzzy'],
-      \   'converters': ['converter_fuzzy']
-      \ }
-      \})
+  \ 'vim-lsp': {'mark': 'lsp'},
+  \ 'around': {'mark': 'A'},
+  \ 'buffer': {'mark': 'B'},
+  \ 'dictionary': {'mark': 'D'},
+  \ '_': {
+  \   'ignoreCase': v:true,
+  \   'minAutoCompleteLength': 1,
+  \   'maxCandidates': 50,
+  \   'matchers': ['matcher_fuzzy'],
+  \   'sorters': ['sorter_fuzzy'],
+  \   'converters': ['converter_fuzzy']
+  \ }
+\})
 
 " mappings
 " <TAB>: completion.

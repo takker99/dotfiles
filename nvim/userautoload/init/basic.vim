@@ -88,10 +88,10 @@ set pumheight=10          "変換候補で一度に表示される数を設定�
 set infercase             " 補完時に大文字小文字をいい感じに調節してくれる
 
 " 言語ごとに追加の辞書を登録する
-augroup fileTypeDictionary
-    autocmd!
-    autocmd FileType * execute 'setlocal dictionary+='. g:nvim_git_dir_path.'/userautoload/dictionary/'.&filetype.'.txt'
-augroup END
+" augroup fileTypeDictionary
+"     autocmd!
+"     autocmd FileType * execute 'setlocal dictionary+='. g:nvim_git_dir_path.'/userautoload/dictionary/'.&filetype.'.txt'
+" augroup END
 
 " Tab系
 set expandtab               " Tab文字を半角スペースにする
