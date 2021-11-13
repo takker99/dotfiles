@@ -32,6 +32,7 @@ call ddc#custom#patch_global('sourceOptions', {
       \ 'around': {'mark': 'A'},
       \ 'buffer': {'mark': 'B'},
       \ '_': {
+      \   'ignoreCase': v:true,
       \   'matchers': ['matcher_fuzzy'],
       \   'sorters': ['sorter_fuzzy'],
       \   'converters': ['converter_fuzzy']
