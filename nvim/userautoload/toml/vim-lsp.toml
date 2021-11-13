@@ -22,6 +22,7 @@ function! s:on_lsp_buffer_enabled() abort
   nmap <silent><buffer> [LSP]h <plug>(lsp-hover)
   nmap <silent><buffer> [LSP]a <plug>(lsp-code-action)
   nmap <silent><buffer> [LSP]l <plug>(lsp-code-lens)
+  nmap <silent><buffer> =G <plug>(lsp-document-format)
   augroup lsp_oparate_floating
     autocmd!
     autocmd User lsp_float_opened nnoremap <silent><buffer> <expr><c-f> lsp#scroll(+4)
