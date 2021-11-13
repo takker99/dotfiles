@@ -1,6 +1,8 @@
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
 hook_add= '''
+let g:lsp_diagnostics_float_cursor = 1
+
 nnoremap [LSP] <Nop>
 nmap <Leader>c [LSP]
 
