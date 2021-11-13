@@ -1,2 +1,14 @@
 [[plugins]]
+hook_add = '''
+let s:debug = v:false
+
+if s:debug
+  let g:denops#debug = 1
+  for path in split(glob("$HOME/git/denops-plugins" . "/*"), '\n')
+    if isdirectory(path)
+      execute 'set runtimepath^=' . path
+    endif
+  endfor
+endif
+'''
 repo = 'vim-denops/denops.vim'
