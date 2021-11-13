@@ -45,14 +45,15 @@ function! s:isWsl()
     return filereadable('/proc/sys/fs/binfmt_misc/WSLInterop')
 endfunction
 
+" 動かないので消す
 " insert mode を抜けるときIMEをオフにする
 " cf.https://moyapro.com/2018/04/02/disable-ime-on-wsl-vim/
-if s:isWsl() && executable('AutoHotkeyU64.exe')
-    augroup insertLeave
-        autocmd!
-        autocmd InsertLeave * :call system('AutoHotkeyU64.exe "C:/linux_home/git/dotfiles/nvim/userautoload/init/ImDisable.ahk"')
-    augroup END
-endif
+" if s:isWsl() && executable('AutoHotkeyU64.exe')
+"     augroup insertLeave
+"         autocmd!
+"         autocmd InsertLeave * :call system('AutoHotkeyU64.exe "C:/linux_home/git/dotfiles/nvim/userautoload/init/ImDisable.ahk"')
+"     augroup END
+" endif
 
 " 誤動作すると困るキーを無効にする
 nnoremap ZZ <Nop>
