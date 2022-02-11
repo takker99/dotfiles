@@ -131,6 +131,29 @@ set hlsearch   " 検索語をハイライト表示
 
 set updatetime=100 " エディタの更新速度を速くする。
 
+" status line
+" references:
+" - https://blog.htkyama.org/vimrm
+" ファイル名表示
+set statusline=%F
+" 変更チェック表示
+set statusline+=%m
+" 読み込み専用かどうか表示
+set statusline+=%r
+" ヘルプページなら[HELP]と表示
+set statusline+=%h
+" プレビューウインドウなら[Prevew]と表示
+set statusline+=%w
+" これ以降は右寄せ表示
+set statusline+=%=
+" ファイルタイプ表示
+set statusline+=%y
+" file encoding
+set statusline+=[%{&fileencoding}]
+" ファイルフォーマット表示
+set statusline+=[%{&fileformat}]
+" 現在行数/全行数/パーセント
+set statusline+=[L%l:C%c\ (%p%%)]
 
 " I like highlighting strings inside C comments.
 let c_comment_strings=1
