@@ -15,7 +15,7 @@ repo = 'matsui54/ddc-dictionary'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'tani/ddc-fuzzy'
+repo = 'takker99/ddc-bitap'
 on_source = 'ddc.vim'
 
 [[plugins]]
@@ -38,7 +38,10 @@ call ddc#custom#patch_global('sourceParams', {
   \ 'buffer': {'requireSameFiletype': v:false},
 \})
 call ddc#custom#patch_global('sourceOptions', {
-  \ 'vim-lsp': {'mark': 'lsp'},
+  \ 'vim-lsp': {
+  \   'mark': 'lsp',
+  \   'forceCompletionPattern': '\.\w*|:\w*|->\w*',
+  \  },
   \ 'around': {'mark': 'A'},
   \ 'buffer': {'mark': 'B'},
   \ 'dictionary': {'mark': 'D'},
@@ -46,9 +49,8 @@ call ddc#custom#patch_global('sourceOptions', {
   \   'ignoreCase': v:true,
   \   'minAutoCompleteLength': 1,
   \   'maxCandidates': 50,
-  \   'matchers': ['matcher_fuzzy'],
-  \   'sorters': ['sorter_fuzzy'],
-  \   'converters': ['converter_fuzzy']
+  \   'matchers': ['matcher_bitap'],
+  \   'sorters': ['sorter_bitap'],
   \ }
 \})
 
