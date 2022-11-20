@@ -19,8 +19,23 @@ set autoread   " 編集中のファイルが変更されたら自動で読み直
 set hidden     " バッファが編集中でもその他のファイルを開けるように
 set autochdir
 
-"set guioptions+=a
-set clipboard=unnamed,unnamedplus
+set guioptions+=a
+set clipboard^=unnamed,unnamedplus
+
+if system('uname -a | grep microsoft') != ''
+  let g:clipboard = {
+  \   'name': 'WslClipboard',
+  \   'copy': {
+  \      '+': 'clip.exe',
+  \      '*': 'clip.exe',
+  \    },
+  \   'paste': {
+  \      '+': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+  \      '*': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+  \   },
+  \   'cache_enabled': 0,
+  \ }
+endif
 
 " vim が作る一時ファイルの場所
 set directory=$XDG_CONFIG_HOME/nvim/.temp
