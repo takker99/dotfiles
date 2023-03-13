@@ -22,16 +22,17 @@ set autochdir
 set guioptions+=a
 set clipboard^=unnamed,unnamedplus
 
+
 if system('uname -a | grep microsoft') != ''
   let g:clipboard = {
   \   'name': 'WslClipboard',
   \   'copy': {
-  \      '+': 'clip.exe',
-  \      '*': 'clip.exe',
+  \        '+': 'sh '.expand('<sfile>:p:h').'/copy.sh',
+  \        '*': 'sh '.expand('<sfile>:p:h').'/copy.sh',
   \    },
   \   'paste': {
-  \      '+': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-  \      '*': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+  \      '+': 'powershell.exe -c [Console]::OutputEncoding = [Text.Encoding]::UTF8;[Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+  \      '*': 'powershell.exe -c [Console]::OutputEncoding = [Text.Encoding]::UTF8;[Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
   \   },
   \   'cache_enabled': 0,
   \ }
