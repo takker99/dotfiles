@@ -53,7 +53,7 @@ call ddc#custom#patch_global('sourceOptions', {
   \ '_': {
   \   'ignoreCase': v:true,
   \   'minAutoCompleteLength': 1,
-  \   'maxCandidates': 50,
+  \   'maxItems': 50,
   \   'matchers': ['matcher_bitap'],
   \   'sorters': ['sorter_bitap'],
   \ }
