@@ -48,19 +48,22 @@ fi
 
 if !(type "node" > /dev/null 2>&1); then
   echo "Node.js is not installed. Install Node.js..."
-  curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-  sudo apt install nodejs
+  sudo apt-get update
+  sudo apt-get install -y ca-certificates curl gnupg
+  sudo mkdir -p /etc/apt/keyrings
+  curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+  NODE_MAJOR=20
+  echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+  sudo apt-get update
+  sudo apt-get install nodejs -y
 
   mkdir -p ~/.npm-global
   npm config set prefix '~/.npm-global'
-  echo "Successfully installed node and npm."
-fi
-if !(type "yarn" > /dev/null 2>&1); then
-  echo "yarn is not installed. Install yarn..."
-  npm install -g yarn
-  # use yarn V2
-  yarn set version berry
-  echo "Successfully installed yarn."
+  echo "Successfully installed node. Setting corepack..."
+  corepack enable npm yarn pnpm
+  corepack prepare pnpm@latest --activate
+  corepack prepare yarn@stable --activate
+  echo "Successfully set Corepack."
 fi
 
 if !(type "cargo" > /dev/null 2>&1); then
