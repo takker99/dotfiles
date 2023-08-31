@@ -60,7 +60,7 @@ if !(type "node" > /dev/null 2>&1); then
   mkdir -p ~/.npm-global
   npm config set prefix '~/.npm-global'
   echo "Successfully installed node. Setting corepack..."
-  corepack enable npm yarn pnpm
+  corepack enable npm yarn pnpm --install-directory ~/.npm-global/bin
   corepack prepare pnpm@latest --activate
   corepack prepare yarn@stable --activate
   echo "Successfully set Corepack."
