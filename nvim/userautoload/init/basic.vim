@@ -22,22 +22,6 @@ set autochdir
 set guioptions+=a
 set clipboard^=unnamed,unnamedplus
 
-
-if system('uname -a | grep microsoft') != ''
-  let g:clipboard = {
-  \   'name': 'WslClipboard',
-  \   'copy': {
-  \        '+': ['sh','-c','nkf -sc | clip.exe'],
-  \        '*': ['sh','-c','nkf -sc | clip.exe'],
-  \    },
-  \   'paste': {
-  \      '+': 'powershell.exe -c [Console]::OutputEncoding = [Text.Encoding]::UTF8;[Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-  \      '*': 'powershell.exe -c [Console]::OutputEncoding = [Text.Encoding]::UTF8;[Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-  \   },
-  \   'cache_enabled': 0,
-  \ }
-endif
-
 " vim が作る一時ファイルの場所
 set directory=$XDG_CONFIG_HOME/nvim/.temp
 set viminfo+=n$XDG_CONFIG_HOME/nvim/.temp/viminfo.txt
