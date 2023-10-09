@@ -52,6 +52,17 @@ endif
 filetype plugin indent on
 syntax enable
 
+" GitHub Personal Access Tokenを取得する
+
+" GitHub apt file.
+let s:github_pat = expand('<sfile>:p:h:h:h:h').'/github_pat'
+" github_patが有れば更新を確認し、pluginsをupdateする
+if filereadable(s:github_pat)
+  " ここで、g:dein#install_github_api_tokenにPATをセットする。
+  let g:dein#install_github_api_token = readfile(s:github_pat)[0]
+  call dein#check_update('v:true')
+endif
+
 " 未インストールのプラグインがある場合はインストール
 if dein#check_install()
   call dein#install()
