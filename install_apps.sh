@@ -23,7 +23,7 @@ fi
 
 if !(type "fish" > /dev/null 2>&1); then
   echo "fish shell is not installed. Install fish..."
-  sudo add-apt-repository ppa:fish-shell/release-3
+  sudo add-apt-repository ppa:fish-shell/release-4
   sudo apt-get update
   sudo apt-get install fish
   echo "Successfully installed fish."
