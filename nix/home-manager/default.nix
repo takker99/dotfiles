@@ -37,7 +37,7 @@ in
       gh
       bat
       curl
-      nixfmt-rfc-style
+      nixfmt
       nixd
       xsel
       poppler-utils
