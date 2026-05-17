@@ -36,7 +36,7 @@
               echo "Updating flake..."
               nix flake update
               echo "Updating home-manager..."
-              nix run nixpkgs#home-manager -- switch --flake .#takker
+              nix run "github:nix-community/home-manager/26aaab785b0bab4af60a2c42b22760fa906ef22a?narHash=sha256-oaNyOr05lblaQdtbkbN1wO0b2KLIL2O1LkmwDgdQp4I=" -- switch --flake .#takker
               echo "Update complete!"
             ''
           );
