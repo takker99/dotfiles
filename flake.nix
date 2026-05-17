@@ -41,6 +41,22 @@
             ''
           );
         };
+        apps.setupLang = {
+          type = "app";
+          program = toString (
+            pkgs.writeShellScript "setup-lang" ''
+              set -e
+              # This script requires root to modify system files. Run with sudo to apply.
+              echo "Running system language/timezone setup..."
+              sudo sed -i.bak -e "s/http:\/\/archive\.ubuntu\.com/http:\/\/jp\.archive\.ubuntu\.com/g" /etc/apt/sources.list
+              sudo apt update
+              sudo apt -y install language-pack-ja-base
+              sudo update-locale LANG=ja_JP.UTF8
+              cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+              sudo apt -y install manpages-ja manpages-ja-dev
+            ''
+          );
+        };
         legacyPackages = {
           inherit (pkgs) home-manager;
           homeConfigurations.takker = home-manager.lib.homeManagerConfiguration {

@@ -24,10 +24,12 @@ in
     # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
     stateVersion = "24.05";
 
-    # Set fish as default shell
+    # Set fish as default shell and user locale/timezone environment
     sessionVariables = {
       SHELL = "${pkgs.fish}/bin/fish";
       XDG_CONFIG_HOME = "${config.home.homeDirectory}/.config";
+      LANG = "ja_JP.UTF-8"; # set user LANG; system locale files may still require root
+      TZ = "Asia/Tokyo"; # set timezone environment variable for user sessions
     };
 
     packages = with pkgs; [
