@@ -1,5 +1,25 @@
-There are my vim files, .bashrc, shell scripts and so on.
+My dotfiles, managed primarily with Nix Home Manager.
 
-## How to install
+## How to use
 
-see [takkerのterminal環境構築手順 (半自動版)](https://scrapbox.io/takker/takkerのterminal環境構築手順_(半自動版))
+- Enter the environment with the flake defined in `flake.nix`
+- Run the Home Manager configuration for `takker`
+- Use the update app from the flake when you want to refresh inputs and reapply the profile
+
+If you want the exact command sequence, check the flake outputs in `flake.nix` and the Home Manager module in `nix/home-manager/default.nix`.
+
+## Frequently used nix commands
+
+- Build or enter the local development environment:
+	- `nix develop`
+- Update flake inputs and re-apply Home Manager in one go:
+	- `nix run .#update`
+- Refresh only the flake lock file:
+	- `nix flake update`
+- Re-apply the Home Manager configuration manually:
+	- `home-manager switch --flake .#takker`
+- Remove unreachable Nix store paths and free disk space:
+	- `nix-collect-garbage -d`
+	- `nix store gc`
+- Optimize the Nix store contents:
+	- `nix store optimise`

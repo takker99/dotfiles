@@ -27,6 +27,7 @@ in
     # Set fish as default shell
     sessionVariables = {
       SHELL = "${pkgs.fish}/bin/fish";
+      XDG_CONFIG_HOME = "${config.home.homeDirectory}/.config";
     };
 
     packages = with pkgs; [
