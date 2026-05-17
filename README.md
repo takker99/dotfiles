@@ -16,7 +16,6 @@ My dotfiles, managed primarily with Nix Home Manager.
 - Refresh only the flake lock file:
 	- `nix flake update`
 - Remove unreachable Nix store paths and free disk space:
-	- `nix-collect-garbage -d`
 	- `nix store gc`
 - Optimize the Nix store contents:
 	- `nix store optimise`
