@@ -48,6 +48,7 @@ in
       deno
       pnpm
       neovim # nightly
+      opencode
     ];
 
     file.".commit_template".source =
