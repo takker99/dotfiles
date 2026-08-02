@@ -32,6 +32,18 @@ in
       TZ = "Asia/Tokyo"; # set timezone environment variable for user sessions
     };
 
+    # pnpm v11 puts globally installed CLI bins here (PNPM_HOME/bin)
+    sessionPath = [ "${config.home.homeDirectory}/.local/share/pnpm/bin" ];
+
+    # home-manager generates hm-session-vars.fish with `set -gx __HM_SESS_VARS_SOURCED`,
+    # which leaks the guard variable to child processes. When it is present in the
+    # environment, fresh fish shells early-return in hm-session-vars.fish and never
+    # apply sessionVariables/sessionPath. conf.d runs before config.fish, so unset
+    # the guard there to make session vars apply on every shell start.
+    file.".config/fish/conf.d/00-clear-hm-session-vars-guard.fish".text = ''
+      set -e __HM_SESS_VARS_SOURCED
+    '';
+
     packages = with pkgs; [
       git
       eza
