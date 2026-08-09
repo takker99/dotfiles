@@ -153,4 +153,13 @@ in
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/dotfiles/gh/config.yml";
   };
 
+  # opencode config is version-controlled in this repo, but opencode may write
+  # node_modules/package.json next to it, so link the file (not the whole
+  # directory) to a writable out-of-store path. Add agent/command files here as
+  # the need arises.
+  xdg.configFile."opencode/opencode.jsonc" = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/dotfiles/opencode/opencode.jsonc";
+    force = true;
+  };
+
 }
