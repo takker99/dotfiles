@@ -21,8 +21,6 @@ PROFILE="${HOME}/.profile"
 BASHRC="${HOME}/.bashrc"
 LOCAL_BIN="${HOME}/.local/bin"
 NIX_PROFILE="${HOME}/.nix-profile"
-FISH_BIN="${NIX_PROFILE}/bin/fish"
-
 echo "== dotfiles install: start =="
 
 # 1) Nix インストール確認・インストール（multi-user 推奨）
@@ -74,20 +72,16 @@ if [ ! -f "${NIX_CONF_FILE}" ]; then
 else
   # Add missing flags if needed
   if ! grep -q "nix-command" "${NIX_CONF_FILE}" || ! grep -q "flakes" "${NIX_CONF_FILE}"; then
-    # read existing and merge
-    EXISTING=$(cat "${NIX_CONF_FILE}")
-    # Remove any existing experimental-features line
+    # Remove any existing experimental-features line and append the merged one
     grep -v "^experimental-features" "${NIX_CONF_FILE}" > "${NIX_CONF_FILE}.tmp" || true
     mv "${NIX_CONF_FILE}.tmp" "${NIX_CONF_FILE}"
-    printf "%s\n" "${EXISTING}" >> "${NIX_CONF_FILE}"
-    # Append merged experimental-features
     printf "experimental-features = nix-command flakes\n" >> "${NIX_CONF_FILE}"
     echo "-> ${NIX_CONF_FILE} に experimental-features を追記しました"
   fi
 fi
 
 # use nix run to ensure home-manager is available
-nix run home-manager/master -- switch --flake "${FLAKE_REF}"
+nix run "${DOTFILES_DIR}#home-manager" -- switch --flake "${FLAKE_REF}"
 
 # 5) wrapper スクリプト作成（どのディレクトリからでも flake 操作できるように）
 cat > "${LOCAL_BIN}/dotfiles-update" <<EOF
