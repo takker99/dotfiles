@@ -28,6 +28,7 @@ in
     sessionVariables = {
       SHELL = "${pkgs.fish}/bin/fish";
       XDG_CONFIG_HOME = "${config.home.homeDirectory}/.config";
+      OPENCODE_ENABLE_EXA = "1";
       LANG = "ja_JP.UTF-8"; # set user LANG; system locale files may still require root
       TZ = "Asia/Tokyo"; # set timezone environment variable for user sessions
     };
