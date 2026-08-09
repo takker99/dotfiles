@@ -63,7 +63,16 @@ in
       pnpm
       neovim # nightly
       opencode
-      openscad-unstable # command name is openscad
+      # WSL2: openscad GUI には Mesa swrast が必要
+      (symlinkJoin {
+        name = "openscad";
+        paths = [ openscad-unstable mesa ];
+        buildInputs = [ makeWrapper ];
+        postBuild = ''
+          wrapProgram $out/bin/openscad \
+            --prefix LD_LIBRARY_PATH : ${mesa}/lib
+        '';
+      })
     ];
 
     file.".commit_template".source =
