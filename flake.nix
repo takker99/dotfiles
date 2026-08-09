@@ -37,7 +37,7 @@
               echo "Updating flake..."
               nix flake update
               echo "Updating home-manager..."
-              nix run .#home-manager -- switch --flake .#takker
+              nix run .#home-manager -- switch --flake ".#takker-${system}"
               echo "Update complete!"
             ''
           );
@@ -65,10 +65,27 @@
       }
     )
     // {
-      homeConfigurations.takker = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs { system = builtins.currentSystem; };
-        extraSpecialArgs = { inherit inputs; };
-        modules = [ ./nix/home-manager/default.nix ];
-      };
+      homeConfigurations =
+        let
+          mkConfig =
+            sys:
+            home-manager.lib.homeManagerConfiguration {
+              pkgs = nixpkgs.legacyPackages.${sys};
+              extraSpecialArgs = { inherit inputs; };
+              modules = [ ./nix/home-manager/default.nix ];
+            };
+        in
+        builtins.listToAttrs (
+          map
+            (sys: {
+              name = "takker-${sys}";
+              value = mkConfig sys;
+            })
+            [
+              "aarch64-linux"
+              "x86_64-linux"
+              "aarch64-darwin"
+            ]
+        );
     };
 }
