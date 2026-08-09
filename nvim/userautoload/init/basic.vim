@@ -1,4 +1,4 @@
-"文字コードをUFT-8に設定
+" Set character encoding to UTF-8
 scriptencoding utf-8
 
 " if has('win32') || has('win64')
@@ -6,7 +6,7 @@ scriptencoding utf-8
 "     let g:python_host_prog = 'C:\Python27amd64\python.exe'
 " endif
 
-" gitで管理しているnvimへのdirectory path
+" Path to the git-managed nvim directory
 let g:nvim_git_dir_path = expand('<sfile>:p:h:h:h')
 
 " encodings
@@ -15,47 +15,47 @@ set fileencodings=utf-8,euc-jp,ucs-bom,iso-2022-jp,sjis,cp932,latin1
 set fileformats=unix,dos,mac
 
 " setting
-set autoread   " 編集中のファイルが変更されたら自動で読み直す
-set hidden     " バッファが編集中でもその他のファイルを開けるように
+set autoread   " Automatically reload the file when it is changed outside
+set hidden     " Allow opening other files even if the current buffer is modified
 set autochdir
 
 set guioptions+=a
 set clipboard^=unnamed,unnamedplus
 
-" vim が作る一時ファイルの場所
+" Location of temporary files created by vim
 set directory=$XDG_CONFIG_HOME/nvim/.temp
 set viminfo+=n$XDG_CONFIG_HOME/nvim/.temp/viminfo.txt
-set undofile                      " Undo ファイルを作成する
+set undofile                      " Create undo files
 set undodir=$XDG_CONFIG_HOME/nvim/.temp/undodir
 
-" backup ファイルの設定
+" Backup file settings
 " c.f. https://orebibou.com/2015/04/vim%E3%81%A7%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E4%BF%9D%E5%AD%98%E6%99%82%E3%81%AB%E4%BD%9C%E6%88%90%E3%81%95%E3%82%8C%E3%82%8B%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%E3%83%95/
-set backup                      " ファイルのバックアップを有効にする
-set writebackup                 " 取得するバックアップを編集前のファイルとする(無効化する場合は「nowritebackup」)
-set backupdir=$XDG_CONFIG_HOME/nvim/.backup  " このディレクトリはあらかじめ作っておく。chmod 700 するのを忘れずに
-" バックアップを取得するファイル名を「ファイル名.タイムスタンプ」とする
+set backup                      " Enable file backup
+set writebackup                 " Backup the file before it is edited (disable with "nowritebackup")
+set backupdir=$XDG_CONFIG_HOME/nvim/.backup  " Create this directory in advance. Don't forget to chmod 700 it
+" Use "filename.timestamp" as the backup file name
 " autocmd BufWritePre * let &backupext= '.' . strftime("%Y%m%d_%H%M%S")
 
-" 見た目系
-set number                " 行番号を表示
+" Appearance
+set number                " Show line numbers
 set relativenumber
-set ruler                 " ルーラーを表示
-" set cursorline            " 現在の行を強調表示
-" set cursorcolumn          " 現在の行を強調表示（縦）
-set title                 " タイトルを表示
-set virtualedit=onemore   " 行末の1文字先までカーソルを移動できるように
-set visualbell            " ビープ音を可視化
-set showmatch             " 括弧入力時の対応する括弧を表示
+set ruler                 " Show the ruler
+" set cursorline            " Highlight the current line
+" set cursorcolumn          " Highlight the current column
+set title                 " Show the window title
+set virtualedit=onemore   " Allow moving the cursor one character past the end of line
+set visualbell            " Visualize the bell instead of beeping
+set showmatch             " Show matching brackets when typing brackets
 set matchtime=1
 set matchpairs+=<:>
-set showcmd               " 入力中のコマンドをステータスに表示する
+set showcmd               " Show the command being typed in the status line
 set noshowmode
-set laststatus=2          " ステータスラインを常に表示
-" set nowrap                "テキストが折り返されないようにする
+set laststatus=2          " Always show the status line
+" set nowrap                " Do not wrap text
 set wrap
 set display=lastline
-set cursorline            " 現在の行をハイライト
-hi clear CursorLine       " 上と合わせることで行番号のみハイライト
+set cursorline            " Highlight the current line
+hi clear CursorLine       " Combined with the above, highlight only the line number
 set ambiwidth=double
 set signcolumn=auto
 set switchbuf=useopen
@@ -64,13 +64,13 @@ set conceallevel=2
 let g:tex_conceal=''
 set concealcursor=nc
 
-" 折りたたみ系
+" Folding
 " cf. https://maku77.github.io/vim/advanced/folding.html
-set foldmethod=indent  "折りたたみ範囲の判断基準（デフォルト: manual）
-set foldlevel=99       "ファイルを開いたときにデフォルトで折りたたむレベル (0: すべて折りたたむ 数値の分だけ折りたたまない)
-set foldcolumn=3       "左端に折りたたみ状態を表示する領域を追加する
+set foldmethod=indent  "Criteria for determining fold ranges (default: manual)
+set foldlevel=99       "Default fold level when a file is opened (0: fold everything, n: don't fold n levels)
+set foldcolumn=3       "Add a column on the left showing the fold state
 
-" " 折りたたみの自動保存
+" " Automatically save folds
 " " cf. https://vim-jp.org/vim-users-jp/2009/10/08/Hack-84.html
 " " Save fold settings.
 " autocmd BufWritePost * if expand('%') != '' && &buftype !~ 'nofile' | mkview | endif
@@ -78,90 +78,90 @@ set foldcolumn=3       "左端に折りたたみ状態を表示する領域を�
 " " Don't save options.
 " set viewoptions-=options
 
-" 折りたたみ設定etc.を保存するフォルダ
+" Directory for storing fold settings, etc.
 " set viewdir=$XDG_CONFIG_HOME/nvim/.temp/view
 
-" 補完系
+" Completion
 set wildmenu
-set wildmode=longest:full,full " コマンドラインの補完
-set pumheight=10          "変換候補で一度に表示される数を設定する
-set infercase             " 補完時に大文字小文字をいい感じに調節してくれる
+set wildmode=longest:full,full " Command line completion
+set pumheight=10          "Set the number of candidates shown at once in the popup menu
+set infercase             " Adjust case intelligently during completion
 
-" 言語ごとに追加の辞書を登録する
+" Register additional dictionaries per filetype
 " augroup fileTypeDictionary
 "     autocmd!
 "     autocmd FileType * execute 'setlocal dictionary+='. g:nvim_git_dir_path.'/userautoload/dictionary/'.&filetype.'.txt'
 " augroup END
 
-" Tab系
-set expandtab               " Tab文字を半角スペースにする
-set tabstop=2              " 行頭以外のTab文字の表示幅（スペースいくつ分）
-set shiftwidth=2            " 行頭でのTab文字の表示幅
-set softtabstop=2         " <Tab> の挿入や <BS> の使用等の編集操作をするときに、<Tab> が対応する空白の数。
+" Tabs
+set expandtab               " Use spaces instead of tab characters
+set tabstop=2              " Display width of tab characters not at the beginning of a line
+set shiftwidth=2            " Display width of tab characters at the beginning of a line
+set softtabstop=2         " Number of spaces a <Tab> corresponds to during editing operations such as inserting <Tab> or using <BS>
 
-" 言語ごとにTabの設定を変える
+" Change tab settings per filetype
 augroup fileTypeIndent
     autocmd!
 augroup END
 
-" 不可視文字を可視化(タブが「?-」と表示される)
+" Visualize invisible characters (tab displayed as "»-")
 set list
 set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:⍽
 
 
-" 入力系
+" Input
 set textwidth=0
-set cindent           " インデントは C 形式のインデント
-set backspace=indent,eol,start " <BS> の挙動を変更
-set imdisable           " insert mode を抜けるときIMEをoffにする
+set cindent           " Use C-style indentation
+set backspace=indent,eol,start " Change <BS> behavior
+set imdisable           " Turn off the IME when leaving insert mode
 
-" 選択系
+" Selection
 set virtualedit=block
 
 " spellcheck
 set spell
-set spelllang=en,cjk "日本語を除外
+set spelllang=en,cjk " Exclude Japanese
 
-" 検索系
-set ignorecase " 検索文字列が小文字の場合は大文字小文字を区別なく検索する
-set smartcase  " 検索文字列に大文字が含まれている場合は区別して検索する
-set incsearch  " 検索文字列入力時に順次対象文字列にヒットさせる
-set wrapscan   " 検索時に最後まで行ったら最初に戻る
-set hlsearch   " 検索語をハイライト表示
+" Search
+set ignorecase " Ignore case if the search string is lowercase
+set smartcase  " Match case if the search string contains uppercase
+set incsearch  " Show incremental matches while typing the search string
+set wrapscan   " Wrap around to the top after reaching the bottom during search
+set hlsearch   " Highlight search matches
 
-set updatetime=100 " エディタの更新速度を速くする。
+set updatetime=100 " Speed up editor updates.
 
 " status line
 " references:
 " - https://blog.htkyama.org/vimrm
-" ファイル名表示
+" Show file name
 set statusline=%F
-" 変更チェック表示
+" Show modified flag
 set statusline+=%m
-" 読み込み専用かどうか表示
+" Show read-only flag
 set statusline+=%r
-" ヘルプページなら[HELP]と表示
+" Show [HELP] for help pages
 set statusline+=%h
-" プレビューウインドウなら[Prevew]と表示
+" Show [Preview] for preview windows
 set statusline+=%w
-" これ以降は右寄せ表示
+" Right-align the following
 set statusline+=%=
-" ファイルタイプ表示
+" Show file type
 set statusline+=%y
 " file encoding
 set statusline+=[%{&fileencoding}]
-" ファイルフォーマット表示
+" Show file format
 set statusline+=[%{&fileformat}]
-" 現在行数/全行数/パーセント
+" Current line/total lines/percent
 set statusline+=[L%l:C%c\ (%p%%)]
 
 " I like highlighting strings inside C comments.
 let c_comment_strings=1
 
-" 保存時に行末の空白を除去する
+" Remove trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//ge
 
-" 保存時にタブをスペースに変換
+" Convert tabs to spaces on save
 autocmd BufWritePre * :retab
 
 " Enable file type detection.
@@ -195,19 +195,19 @@ if !exists(":DiffOrig")
                 \ | wincmd p | diffthis
 endif
 
-" vimdiff 関連
+" vimdiff settings
 set diffopt=internal,filler,algorithm:histogram,indent-heuristic
 
-" coc-setting.jsonの場所
+" Location of coc-setting.json
 let g:coc_config_home=expand('<sfile>:p:h:h').'/toml'
 
-" " エラーウィンドウを出す
+" " Show the error window
 " function! s:ale_list()
 "     let g:ale_open_list = 1
 "     call ale#Queue(0, 'lint_file')
 " endfunction
 " command! ALEList call s:ale_list()
-" オートコンパイル
+" Auto compile
 " augroup setAutoCompile
 "     autocmd!
 "     autocmd BufWritePost *.tex :!latexmk -lualatex %

@@ -4,71 +4,71 @@
 
 ### note
 
-`<Leader>`は`<Space>`にしてある。
+`<Leader>` is set to `<Space>`.
 
 ### move
 
 #### cursor
 
-- `h` : 右
-- `j` : 下
-- `k` : 上
-- `l` : 左
+- `h` : Right
+- `j` : Down
+- `k` : Up
+- `l` : Left
 
 #### word
 
-- `w`   : 単語 記号区切り 次の先頭へ
-- `b`   : 単語 記号区切り 前の先頭へ
-- `e`   : 単語 記号区切り 次の末尾へ
-- `ge`  : 単語 記号区切り 前の末尾へ
-- `W`   : 単語 空白区切り 次の先頭へ
-- `B`   : 単語 空白区切り 前の先頭へ
-- `E`   : 単語 空白区切り 次の末尾へ
-- `gE`  : 単語 空白区切り 前の末尾へ
+- `w`   : Word, symbol-delimited, to the next start
+- `b`   : Word, symbol-delimited, to the previous start
+- `e`   : Word, symbol-delimited, to the next end
+- `ge`  : Word, symbol-delimited, to the previous end
+- `W`   : Word, whitespace-delimited, to the next start
+- `B`   : Word, whitespace-delimited, to the previous start
+- `E`   : Word, whitespace-delimited, to the next end
+- `gE`  : Word, whitespace-delimited, to the previous end
 
 #### line
 
-- `0`    : 行頭へ
-- `^`, `H` : 空白以外の行頭へ
-- `$`, `L` : 行末へ
+- `0`    : To the beginning of the line
+- `^`, `H` : To the beginning of the line (first non-whitespace)
+- `$`, `L` : To the end of the line
 
-- `<Leader>w`   : marker へ飛ぶ(単語 記号区切り cursor より次にある先頭)
-- `<Leader>b`   : marker へ飛ぶ(単語 記号区切り cursor より前にある先頭)
-- `<Leader>e`   : marker へ飛ぶ(単語 記号区切り cursor より次にある末尾)
-- `<Leader>ge`  : marker へ飛ぶ(単語 記号区切り cursor より前にある末尾)
-- `<Leader>W`   : marker へ飛ぶ(単語 空白区切り cursor より次にある先頭)
-- `<Leader>B`   : marker へ飛ぶ(単語 空白区切り cursor より前にある先頭)
-- `<Leader>E`   : marker へ飛ぶ(単語 空白区切り cursor より次にある末尾)
-- `<Leader>gE`  : marker へ飛ぶ(単語 空白区切り cursor より前にある末尾)
+- `<Leader>w`   : Jump to marker (word, symbol-delimited, next start after cursor)
+- `<Leader>b`   : Jump to marker (word, symbol-delimited, previous start before cursor)
+- `<Leader>e`   : Jump to marker (word, symbol-delimited, next end after cursor)
+- `<Leader>ge`  : Jump to marker (word, symbol-delimited, previous end before cursor)
+- `<Leader>W`   : Jump to marker (word, whitespace-delimited, next start after cursor)
+- `<Leader>B`   : Jump to marker (word, whitespace-delimited, previous start before cursor)
+- `<Leader>E`   : Jump to marker (word, whitespace-delimited, next end after cursor)
+- `<Leader>gE`  : Jump to marker (word, whitespace-delimited, previous end before cursor)
 
-- `<Leader>h{char}` : marker へ飛ぶ ({char}の真上 cursor より左)
-- `<Leader>l{char}` : marker へ飛ぶ ({char}の真上 cursor より右)
-- `<Leader>H{char}` : marker へ飛ぶ ({char}の前 cursor より左)
-- `<Leader>L{char}` : marker へ飛ぶ ({char}の前 cursor より右)
+- `<Leader>h{char}` : Jump to marker (directly above {char}, left of cursor)
+- `<Leader>l{char}` : Jump to marker (directly above {char}, right of cursor)
+- `<Leader>H{char}` : Jump to marker (before {char}, left of cursor)
+- `<Leader>L{char}` : Jump to marker (before {char}, right of cursor)
 
-- `f{char}` : marker へ飛ぶ ({char}の真上)
-- `t{char}` : marker へ飛ぶ ({char}の前)
+- `f{char}` : Jump to marker (directly above {char})
+- `t{char}` : Jump to marker (before {char})
 
 #### column
 
-- `<Leader>j` : marker へ飛ぶ (下)
-- `<Leader>k` : marker へ飛ぶ (上)
+- `<Leader>j` : Jump to marker (down)
+- `<Leader>k` : Jump to marker (up)
 
 #### object
 
-- `(`  : 文単位で上へ
-- `)`  : 文単位で下へ
-- `{`  : 段落単位で上へ
-- `}`  : 段落単位で下へ
-- `[[` : セクション単位で上へ
-- `]]` : セクション単位で下へ
+- `(`  : Up by sentence
+- `)`  : Down by sentence
+- `{`  : Up by paragraph
+- `}`  : Down by paragraph
+- `[[` : Up by section
+- `]]` : Down by section
 
 #### scroll
 
-- `<C-u>`             : 画面半分上へスクロール
-- `<C-d>`             : 画面半分下へスクロール
-- `<C-b>`, `<PageUp>`   : 1画面分上へスクロール
-- `<C-f>`, `<PageDown>` : 1画面分下へスクロール
+- `<C-u>`             : Scroll up half a screen
+- `<C-d>`             : Scroll down half a screen
+- `<C-b>`, `<PageUp>`   : Scroll up one screen
+- `<C-f>`, `<PageDown>` : Scroll down one screen
 
 #### mark
 
@@ -103,179 +103,179 @@ cf. https://github.com/kshenoy/vim-signature/blob/master/README.md
 
 #### other
 
-- `gg` : ファイル先頭へ
-- `G`  : ファイル末尾へ
-- `I`  : 行頭でインサートモードへ
-- `A`  : 行末でインサートモードへ
-- `S`  : 行を消してインサートモードへ
-- `J`  : 行をスペース区切りで結合(頭に数字で繰り返し)
-- `gJ` : 行を結合(頭に数字で繰り返し)
-- `<F12>` : 行表示切り替え(相対表示⇔絶対表示)
+- `gg` : To the beginning of the file
+- `G`  : To the end of the file
+- `I`  : Insert mode at the beginning of the line
+- `A`  : Insert mode at the end of the line
+- `S`  : Delete the line and enter insert mode
+- `J`  : Join lines separated by a space (prefix a number to repeat)
+- `gJ` : Join lines (prefix a number to repeat)
+- `<F12>` : Toggle line number display (relative to absolute)
 
 ### I/O
 
-- `:w` : 上書き保存
-- `:wa` : すべての buffer を上書き保存
-- `:q` : window を閉じる
-- `:qa` : vimを終了する
-- `:wq` : 上書き保存して window を閉じる
-- `:x` : 変更点があるときのみ上書き保存して window を閉じる
-- `:wqa`, `:xa` :すべての buffer を上書き保存して vim を終了する
+- `:w` : Save
+- `:wa` : Save all buffers
+- `:q` : Close the window
+- `:qa` : Quit vim
+- `:wq` : Save and close the window
+- `:x` : Save (only if modified) and close the window
+- `:wqa`, `:xa` : Save all buffers and quit vim
 
-- `:e {filename}` : {filename}を開く (相対パス/絶対パス両方可)
+- `:e {filename}` : Open {filename} (relative or absolute path)
 
 ### yank
 
-- `"0p` : レジスタ`"0`の内容を貼り付け(`"0`は`dd`などで削除しても使用されない)
+- `"0p` : Paste the contents of register `"0` (`"0` is not used when deleting with `dd` etc.)
 
 ### fold
 
-- ~`zf` : 新規作成~ 使用不可
-- `zo` : 開く
-- `zc` : 閉じる
-- `za` : 折りたたみ状態の切り替え
-- `zr` : ファイル全体を一段開く
-- `zR` : ファイル全体を全て開く
-- `zm` : ファイル全体を一段閉じる
-- `zM` : ファイル全体を全て閉じる
-- `zj` : 次の折りたたみ位置に進む
-- `zk` : 前の折りたたみ位置に戻る
-- `[z` : 現在開いている折り畳みの先頭へ移動
-- `]z` : 現在開いている折り畳みの末尾へ移動
+- ~`zf` : Create new~ not available
+- `zo` : Open
+- `zc` : Close
+- `za` : Toggle fold state
+- `zr` : Open one level of the whole file
+- `zR` : Open all folds of the whole file
+- `zm` : Close one level of the whole file
+- `zM` : Close all folds of the whole file
+- `zj` : Move to the next fold
+- `zk` : Move to the previous fold
+- `[z` : Move to the start of the current fold
+- `]z` : Move to the end of the current fold
 
 ### pane
 
-- `sv`: 縦に分割
-- `ss`: 横に分割
-- `sh`: 左のペインへ
-- `sj`: 下のペインへ
-- `sk`: 上のペインへ
-- `sl`: 右のペインへ
-- `sw`: 次のペインへ
-- `sH`: ペインを左に移動
-- `sJ`: ペインを下に移動
-- `sK`: ペインを上に移動
-- `sL`: ペインを右に移動
-- `sr`: ペインを回転
+- `sv`: Split vertically
+- `ss`: Split horizontally
+- `sh`: To the left pane
+- `sj`: To the lower pane
+- `sk`: To the upper pane
+- `sl`: To the right pane
+- `sw`: To the next pane
+- `sH`: Move pane to the left
+- `sJ`: Move pane down
+- `sK`: Move pane up
+- `sL`: Move pane to the right
+- `sr`: Rotate panes
 
 ### buffer
 
-- `sn`       : 次へ
-- `sp`       : 前へ
-- `sd`       : 削除
-- `:b {名前}` : 指定したバッファへ(補完可能)
+- `sn`       : Next
+- `sp`       : Previous
+- `sd`       : Delete
+- `:b {name}` : Switch to the specified buffer (completable)
 
 ### tab
 
-- `st`    : 空タブを新規作成
-- `<M-l>` : 次へ
-- `<M-h>` : 前へ
-- `sx`    : 削除
+- `st`    : Create a new empty tab
+- `<M-l>` : Next
+- `<M-h>` : Previous
+- `sx`    : Delete
 
 ### macro
 
-- `q(a-z)`       : 記録開始
-- `q`            : 記録終了
-- `[数字]@(a-z)` : 任意の回数分マクロを実行
+- `q(a-z)`       : Start recording
+- `q`            : Stop recording
+- `[number]@(a-z)` : Run the macro that many times
 
 ### coc.nvim
 
-- `<tab>` : 補完開始
-- `<C-j>` : ( snippet を展開できるとき ) snippet を展開する
-- `<C-j>` : ( snippet 展開中 ) 次の placefolder へ飛ぶ
-- `<C-k>` : ( snippet 展開中 ) 前の placefolder に戻る
-- `=G`    : LSP を使って code を整形する
-- `[c` : 前の警告へ飛ぶ
-- `]c` : 次の警告へ飛ぶ
+- `<tab>` : Start completion
+- `<C-j>` : (when a snippet can be expanded) expand the snippet
+- `<C-j>` : (while expanding a snippet) jump to the next placeholder
+- `<C-k>` : (while expanding a snippet) jump to the previous placeholder
+- `=G`    : Format code using LSP
+- `[c` : Jump to the previous warning
+- `]c` : Jump to the next warning
 
 ### location list
 
-- `:lop[en]`     : ロケーションリストを開く
-- `:lcl[ose]`    : ロケーションリストを閉じる
-- `:lne[xt]`     : 次へ
-- `:lp[revious]` : 前へ
+- `:lop[en]`     : Open the location list
+- `:lcl[ose]`    : Close the location list
+- `:lne[xt]`     : Next
+- `:lp[revious]` : Previous
 
 ### help
 
-- `:h[elp] ${name}`        : ヘルプを分割して表示
-- `:h[elp] ${name} | only` : ヘルプを全画面で表示
-- `<C-]>`                  : 項目へジャンプ
-- `<C-o>`                  : 元の場所へ戻る
-- `K`                      : カーソル位置のキーワードを調べる
-- `<F1>`                   : このcheat sheetを開閉する
+- `:h[elp] ${name}`        : Show help in a split window
+- `:h[elp] ${name} | only` : Show help fullscreen
+- `<C-]>`                  : Jump to the item
+- `<C-o>`                  : Go back to the previous location
+- `K`                      : Look up the keyword under the cursor
+- `<F1>`                   : Toggle this cheat sheet
 
 ### EasyMotion
 
-- `;{char}{char}{label}` : ;のあとに続けた二文字がある場所にカーソルを飛ばす。複数箇所ある場合はジャンプ用のlabelsを表示する
-- `f{char}{label}` : 現在行内で、カーソルの右にある{char}に飛ぶ。複数箇所あるときはlabelsを表示する。
-- `F{char}{label}` : 現在行内で、カーソルの左にある{char}に飛ぶ。複数箇所あるときはlabelsを表示する。
-- `<leader>k{label}` : {label}が表示されている行に飛ぶ。範囲はカーソルより上の行
-- `<leader>j{label}` : {label}が表示されている行に飛ぶ。範囲はカーソルより下の行
+- `;{char}{char}{label}` : Jump to the position of the two characters typed after `;`. If there are multiple positions, jump labels are shown
+- `f{char}{label}` : Jump to {char} to the right of the cursor on the current line. If there are multiple positions, labels are shown
+- `F{char}{label}` : Jump to {char} to the left of the cursor on the current line. If there are multiple positions, labels are shown
+- `<leader>k{label}` : Jump to the line where {label} is shown, above the cursor
+- `<leader>j{label}` : Jump to the line where {label} is shown, below the cursor
 
 ### Denite
 
 - `:Dgrep`   : Denite grep
-- `:Dresume` : 閉じた検索結果を再度開く
-- `:Dprev`   : 前の検索結果へ
-- `:Dnext`   : 次の検索結果へ
-- `<C-n>`    : (検索結果ダイアログ)次へ
-- `<C-p>`    : (検索結果ダイアログ)前へ
+- `:Dresume` : Reopen the closed search results
+- `:Dprev`   : To the previous search result
+- `:Dnext`   : To the next search result
+- `<C-n>`    : (search result dialog) next
+- `<C-p>`    : (search result dialog) previous
 
 ### Defx
 
-- `<C-u>` : defx を開く
+- `<C-u>` : Open defx
 
-以下、defx buffer 内でのみ有効
+The following are only valid inside the defx buffer
 
-- `h`       : 親 directory に戻る
-- `j`       : 下に進む
-- `k`       : 上に戻る
-- `l`, `<CR>` : cursor 行の file/directory を開く
-- `E`      : windowを垂直分割してfileを左のpaneで開く
-- `~`       : root directory に飛ぶ
-- `o`       : file tree の展開の切り替え
-- `N`       : file を新規作成
-- `M`       : file を新規作成 (複数個)
-- `K`       : directory を新規作成
-- `r`       : 名前変更
-- `d`       : file/directoryを削除
-- `c`       : file/directoryをcopy
-- `m`       : file/directoryを切り取る
-- `p`       : copy・切り取りしたfile/directoryを貼り付ける
-- `C`       : 詳細情報の表示切り替え
-- `S`        : 更新日時順に並び替える
-- `cd`      : 現在地点を vim の current directory にする
-- `!{command}<CR>`: shell commandを実行する
-- `yy`           : cursor行のfile/directoryのpathをyankする
-- `<Space>`        : cursor行のfile/directoryを選択肢しcursorを一つ下に移動させる
+- `h`       : Go back to the parent directory
+- `j`       : Move down
+- `k`       : Move up
+- `l`, `<CR>` : Open the file/directory on the cursor line
+- `E`      : Open the file in the left pane with a vertical split
+- `~`       : Jump to the root directory
+- `o`       : Toggle file tree expansion
+- `N`       : Create a new file
+- `M`       : Create new files (multiple)
+- `K`       : Create a new directory
+- `r`       : Rename
+- `d`       : Delete file/directory
+- `c`       : Copy file/directory
+- `m`       : Cut file/directory
+- `p`       : Paste the copied/cut file/directory
+- `C`       : Toggle detailed information display
+- `S`        : Sort by modification time
+- `cd`      : Make the current location vim's current directory
+- `!{command}<CR>`: Run a shell command
+- `yy`           : Yank the path of the file/directory on the cursor line
+- `<Space>`        : Select the file/directory on the cursor line and move the cursor down
 
-- `q` : defx を閉じる
+- `q` : Close defx
 
 ### git
 
-- `<Leader>gs`      : statusを表示
-- `<Leader>gb`      : branchを表示
-- `<Leader>gl`      : logを表示
-- `<Leader>gc`      : commit編集windowを表示
-- `<Leader>gm`      : cursor位置に関するcommit messageを表示
+- `<Leader>gs`      : Show status
+- `<Leader>gb`      : Show branches
+- `<Leader>gl`      : Show log
+- `<Leader>gc`      : Show the commit edit window
+- `<Leader>gm`      : Show the commit message for the cursor position
 
 ### vim-go
 
-- `:GoImport ${name}` : importに追加、tab補完可能
-- `:GoDrop ${name}`   : importから削除、tab補完可能
-- `:GoImports`        : 不足しているパッケージをimportに追加する
-- `dif`               : 関数の中身をdelete
-- `vif`               : 関数の中身を選択
-- `yif`               : 関数の中身をyank
-- `daf`               : 関数の全体をdelete
-- `vaf`               : 関数の全体を選択
-- `yaf`               : 関数の全体をyank
-- `:GoAlternate`      : foo.go と foo_test.goを行き来する
-- `:GoDef`            : 定義へ移動
-- `:GoDoc`            : ドキュメントを開く
-- `:GoDocBrowser`     : ドキュメントをブラウザで開く
-- `<Leader>i`         : GoInfo = カーソル下の情報を表示
-- `:GoRename`         : カーソル下の要素をリネーム
+- `:GoImport ${name}` : Add to imports, tab completion available
+- `:GoDrop ${name}`   : Remove from imports, tab completion available
+- `:GoImports`        : Add missing packages to imports
+- `dif`               : Delete the function body
+- `vif`               : Select the function body
+- `yif`               : Yank the function body
+- `daf`               : Delete the whole function
+- `vaf`               : Select the whole function
+- `yaf`               : Yank the whole function
+- `:GoAlternate`      : Switch between foo.go and foo_test.go
+- `:GoDef`            : Jump to definition
+- `:GoDoc`            : Open documentation
+- `:GoDocBrowser`     : Open documentation in a browser
+- `<Leader>i`         : GoInfo = show info under the cursor
+- `:GoRename`         : Rename the element under the cursor
 
 ## c.f
 

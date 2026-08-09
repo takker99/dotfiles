@@ -4,7 +4,7 @@
 "     for Unix:     $HOME/.config/nvim/init.vim
 "     for Windows:  %LOCALAPPDATA%\nvim\init.vim
 "
-"文字コードをUFT-8に設定
+" Set character encoding to UTF-8
 set encoding=utf-8
 scriptencoding utf-8
 

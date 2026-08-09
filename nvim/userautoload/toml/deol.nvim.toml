@@ -1,6 +1,6 @@
 [[plugins]]
 repo = 'Shougo/deol.nvim'
 hook_add='''
-" floating window でterminalを表示する。
+" Open a terminal in a floating window.
 nnoremap <silent><Leader>t :<C-u>Deol -split=floating<CR>
 '''

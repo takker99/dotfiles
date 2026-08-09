@@ -1,20 +1,20 @@
-"文字コードをUFT-8に設定
+" Set character encoding to UTF-8
 scriptencoding utf-8
 
 " let s:script_path = expand('<sfile>:p')
 " echom '[debug]enter ' . s:script_path
 
-" ウィンドウの縦幅
+" Window height
 " set lines=55
-" ウィンドウの横幅
+" Window width
 " set columns=180
-" カラースキーム
+" Color scheme
 "autocmd ColorScheme * highlight Search term=reverse cterm=reverse ctermfg=166 gui=reverse guifg=#FF8C00
 
 "cf. https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwiU9Lq2wf7mAhXSG6YKHcnJDTYQFjAAegQIBRAB&url=https%3A%2F%2Fgithub.com%2Fxaizek%2Fdotvim%2Fblob%2Fmaster%2Fftdetect%2Fxaml.vim&usg=AOvVaw3fFHYZwsk5d0Pe1r63IWXW
 autocmd BufRead,BufNewFile *.xaml :set filetype=xml
 
-" JSONでコメントがhighlightされるようにする
+" Highlight comments in JSON
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
 let g:markdown_fenced_languages = [
@@ -31,7 +31,7 @@ let g:markdown_fenced_languages = [
 \  'help'
 \]
 
-"全角スペースをハイライト表示
+" Highlight full-width spaces
 function! ZenkakuSpace()
     highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
 endfunction
@@ -45,18 +45,18 @@ if has('syntax')
     call ZenkakuSpace()
 endif
 
-" 入力補完を半透明にする
+" Make the completion popup translucent
 set pumblend=20
 
 syntax enable
 colorscheme solarized8_dark_low
 set background=dark
 
-" Floating Window の色設定
+" Floating window color settings
 highlight! NormalFloat ctermbg=NONE guibg=#505050
 set winblend=20
 
-" 無色透明にする
+" Make fully transparent
 highlight! Normal ctermbg=NONE guibg=NONE
 highlight! NonText ctermbg=NONE guibg=NONE
 highlight! CursorLineNr ctermbg=NONE guibg=NONE
@@ -70,16 +70,16 @@ highlight! DiffAdd ctermbg=NONE guibg=NONE
 highlight! DiffChange ctermbg=NONE guibg=NONE
 highlight! DiffDelete ctermbg=NONE guibg=NONE
 
-" Comment を緑色にして見やすくする
+" Make comments green for readability
 highlight! Comment ctermfg=22 guifg=#3DB680
 
-" git commit のコメントを見やすくする
+" Make git commit comments more readable
 highlight! gitcommitComment ctermfg=22, guifg=#3DB680
 
-" cterm ではなく gui の色を使用する
+" Use gui colors instead of cterm colors
 set termguicolors
 
-" Cursor下のsyntax情報を取得する函数群
+" Functions to get syntax info under the cursor
 " cf. http://cohama.hateblo.jp/entry/2013/08/11/020849
 function! s:get_syn_id(transparent)
   let synid = synID(line("."), col("."), 1)
