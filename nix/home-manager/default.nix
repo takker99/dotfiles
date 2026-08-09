@@ -60,6 +60,7 @@ in
       uv
       cargo
       deno
+      nodejs
       pnpm
       neovim # nightly
       opencode
