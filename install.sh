@@ -1,7 +1,21 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-DOTFILES_DIR="${HOME}/git/dotfiles"
+# DOTFILES_DIR は環境変数か第1引数で上書きできる
+DOTFILES_DIR="${1:-${DOTFILES_DIR:-${HOME}/git/dotfiles}}"
+
+# bootstrap: リポジトリ未取得なら clone してから install.sh を再実行する
+if [ ! -d "${DOTFILES_DIR}/.git" ]; then
+  echo "dotfiles を ${DOTFILES_DIR} に clone します..."
+  if ! command -v git >/dev/null 2>&1; then
+    echo "git が見つかりません。先に git をインストールしてください" >&2
+    exit 1
+  fi
+  mkdir -p "$(dirname "${DOTFILES_DIR}")"
+  git clone --branch nix https://github.com/takker99/dotfiles "${DOTFILES_DIR}"
+  exec bash "${DOTFILES_DIR}/install.sh" "${DOTFILES_DIR}"
+fi
+
 FLAKE_REF="${DOTFILES_DIR}#takker"
 PROFILE="${HOME}/.profile"
 BASHRC="${HOME}/.bashrc"

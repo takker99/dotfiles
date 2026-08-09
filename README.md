@@ -2,6 +2,33 @@ My dotfiles, managed primarily with Nix Home Manager.
 
 ## How to use
 
+### Installation on a new machine (one-liner)
+
+Clones the repo to `~/git/dotfiles` if missing, then runs the installer:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/takker99/dotfiles/nix/install.sh | bash
+```
+
+Install into a different directory:
+
+```sh
+DOTFILES_DIR="$HOME/src/dotfiles" curl -fsSL https://raw.githubusercontent.com/takker99/dotfiles/nix/install.sh | bash
+# or when running the script directly:
+bash install.sh "$HOME/src/dotfiles"
+```
+
+Requires `git` and `curl` on the machine.
+
+### Git authentication (to push changes)
+
+The install itself needs no authentication (the repo is public). To commit and push changes back to GitHub, authenticate once per machine:
+
+- Recommended: `gh auth login` then `gh auth setup-git`
+- Or add an SSH key and switch the remote:
+  `git remote set-url origin git@github.com:takker99/dotfiles.git`
+- Or use a PAT via a credential helper
+
 ### Initial setup
 
 - Enter the Nix development environment:
