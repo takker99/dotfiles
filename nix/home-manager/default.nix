@@ -2,6 +2,7 @@
   inputs,
   config,
   pkgs,
+  lib,
   ...
 }:
 let
@@ -142,17 +143,14 @@ in
 
     gh = {
       enable = true;
-      settings = {
-        git_protocol = "https";
-
-        prompt = "enabled";
-
-        aliases = {
-          co = "pr checkout";
-          pv = "pr view";
-        };
-      };
     };
+  };
+
+  # gh CLI expects to own config.yml (it writes git_protocol etc. during
+  # auth/login), so link it to a real, writable file in this repo instead of a
+  # read-only store path.
+  xdg.configFile."gh/config.yml" = lib.mkForce {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/dotfiles/gh/config.yml";
   };
 
 }
