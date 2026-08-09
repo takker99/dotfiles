@@ -26,22 +26,33 @@ FLAKE_REF="${DOTFILES_DIR}#takker-${SYS}"
 PROFILE="${HOME}/.profile"
 BASHRC="${HOME}/.bashrc"
 LOCAL_BIN="${HOME}/.local/bin"
-NIX_PROFILE="${HOME}/.nix-profile"
 echo "== dotfiles install: start =="
 
 # 1) Check for Nix and install it if missing (multi-user recommended)
 if ! command -v nix >/dev/null 2>&1; then
   echo "Nix not found. Installing Nix with multi-user support (sudo required)..."
   curl -L https://nixos.org/nix/install | sh -s -- --daemon
-  echo "Nix installation complete. Loading shell initialization..."
+  echo "Nix installation complete."
 else
   echo "Nix is already installed."
 fi
 
-# 2) Initialize Nix profile (source it if present)
-if [ -f "${NIX_PROFILE}/etc/profile.d/nix.sh" ]; then
-  # shellcheck source=/dev/null
-  . "${NIX_PROFILE}/etc/profile.d/nix.sh"
+# 2) Source Nix profile so nix is available in the current shell
+NIX_PROFILE_DIRS=(
+  "/nix/var/nix/profiles/default"  # multi-user daemon install
+  "${HOME}/.nix-profile"            # single-user or user profile
+)
+NIX_PATH_UPDATED=false
+for nix_dir in "${NIX_PROFILE_DIRS[@]}"; do
+  if [ -f "${nix_dir}/etc/profile.d/nix.sh" ]; then
+    # shellcheck source=/dev/null
+    . "${nix_dir}/etc/profile.d/nix.sh"
+    NIX_PATH_UPDATED=true
+  fi
+done
+if ! command -v nix >/dev/null 2>&1; then
+  echo "nix is still not in PATH. Please restart your shell and re-run install.sh." >&2
+  exit 1
 fi
 
 # 3) Add PATH and local bin to ~/.profile (idempotently)
