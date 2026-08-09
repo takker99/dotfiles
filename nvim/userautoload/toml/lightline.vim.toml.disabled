@@ -30,16 +30,16 @@ let g:lightline = {
             \ 'subseparator': { 'left': '', 'right': '' }
             \ }
 
-" 特殊バッファとして認識するfiletypes
+" Filetypes treated as special buffers
 let s:ignore_types='defx\|help\|undotree\|gina-*'
 
-" winwidth に関するメモ：
-" - winwidth >130: 通常モード
-" - winwidth > 100: 短縮表示
-" - otherwise     : 表示しない
+" Notes on winwidth:
+" - winwidth >130: full mode display
+" - winwidth > 100: shortened display
+" - otherwise     : hidden
 
 function! LightLineMode()
-    " windowの幅が狭いときは、modeを短縮表示する
+    " Show a shortened mode when the window is narrow
     if winwidth(0)>100
         let mode_name=lightline#mode()
     else
@@ -164,12 +164,12 @@ let g:lightline.tab_component_function = {
             \ 'readonly': 'lightline#tab#readonly',
             \ 'tabnum': 'lightline#tab#tabnum' }
 
-" 特殊バッファと読み取り専用ファイルに対して、読み取り専用マークを表示する。
+" Show the read-only mark for special buffers and read-only files.
 function! LightLineReadonly()
     return &filetype =~ s:ignore_types || &readonly ? '' :&filetype ==  ''
 endfunction
 
-" 保存していない変更があったら+マークを表示する
+" Show a + mark if there are unsaved changes
 function! LightLineModified()
     return &filetype !~s:ignore_types && &modified ? '+' : ''
 endfunction

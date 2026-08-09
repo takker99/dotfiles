@@ -73,7 +73,7 @@ namespace ${1:Application}
 
 		protected override void RegisterTypes(IContainerRegistry containerRegistry) { }
 
-		// "...Views.hogehoge.xaml" という View の View Model を "...ViewModels.hogehoge.cs" に自動で設定する
+		// Automatically map the View Model for a View named "...Views.hogehoge.xaml" to "...ViewModels.hogehoge.cs"
 		protected override void ConfigureViewModelLocator()
 		{
 			base.ConfigureViewModelLocator();
@@ -81,7 +81,7 @@ namespace ${1:Application}
 			ViewModelLocationProvider.
 				SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
 			{
-				// "...Views.MainWindow" を "...ViewModels.MainWindow" に置き換える
+				// Replace "...Views.MainWindow" with "...ViewModels.MainWindow"
 				string viewName = viewType.FullName.Replace(".Views.",".ViewModels.");
 				string viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
 				string viewModelName = $"{viewName}, {viewAssemblyName}";

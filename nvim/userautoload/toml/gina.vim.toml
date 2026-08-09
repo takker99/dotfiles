@@ -15,11 +15,11 @@ nnoremap [GitMode]k :Gina push<CR>
 nnoremap [GitMode]j :Gina pull<CR>
 nnoremap [GitMode]J :Gina fetch<CR>
 
-" Gina log 上でのkey mappings
+" Key mappings in Gina log
 call gina#custom#mapping#nmap('log', '<CR>', ':call gina#action#call(''commit:checkout'')<CR>', {'noremap': 1, 'silent': 1})
 call gina#custom#mapping#nmap('log', 'dd', ':call gina#action#call(''commit:revert'')<CR>', {'noremap': 1, 'silent': 1})
 
-" Gina branch 上でのkey mappings
+" Key mappings in Gina branch
 call gina#custom#mapping#nmap('branch', 'm', ':call gina#action#call(''commit:merge:no-ff'')<CR>', {'noremap': 1, 'silent': 1})
 call gina#custom#mapping#nmap('branch', 'o', ':call gina#action#call(''branch:new'')<CR>', {'noremap': 1, 'silent': 1})
 call gina#custom#mapping#nmap('branch', 'dd', ':call gina#action#call(''branch:delete'')<CR>', {'noremap': 1, 'silent': 1})

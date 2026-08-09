@@ -1,10 +1,10 @@
-; insert mode を抜ける時にIMEをOFFにするための script
+; Script to turn off the IME when leaving insert mode
 GoSub,imeOn
 return
 
 imeOn:
     GoSub,GetIMEState
-    ;Msgbox, %ime_state% `n 0はOFF `n 1はON
+    ;Msgbox, %ime_state% `n 0 means OFF `n 1 means ON
     if(ime_state=1)
     {
     Send {vkF4sc029}    ; ZenHan

@@ -1,18 +1,18 @@
 " memo
-" - <silent>を使うと、コマンドラインにコマンドが出力されないようになる。
+" - Using <silent> prevents the command from being printed on the command line.
 "   e.g
 "   - nnoremap <silent>sb :b#<CR>
-"   →一番下のラインには何も表示されない。
+"   -> nothing is shown on the bottom line.
 "   - nnoremap sb :b#<CR>
-"   →一番下のラインには :b# が表示されない。
+"   -> :b# is not shown on the bottom line.
 "
-"文字コードをUFT-8に設定
+" Set character encoding to UTF-8
 scriptencoding utf-8
 
 " let s:script_path = expand('<sfile>:p')
 " echom '[debug]enter ' . s:script_path
 
-" <Leader> を<Space> にする
+" Set <Leader> to <Space>
 let mapleader = "\<Space>"
 
 " Don't use Ex mode, use Q for formatting
@@ -22,7 +22,7 @@ noremap Q gq
 " so that you can undo CTRL-U after inserting a line break.
 inoremap <C-U> <C-G>u<C-U>
 
-" 折り返し時に表示行単位での移動できるようにする
+" Move by display line when wrapped
 nnoremap k   gk
 nnoremap j   gj
 vnoremap k   gk
@@ -30,23 +30,23 @@ vnoremap j   gj
 nnoremap gk  k
 nnoremap gj  j
 vnoremap gk  k
-" <C-l>にハイライト消去・ファイル変更適用効果を追加
+" Add highlight clearing and file change reload to <C-l>
 nnoremap <C-l> :nohlsearch<CR>:checktime<CR><Esc><C-l>
 nnoremap <Esc><Esc> :nohlsearch<CR>
-" 検索で使う規定の正規表現を Very Magic にする
+" Use Very Magic regex for search by default
 nmap / /\v
 
-" jj で insert mode を抜ける
+" Leave insert mode with jj
 inoremap jj <ESC>
 
-" WSLかどうかを判定する
+" Detect whether running under WSL
 " cf.https://moyapro.com/2018/03/21/detect-wsl/
 function! s:isWsl()
     return filereadable('/proc/sys/fs/binfmt_misc/WSLInterop')
 endfunction
 
-" 動かないので消す
-" insert mode を抜けるときIMEをオフにする
+" Removed because it doesn't work
+" Turn off the IME when leaving insert mode
 " cf.https://moyapro.com/2018/04/02/disable-ime-on-wsl-vim/
 " if s:isWsl() && executable('AutoHotkeyU64.exe')
 "     augroup insertLeave
@@ -55,11 +55,11 @@ endfunction
 "     augroup END
 " endif
 
-" 誤動作すると困るキーを無効にする
+" Disable keys that would cause trouble if accidentally pressed
 nnoremap ZZ <Nop>
 nnoremap ZQ <Nop>
 
-" 矢印キーを無効にする
+" Disable arrow keys
 noremap <Up> <Nop>
 noremap <Down> <Nop>
 noremap <Left> <Nop>
@@ -69,23 +69,23 @@ inoremap <Down> <Nop>
 inoremap <Left> <Nop>
 inoremap <Right> <Nop>
 
-" 行を移動
+" Move lines
 nnoremap <C-k> :m-2<cr>==
 nnoremap <C-j> :m+<cr>==
-" 複数行を移動
+" Move multiple lines
 xnoremap <C-k> :m-2<cr>gv=gv
 xnoremap <C-j> :m'>+<cr>gv=gvk
 
-" Yでカーソル位置から行末までヤンクする
+" Yank from cursor to end of line with Y
 nnoremap Y y$
 
-" x,Xでカーソル文字を削除する際レジスタを汚さない
+" Don't clobber the register when deleting the character under the cursor with x/X
 nnoremap x "_x
 vnoremap x "_x
 nnoremap X "_X
 vnoremap X "_X
 
-" s,Sでカーソル文字を削除する際レジスタを汚さない設定
+" Don't clobber the register when deleting the character under the cursor with s/S
 nnoremap s "_s
 vnoremap s "_s
 nnoremap S "_S
@@ -93,19 +93,19 @@ vnoremap S "_S
 
 " c.f. http://vimblog.hatenablog.com/entry/vimrc_key_mapping_examples
 
-" ビジュアルモードで < > キーによるインデント後にビジュアルモードが解除されないようにする
+" Keep visual mode active after indenting with < > keys
 vnoremap < <gv
 vnoremap > >gv
 
-" n, N キーで「次の（前の）検索候補」を画面の中心に表示する
+" Center the next (previous) search match on screen with n/N
 nnoremap n nzz
 nnoremap N Nzz
 
-" 数字のインクリメント/デクリメント
+" Increment/decrement numbers
 nnoremap + <C-a>
 nnoremap - <C-x>
 
-"押しにくい$及び^をリマッピング
+" Remap hard-to-reach $ and ^
 nmap H ^
 nmap L $
 vmap H ^
@@ -123,7 +123,7 @@ function! s:Repl()
 endfunction
 nmap <silent> <expr> p <sid>Repl()
 
-" ウィンドウ関連
+" Window related
 " c.f. https://qiita.com/tekkoc/items/98adcadfa4bdc8b5a6ca
 " c.f. http://ivxi.hatenablog.com/entry/2013/05/23/163825
 nnoremap s <Nop>
@@ -150,33 +150,33 @@ nnoremap <silent>sx :tabclose<CR>
 nnoremap <M-l> gt
 nnoremap <M-h> gT
 
-" function key 関連
+" Function key related
 
 " cf.
-" 相対行番号表示の切り替え
+" Toggle relative line numbers
 nnoremap <F12> :set relativenumber!<CR>
-" コマンドラインモードで %% を入力すると現在編集中のファイルのフォルダのパスが展開されるようにする
+" Expand %% to the path of the directory of the current file in command-line mode
 cnoremap %% <C-R>=expand('%:p:h').'/'<cr>
 
-" コマンドライン補完の選択キー
+" Keys for selecting command line completion
 set wildcharm=<TAB>
 cnoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 cnoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 
-" terminal の設定
+" Terminal settings
 
-" 新しいタブでターミナルを起動
+" Open a terminal in a new tab
 nnoremap @t :tabe<CR>:terminal<CR>
-" Ctrl + q でターミナルを終了
+" Quit terminal with Ctrl+q
 tnoremap <C-q> <C-\><C-n>:q<CR>
-" ESC or jj でターミナルモードからノーマルモードへ
+" Return from terminal mode to normal mode with ESC or jj
 tnoremap <ESC> <C-\><C-n>
 tnoremap jj <C-\><C-n>
 vnoremap gj  j
 
 
-" オートコンパイルする
+" Auto compile
 " augroup setAutoCompile
 "     autocmd!
 "     autocmd BufWritePost *.tex  | :!latexmk -lualatex %

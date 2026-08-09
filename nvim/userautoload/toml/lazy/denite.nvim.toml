@@ -4,7 +4,7 @@ hook_add='''
 nnoremap [Denite] <Nop>
 nmap <Leader>d [Denite]
 
-" 大文字のときは検索を自動で開始させておく
+" Start filtering automatically with the uppercase mappings
 nnoremap <silent> [Denite]a :<C-u>Denite file buffer file:new<CR>
 nnoremap <silent> [Denite]A :<C-u>Denite file buffer file:new -start-filter<CR>
 nnoremap <silent> [Denite]b :<C-u>Denite buffer file:new<CR>
@@ -24,7 +24,7 @@ nnoremap <silent> [Denite]H :<C-u>Denite help -start-filter<CR>
 nnoremap <silent> [Denite]m :<C-u>Denite mark<CR>
 '''
 hook_source='''
-" Denite の default options
+" Denite default options
 " cf. https://qiita.com/reireias/items/a15f43dbbf7c88aeaf99
 let s:denite_win_width_percent = 0.85
 let s:denite_win_height_percent = 0.7
@@ -36,7 +36,7 @@ let s:denite_default_options = {
     \ 'highlight_filter_background': 'DeniteFilter',
     \ 'prompt': '$ ',
     \ }
-" default options を登録する
+" Register the default options
 let s:denite_option_array = []
 for [key, value] in items(s:denite_default_options)
   call add(s:denite_option_array, '-'.key.'='.value)

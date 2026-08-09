@@ -2,16 +2,16 @@
 repo = 'kana/vim-submode'
 hook_add = '''
 
-" statusline に表示するようにしたのでいらない
+" No longer needed because it is shown in the statusline
 " let g:submode_always_show_submode = 1 " show always the current submode
 let g:submode_timeout = 0            " disable time out on submodes
 let g:submode_keep_leaving_key=v:true
 
 " cf. https://qiita.com/tekkoc/items/98adcadfa4bdc8b5a6ca#vimrc
-" s>:windowの幅を増やす
-" s<:windowの幅を減らす
-" s+:windowの高さを増やす
-" s-:windowの高さを減らす
+" s>: increase window width
+" s<: decrease window width
+" s+: increase window height
+" s-: decrease window height
 call submode#enter_with('WINSIZE', 'n', '', 's>', '<C-w>>')
 call submode#enter_with('WINSIZE', 'n', '', 's<', '<C-w><')
 call submode#enter_with('WINSIZE', 'n', '', 's+', '<C-w>+')

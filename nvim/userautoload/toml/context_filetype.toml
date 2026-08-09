@@ -1,2 +1,2 @@
-[[plugins]] # カーソル位置のコンテキストのftを判定するライブラリ
+[[plugins]] # Library that determines the filetype based on the context at the cursor position
 repo = 'Shougo/context_filetype.vim'
