@@ -12,7 +12,7 @@ if [ ! -d "${DOTFILES_DIR}/.git" ]; then
     exit 1
   fi
   mkdir -p "$(dirname "${DOTFILES_DIR}")"
-  git clone --branch nix https://github.com/takker99/dotfiles "${DOTFILES_DIR}"
+  git clone --branch develop https://github.com/takker99/dotfiles "${DOTFILES_DIR}"
   exec bash "${DOTFILES_DIR}/install.sh" "${DOTFILES_DIR}"
 fi
 

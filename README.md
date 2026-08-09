@@ -7,13 +7,13 @@ My dotfiles, managed primarily with Nix Home Manager.
 Clones the repo to `~/git/dotfiles` if missing, then runs the installer:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/takker99/dotfiles/nix/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/takker99/dotfiles/develop/install.sh | bash
 ```
 
 Install into a different directory:
 
 ```sh
-DOTFILES_DIR="$HOME/src/dotfiles" curl -fsSL https://raw.githubusercontent.com/takker99/dotfiles/nix/install.sh | bash
+DOTFILES_DIR="$HOME/src/dotfiles" curl -fsSL https://raw.githubusercontent.com/takker99/dotfiles/develop/install.sh | bash
 # or when running the script directly:
 bash install.sh "$HOME/src/dotfiles"
 ```
