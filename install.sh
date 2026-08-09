@@ -118,4 +118,10 @@ else
   echo "-> ${BASHRC} に既に exec fish スニペットがあります"
 fi
 
+# 7) Ubuntu の場合、システムのロケールとタイムゾーンを設定
+if grep -qi "^ID=ubuntu$" /etc/os-release 2>/dev/null; then
+  echo "Ubuntu を検出しました。システムのロケール/タイムゾーンを設定します..."
+  nix run "${DOTFILES_DIR}#setupLang"
+fi
+
 echo "== dotfiles install: done =="
