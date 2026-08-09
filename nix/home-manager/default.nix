@@ -61,6 +61,7 @@ in
       pnpm
       neovim # nightly
       opencode
+      openscad-unstable # command name is openscad
     ];
 
     file.".commit_template".source =
