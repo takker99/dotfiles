@@ -16,7 +16,13 @@ if [ ! -d "${DOTFILES_DIR}/.git" ]; then
   exec bash "${DOTFILES_DIR}/install.sh" "${DOTFILES_DIR}"
 fi
 
-FLAKE_REF="${DOTFILES_DIR}#takker"
+case "$(uname -m)" in
+  aarch64) SYS="aarch64-linux" ;;
+  x86_64) SYS="x86_64-linux" ;;
+  arm64) SYS="aarch64-darwin" ;;
+  *) echo "Unsupported architecture: $(uname -m)" >&2; exit 1 ;;
+esac
+FLAKE_REF="${DOTFILES_DIR}#takker-${SYS}"
 PROFILE="${HOME}/.profile"
 BASHRC="${HOME}/.bashrc"
 LOCAL_BIN="${HOME}/.local/bin"
@@ -92,7 +98,7 @@ chmod +x "${LOCAL_BIN}/dotfiles-update"
 
 cat > "${LOCAL_BIN}/dotfiles-switch" <<EOF
 #!/usr/bin/env bash
-home-manager switch --flake ${DOTFILES_DIR}#takker
+home-manager switch --flake ${DOTFILES_DIR}#takker-${SYS}
 EOF
 chmod +x "${LOCAL_BIN}/dotfiles-switch"
 
