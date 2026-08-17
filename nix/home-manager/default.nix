@@ -73,6 +73,7 @@ in
             --prefix LD_LIBRARY_PATH : ${mesa}/lib
         '';
       })
+      pdftk
     ];
 
     file.".commit_template".source =
