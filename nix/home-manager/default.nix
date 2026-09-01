@@ -60,6 +60,7 @@ in
       uv
       cargo
       deno
+      nodejs
       pnpm
       neovim # nightly
       opencode
@@ -74,6 +75,10 @@ in
         '';
       })
       pdftk
+      # PlatformIO (embedded dev): CLI とデバッグ用 openocd
+      platformio-core
+      openocd
+      imagemagick
     ];
 
     file.".commit_template".source =
