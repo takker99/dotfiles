@@ -28,10 +28,11 @@ rootless mode (see below). Pass `--rootless` to force rootless mode even where
 
 On a machine where you do not have `sudo` (e.g. a lab workstation), pass
 `--rootless`, or just run the default installer and let it fall back
-automatically. Nix is installed as a single-user installation inside a user
-chroot managed by [`nix-user-chroot`](https://github.com/nix-community/nix-user-chroot),
-living entirely under `~/.nix`. Interactive bash shells automatically re-enter
-the chroot, so `nix` and the Home Manager tools are available as usual.
+automatically. Nix is provided by
+[`nix-portable`](https://github.com/DavHau/nix-portable), which keeps a
+self-contained store under `~/.nix-portable` and virtualizes `/nix` with
+`proot`. Interactive bash shells automatically re-enter that environment, so
+`nix` and the Home Manager tools are available as usual.
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/takker99/dotfiles/develop/install.sh | bash -s -- --rootless
@@ -39,23 +40,12 @@ curl -fsSL https://raw.githubusercontent.com/takker99/dotfiles/develop/install.s
 bash install.sh --rootless
 ```
 
-This requires **unprivileged user namespaces**. Verify on the machine with:
+No unprivileged user namespaces are required, so this also works on Ubuntu
+24.04 where AppArmor restricts them (`kernel.apparmor_restrict_unprivileged_userns=1`).
+`nix-portable` uses `proot` (ptrace-based) when namespaces are unavailable.
 
-```sh
-unshare --user --pid echo YES   # should print YES
-```
-
-If namespaces are restricted (Ubuntu 23.10+ via AppArmor), ask an
-administrator to run once:
-
-```sh
-sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
-# persist across reboots:
-echo 'kernel.apparmor_restrict_unprivileged_userns=0' | sudo tee /etc/sysctl.d/99-userns.conf
-```
-
-The rootless installer downloads the `nix-user-chroot` static binary into
-`~/.local/bin` and installs Nix into `~/.nix`. The system locale/timezone step
+The installer downloads the `nix-portable` binary into `~/.local/bin` and
+initializes the store under `~/.nix-portable`. The system locale/timezone step
 (`setupLang`) is skipped because it needs root.
 
 ### System language and timezone (Ubuntu only)

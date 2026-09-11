@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Options:
-#   --rootless   Force rootless install using nix-user-chroot (single-user in ~/.nix)
+#   --rootless   Force rootless install using nix-portable (store in ~/.nix-portable)
 #   -h, --help   Show help
 # Positional argument: DOTFILES_DIR
 # Without --rootless, the multi-user (sudo) install is attempted and the script
@@ -16,8 +16,11 @@ while [ $# -gt 0 ]; do
       cat <<'USAGE'
 Usage: install.sh [--rootless] [DOTFILES_DIR]
 
-  --rootless     Force a rootless install using nix-user-chroot.
-                 Nix lives in ~/.nix and interactive shells re-enter a user chroot.
+  --rootless     Force a rootless install using nix-portable.
+                 Nix lives in ~/.nix-portable and interactive shells re-enter
+                 the portable environment. Works without unprivileged user
+                 namespaces (falls back to proot), so no sudo and no AppArmor
+                 changes are required.
                  Without this flag, the multi-user (sudo) install is tried first
                  and the script falls back to rootless automatically on failure.
   DOTFILES_DIR   Where to clone/read the dotfiles (default: ~/git/dotfiles)
@@ -62,85 +65,78 @@ case "$(uname -m)" in
   *) echo "Unsupported architecture: $(uname -m)" >&2; exit 1 ;;
 esac
 if [ "${ROOTLESS}" = "1" ] && [ "${SYS##*-}" = "darwin" ]; then
-  echo "--rootless is only supported on Linux (nix-user-chroot does not support macOS)." >&2
+  echo "--rootless is only supported on Linux (nix-portable does not support macOS)." >&2
   exit 1
 fi
 FLAKE_REF="${DOTFILES_DIR}#takker-${SYS}"
 PROFILE="${HOME}/.profile"
 BASHRC="${HOME}/.bashrc"
 LOCAL_BIN="${HOME}/.local/bin"
-USER_NAME="${USER:-$(id -un)}"
 
-# Rootless (nix-user-chroot) settings
-NIX_USER_CHROOT_VERSION="2.1.1"
-NIX_ROOTLESS_PATH="${HOME}/.nix"
-NIX_USER_CHROOT_BIN="${LOCAL_BIN}/nix-user-chroot"
+# Rootless (nix-portable) settings
+NIX_PORTABLE_BIN="${LOCAL_BIN}/nix-portable"
+NIX_PORTABLE_DIR="${HOME}/.nix-portable"
 
-# Run a command (single string) inside the nix user chroot.
-# NIX_USER_CHROOT_ACTIVE prevents the ~/.bashrc re-entry snippet from recursing.
-nix_user_chroot_exec() {
-  env -u LD_LIBRARY_PATH NIX_USER_CHROOT_ACTIVE=1 \
-    "${NIX_USER_CHROOT_BIN}" "${NIX_ROOTLESS_PATH}" bash -lc "$1"
+# Directory containing the other nix tools (nix-env, nix-store, ...) in the
+# portable store. nix-portable only exposes `nix` itself, but Home Manager's
+# activation script needs nix-env/nix-store.
+nix_portable_nix_bin() {
+  find "${NIX_PORTABLE_DIR}/nix/store" -maxdepth 3 -name nix-env -printf '%h\n' 2>/dev/null | head -n1
 }
 
-download_nix_user_chroot() {
-  if [ -x "${NIX_USER_CHROOT_BIN}" ]; then
-    echo "nix-user-chroot is already installed at ${NIX_USER_CHROOT_BIN}."
+# Run the persistent static nix bundled with nix-portable (same args as `nix`).
+# The store's bin directory is prepended so nix-env/nix-store are found by
+# Home Manager's activation during `switch`.
+np_nix() {
+  local nix_bin_dir
+  nix_bin_dir="$(nix_portable_nix_bin)"
+  if [ -n "${nix_bin_dir}" ]; then
+    env PATH="${nix_bin_dir}:${PATH}" "${NIX_PORTABLE_BIN}" nix "$@"
+  else
+    "${NIX_PORTABLE_BIN}" nix "$@"
+  fi
+}
+
+download_nix_portable() {
+  if [ -x "${NIX_PORTABLE_BIN}" ]; then
+    echo "nix-portable is already installed at ${NIX_PORTABLE_BIN}."
     return
   fi
   case "$(uname -m)" in
-    x86_64) nuc_arch="x86_64-unknown-linux-musl" ;;
-    aarch64) nuc_arch="aarch64-unknown-linux-musl" ;;
-    *) echo "Unsupported architecture for nix-user-chroot: $(uname -m)" >&2; exit 1 ;;
+    x86_64) np_arch="x86_64" ;;
+    aarch64) np_arch="aarch64" ;;
+    *) echo "Unsupported architecture for nix-portable: $(uname -m)" >&2; exit 1 ;;
   esac
-  local url="https://github.com/nix-community/nix-user-chroot/releases/download/${NIX_USER_CHROOT_VERSION}/nix-user-chroot-bin-${NIX_USER_CHROOT_VERSION}-${nuc_arch}"
-  echo "Downloading nix-user-chroot from ${url}..."
+  local url="https://github.com/DavHau/nix-portable/releases/latest/download/nix-portable-${np_arch}"
+  echo "Downloading nix-portable from ${url}..."
   mkdir -p "${LOCAL_BIN}"
-  curl -fL "${url}" -o "${NIX_USER_CHROOT_BIN}"
-  chmod +x "${NIX_USER_CHROOT_BIN}"
-}
-
-check_user_namespaces() {
-  if command -v unshare >/dev/null 2>&1; then
-    if unshare --user --pid echo YES 2>/dev/null | grep -q YES; then
-      return 0
-    fi
-    return 1
-  fi
-  if [ -r /proc/sys/kernel/unprivileged_userns_clone ] &&
-    [ "$(cat /proc/sys/kernel/unprivileged_userns_clone)" = "1" ]; then
-    return 0
-  fi
-  return 1
+  curl -fL "${url}" -o "${NIX_PORTABLE_BIN}"
+  chmod +x "${NIX_PORTABLE_BIN}"
 }
 
 install_nix_rootless() {
-  download_nix_user_chroot
+  download_nix_portable
 
-  if ! check_user_namespaces; then
-    cat >&2 <<'EOF'
-ERROR: unprivileged user namespaces are disabled, so nix-user-chroot cannot work.
-
-Ask an administrator to enable them once. On Ubuntu 23.10+:
-  sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
-  # to persist across reboots:
-  echo 'kernel.apparmor_restrict_unprivileged_userns=0' | sudo tee /etc/sysctl.d/99-userns.conf
-
-Then re-run: bash install.sh --rootless
-EOF
-    exit 1
-  fi
-
-  mkdir -p "${NIX_ROOTLESS_PATH}"
-  chmod 0755 "${NIX_ROOTLESS_PATH}"
-
-  if [ -L "${HOME}/.nix-profile" ] || [ -e "${NIX_ROOTLESS_PATH}/var/nix/profiles" ]; then
-    echo "Nix is already installed in the user chroot."
+  if [ -x "${NIX_PORTABLE_DIR}/bin/nix" ]; then
+    echo "nix-portable environment is already initialized."
     return
   fi
 
-  echo "Installing Nix (single-user) inside the user chroot..."
-  nix_user_chroot_exec 'curl -L https://nixos.org/nix/install | sh -s -- --no-daemon'
+  echo "Initializing nix-portable (first run downloads the portable store)..."
+  # The first invocation bootstraps ~/.nix-portable and selects a runtime.
+  # Retry a few times because proot can hit a transient error during bootstrap.
+  local attempt
+  for attempt in 1 2 3; do
+    if "${NIX_PORTABLE_BIN}" nix --version; then
+      break
+    fi
+    if [ "${attempt}" = "3" ]; then
+      echo "nix-portable bootstrap failed after ${attempt} attempts." >&2
+      exit 1
+    fi
+    echo "nix-portable bootstrap failed (attempt ${attempt}); retrying..." >&2
+    sleep 2
+  done
 }
 
 # 1) Check for Nix and install it if missing.
@@ -207,6 +203,24 @@ grep -Fxq "$LOCALBIN_LINE" "${PROFILE}" 2>/dev/null || {
   echo "-> Added ~/.local/bin to ${PROFILE}"
 }
 
+# In rootless mode, expose the static nix bundled with nix-portable (and the
+# other nix tools) inside the portable environment. NIX_CONF_DIR is provided by
+# nix-portable itself.
+if [ "${ROOTLESS}" = "1" ]; then
+  NP_PATH_LINE='export PATH="$HOME/.nix-portable/bin:$PATH"'
+  grep -Fxq "$NP_PATH_LINE" "${PROFILE}" 2>/dev/null || {
+    printf "%s\n" "$NP_PATH_LINE" >>"${PROFILE}"
+    echo "-> Added nix-portable bin to ${PROFILE}"
+  }
+  # nix-env/nix-store live in a versioned store path; add it via a glob so it
+  # keeps working after nix-portable upgrades.
+  NP_NIX_BIN_LINE='for _np_nix_bin in "$HOME"/.nix-portable/nix/store/*-nix-*/bin; do [ -d "$_np_nix_bin" ] && PATH="$_np_nix_bin:$PATH"; done; unset _np_nix_bin; export PATH'
+  grep -Fxq "$NP_NIX_BIN_LINE" "${PROFILE}" 2>/dev/null || {
+    printf "%s\n" "$NP_NIX_BIN_LINE" >>"${PROFILE}"
+    echo "-> Added nix-portable nix tools to ${PROFILE}"
+  }
+fi
+
 # source again to ensure current shell has PATH updated
 if [ -f "${PROFILE}" ]; then
   # shellcheck source=/dev/null
@@ -214,33 +228,41 @@ if [ -f "${PROFILE}" ]; then
 fi
 
 # 4) Enable Nix experimental features (nix-command, flakes)
-if [ "${ROOTLESS}" = "1" ]; then
-  NIX_CONF_DIR="${NIX_ROOTLESS_PATH}/etc/nix"
-else
+# nix-portable ships its own nix.conf (NIX_CONF_DIR), so only configure nix
+# directly for the multi-user install.
+if [ "${ROOTLESS}" != "1" ]; then
   NIX_CONF_DIR="${HOME}/.config/nix"
-fi
-NIX_CONF_FILE="${NIX_CONF_DIR}/nix.conf"
-mkdir -p "${NIX_CONF_DIR}"
-if [ ! -f "${NIX_CONF_FILE}" ]; then
-  printf "experimental-features = nix-command flakes\n" >"${NIX_CONF_FILE}"
-  echo "-> Created ${NIX_CONF_FILE} and enabled experimental-features"
-else
-  # Add missing flags if needed
-  if ! grep -q "nix-command" "${NIX_CONF_FILE}" || ! grep -q "flakes" "${NIX_CONF_FILE}"; then
-    # Remove any existing experimental-features line and append the merged one
-    grep -v "^experimental-features" "${NIX_CONF_FILE}" >"${NIX_CONF_FILE}.tmp" || true
-    mv "${NIX_CONF_FILE}.tmp" "${NIX_CONF_FILE}"
-    printf "experimental-features = nix-command flakes\n" >>"${NIX_CONF_FILE}"
-    echo "-> Appended experimental-features to ${NIX_CONF_FILE}"
+  NIX_CONF_FILE="${NIX_CONF_DIR}/nix.conf"
+  mkdir -p "${NIX_CONF_DIR}"
+  if [ ! -f "${NIX_CONF_FILE}" ]; then
+    printf "experimental-features = nix-command flakes\n" >"${NIX_CONF_FILE}"
+    echo "-> Created ${NIX_CONF_FILE} and enabled experimental-features"
+  else
+    # Add missing flags if needed
+    if ! grep -q "nix-command" "${NIX_CONF_FILE}" || ! grep -q "flakes" "${NIX_CONF_FILE}"; then
+      # Remove any existing experimental-features line and append the merged one
+      grep -v "^experimental-features" "${NIX_CONF_FILE}" >"${NIX_CONF_FILE}.tmp" || true
+      mv "${NIX_CONF_FILE}.tmp" "${NIX_CONF_FILE}"
+      printf "experimental-features = nix-command flakes\n" >>"${NIX_CONF_FILE}"
+      echo "-> Appended experimental-features to ${NIX_CONF_FILE}"
+    fi
   fi
 fi
 
 # 5) Run home-manager explicitly (flake specified by absolute path)
 echo "Applying home-manager (flake: ${FLAKE_REF})..."
 if [ "${ROOTLESS}" = "1" ]; then
-  nix_user_chroot_exec "nix run \"${DOTFILES_DIR}#home-manager\" -- switch --flake \"${FLAKE_REF}\""
+  np_nix run "${DOTFILES_DIR}#home-manager" -- switch --flake "${FLAKE_REF}"
 else
   nix run "${DOTFILES_DIR}#home-manager" -- switch --flake "${FLAKE_REF}"
+fi
+
+# In rootless mode `home-manager switch` does not create ~/.nix-profile, which
+# the fish snippet and PATH additions rely on. Point it at the Home Manager
+# profile's home-path so the bundled tools (fish, etc.) are reachable.
+if [ "${ROOTLESS}" = "1" ] && { [ ! -e "${HOME}/.nix-profile" ] || [ -L "${HOME}/.nix-profile" ]; }; then
+  ln -sfn "${HOME}/.local/state/nix/profiles/home-manager/home-path" "${HOME}/.nix-profile"
+  echo "-> Linked ~/.nix-profile to the Home Manager profile"
 fi
 
 # 6) Create wrapper scripts (to run flake operations from any directory)
@@ -248,24 +270,22 @@ if [ "${ROOTLESS}" = "1" ]; then
   cat >"${LOCAL_BIN}/dotfiles-update" <<EOF
 #!/usr/bin/env bash
 set -euo pipefail
-if [ -n "\${NIX_USER_CHROOT_ACTIVE:-}" ]; then
+if [ -n "\${NIX_PORTABLE_ACTIVE:-}" ]; then
   exec nix run ${DOTFILES_DIR}#update
 fi
-exec env -u LD_LIBRARY_PATH NIX_USER_CHROOT_ACTIVE=1 \\
-  "\${HOME}/.local/bin/nix-user-chroot" "\${HOME}/.nix" \\
-  bash -lc 'nix run ${DOTFILES_DIR}#update'
+exec env NIX_PORTABLE_ACTIVE=1 \\
+  "\${HOME}/.local/bin/nix-portable" nix run ${DOTFILES_DIR}#update
 EOF
   chmod +x "${LOCAL_BIN}/dotfiles-update"
 
   cat >"${LOCAL_BIN}/dotfiles-switch" <<EOF
 #!/usr/bin/env bash
 set -euo pipefail
-if [ -n "\${NIX_USER_CHROOT_ACTIVE:-}" ]; then
-  exec home-manager switch --flake ${DOTFILES_DIR}#takker-${SYS}
+if [ -n "\${NIX_PORTABLE_ACTIVE:-}" ]; then
+  exec nix run ${DOTFILES_DIR}#home-manager -- switch --flake ${DOTFILES_DIR}#takker-${SYS}
 fi
-exec env -u LD_LIBRARY_PATH NIX_USER_CHROOT_ACTIVE=1 \\
-  "\${HOME}/.local/bin/nix-user-chroot" "\${HOME}/.nix" \\
-  bash -lc 'home-manager switch --flake ${DOTFILES_DIR}#takker-${SYS}'
+exec env NIX_PORTABLE_ACTIVE=1 \\
+  "\${HOME}/.local/bin/nix-portable" nix run ${DOTFILES_DIR}#home-manager -- switch --flake ${DOTFILES_DIR}#takker-${SYS}
 EOF
   chmod +x "${LOCAL_BIN}/dotfiles-switch"
 else
@@ -284,14 +304,14 @@ fi
 
 echo "-> wrapper scripts installed to ${LOCAL_BIN}: dotfiles-update, dotfiles-switch"
 
-# 7) bashrc snippet: re-enter the nix user chroot (rootless only)
+# 7) bashrc snippet: re-enter the nix-portable environment (rootless only)
 if [ "${ROOTLESS}" = "1" ]; then
-  CHROOT_MARK="# Added by dotfiles/install.sh (rootless): enter nix user chroot"
+  CHROOT_MARK="# Added by dotfiles/install.sh (rootless): enter nix-portable environment"
   CHROOT_SNIPPET='case "$-" in
   *i*)
-    if [ -z "${NIX_USER_CHROOT_ACTIVE:-}" ] && [ -x "$HOME/.local/bin/nix-user-chroot" ] && [ -d "$HOME/.nix" ]; then
-      export NIX_USER_CHROOT_ACTIVE=1
-      exec env -u LD_LIBRARY_PATH "$HOME/.local/bin/nix-user-chroot" "$HOME/.nix" bash -l
+    if [ -z "${NIX_PORTABLE_ACTIVE:-}" ] && [ -x "$HOME/.local/bin/nix-portable" ] && [ -d "$HOME/.nix-portable" ]; then
+      export NIX_PORTABLE_ACTIVE=1
+      exec "$HOME/.local/bin/nix-portable" debug /bin/bash -l
     fi
     ;;
 esac'
@@ -305,9 +325,9 @@ esac'
       cat "${BASHRC}"
     } >"${tmp_bashrc}"
     mv "${tmp_bashrc}" "${BASHRC}"
-    echo "-> Prepended rootless chroot snippet to ${BASHRC}"
+    echo "-> Prepended rootless nix-portable snippet to ${BASHRC}"
   else
-    echo "-> rootless chroot snippet already present in ${BASHRC}"
+    echo "-> rootless nix-portable snippet already present in ${BASHRC}"
   fi
 fi
 
