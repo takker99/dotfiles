@@ -20,6 +20,44 @@ bash install.sh "$HOME/src/dotfiles"
 
 Requires `git` and `curl` on the machine.
 
+If the machine has no `sudo`, the default install automatically falls back to
+rootless mode (see below). Pass `--rootless` to force rootless mode even where
+`sudo` is available.
+
+### Rootless installation (no sudo)
+
+On a machine where you do not have `sudo` (e.g. a lab workstation), pass
+`--rootless`, or just run the default installer and let it fall back
+automatically. Nix is installed as a single-user installation inside a user
+chroot managed by [`nix-user-chroot`](https://github.com/nix-community/nix-user-chroot),
+living entirely under `~/.nix`. Interactive bash shells automatically re-enter
+the chroot, so `nix` and the Home Manager tools are available as usual.
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/takker99/dotfiles/develop/install.sh | bash -s -- --rootless
+# or, when running the script directly:
+bash install.sh --rootless
+```
+
+This requires **unprivileged user namespaces**. Verify on the machine with:
+
+```sh
+unshare --user --pid echo YES   # should print YES
+```
+
+If namespaces are restricted (Ubuntu 23.10+ via AppArmor), ask an
+administrator to run once:
+
+```sh
+sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+# persist across reboots:
+echo 'kernel.apparmor_restrict_unprivileged_userns=0' | sudo tee /etc/sysctl.d/99-userns.conf
+```
+
+The rootless installer downloads the `nix-user-chroot` static binary into
+`~/.local/bin` and installs Nix into `~/.nix`. The system locale/timezone step
+(`setupLang`) is skipped because it needs root.
+
 ### System language and timezone (Ubuntu only)
 
 After installation, configure the system locale and timezone:
