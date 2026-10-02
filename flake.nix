@@ -28,20 +28,26 @@
       {
         formatter = pkgs.nixfmt;
         packages.home-manager = home-manager.packages.${system}.default;
+        packages.opencode2 = pkgs.callPackage ./nix/opencode2/package.nix { };
         # https://zenn.dev/kawarimidoll/articles/0a4ec8bab8a8ba#%E6%9B%B4%E6%96%B0%E3%82%BF%E3%82%B9%E3%82%AF%E3%81%AE%E8%BF%BD%E5%8A%A0
         apps.update = {
           type = "app";
           program = toString (
-            pkgs.writeShellScript "update-script" ''
-              set -e
-              echo "Updating flake..."
-              nix flake update
-              echo "Updating home-manager..."
-              nix run .#home-manager -- switch --flake ".#takker-${system}"
-              echo "Update complete!"
-            ''
+            (pkgs.writeShellApplication {
+              name = "update";
+              runtimeInputs = [
+                pkgs.coreutils
+                pkgs.curl
+                pkgs.git
+                pkgs.gnugrep
+                pkgs.jq
+              ];
+              runtimeEnv.FLAKE_SYSTEM = system;
+              text = builtins.readFile ./nix/update.sh;
+            })
+            + "/bin/update"
           );
-          meta.description = "Update flake inputs and re-apply Home Manager";
+          meta.description = "Update flake inputs, opencode2, and re-apply Home Manager";
         };
         apps.setupLang = {
           type = "app";

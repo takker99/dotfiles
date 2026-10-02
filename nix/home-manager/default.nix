@@ -10,7 +10,12 @@ let
 in
 {
   nixpkgs = {
-    overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
+    overlays = [
+      inputs.neovim-nightly-overlay.overlays.default
+      (final: _prev: {
+        opencode2 = final.callPackage ../../nix/opencode2/package.nix { };
+      })
+    ];
     config = {
       allowUnfree = true;
     };
@@ -64,10 +69,14 @@ in
       pnpm
       neovim # nightly
       opencode
+      opencode2 # OpenCode 2 (prebuilt upstream binary)
       # WSL2: openscad GUI には Mesa swrast が必要
       (symlinkJoin {
         name = "openscad";
-        paths = [ openscad-unstable mesa ];
+        paths = [
+          openscad-unstable
+          mesa
+        ];
         buildInputs = [ makeWrapper ];
         postBuild = ''
           wrapProgram $out/bin/openscad \
@@ -96,6 +105,11 @@ in
         la = "eza -la";
       };
       shellInit = ''
+        # config.fish is a read-only nix store symlink, so tools that append to
+        # it (e.g. the Hermes installer's wire_shell_path) fail with EACCES.
+        # Declare ~/.local/bin here: their grep then finds it and skips the write.
+        fish_add_path --path "$HOME/.local/bin"
+
         if status is-interactive
           fish_vi_key_bindings
 
