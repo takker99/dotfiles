@@ -105,6 +105,11 @@ in
         la = "eza -la";
       };
       shellInit = ''
+        # config.fish is a read-only nix store symlink, so tools that append to
+        # it (e.g. the Hermes installer's wire_shell_path) fail with EACCES.
+        # Declare ~/.local/bin here: their grep then finds it and skips the write.
+        fish_add_path --path "$HOME/.local/bin"
+
         if status is-interactive
           fish_vi_key_bindings
 
