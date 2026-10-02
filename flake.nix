@@ -28,6 +28,7 @@
       {
         formatter = pkgs.nixfmt;
         packages.home-manager = home-manager.packages.${system}.default;
+        packages.opencode2 = pkgs.callPackage ./nix/opencode2/package.nix { };
         # https://zenn.dev/kawarimidoll/articles/0a4ec8bab8a8ba#%E6%9B%B4%E6%96%B0%E3%82%BF%E3%82%B9%E3%82%AF%E3%81%AE%E8%BF%BD%E5%8A%A0
         apps.update = {
           type = "app";

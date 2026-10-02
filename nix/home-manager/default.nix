@@ -10,7 +10,12 @@ let
 in
 {
   nixpkgs = {
-    overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
+    overlays = [
+      inputs.neovim-nightly-overlay.overlays.default
+      (final: _prev: {
+        opencode2 = final.callPackage ../../nix/opencode2/package.nix { };
+      })
+    ];
     config = {
       allowUnfree = true;
     };
@@ -64,10 +69,14 @@ in
       pnpm
       neovim # nightly
       opencode
+      opencode2 # OpenCode 2 (prebuilt upstream binary)
       # WSL2: openscad GUI には Mesa swrast が必要
       (symlinkJoin {
         name = "openscad";
-        paths = [ openscad-unstable mesa ];
+        paths = [
+          openscad-unstable
+          mesa
+        ];
         buildInputs = [ makeWrapper ];
         postBuild = ''
           wrapProgram $out/bin/openscad \
