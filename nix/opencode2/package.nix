@@ -8,43 +8,36 @@
   versionCheckHook,
 }:
 let
+  # version / npm package / tarball hash are machine-managed data:
+  # `nix run .#update` rewrites sources.json when a new release is published,
+  # so rationale comments live here instead of in the JSON.
+  #
   # Official prebuilt binaries, published as npm platform packages — the same
   # files `npm i -g @opencode/cli@<version>` installs as bin/opencode.
   # Keyed by host system; meta.platforms is derived from it, so an unconfigured
   # system fails at evaluation instead of silently shipping a foreign binary.
-  npmPlatforms = {
-    "x86_64-linux" = {
-      npm = "linux-x64";
-      hash = "sha256-vUGVUnrNTWxvs11NH9n8cq+0k0mdI2etC/RtSLpLO9Q=";
-    };
-    "aarch64-linux" = {
-      npm = "linux-arm64";
-      hash = "sha256-k0NvUOrOI5dee4ePJ3Cx/pK0svy0A+JqHUWttPgoXTg=";
-    };
-    # x86_64-darwin is absent on purpose: nixpkgs 26.11 (nixos-unstable)
-    # dropped support for it, so importing nixpkgs for that system throws.
-    "aarch64-darwin" = {
-      npm = "darwin-arm64";
-      hash = "sha256-geeWRF71mutp9h22szT5DyZUuVuclRyYnPPyAFtUthA=";
-    };
-  };
+  #   - x86_64-darwin is absent on purpose: upstream publishes no darwin-x64
+  #     tarball, and nixpkgs 26.11 (nixos-unstable) dropped support for it, so
+  #     importing nixpkgs for that system throws.
+  #   - hashes differ per platform: each tarball is a fixed-output fetchzip,
+  #     so the unpacked hash is platform-dependent.
+  sources = builtins.fromJSON (builtins.readFile ./sources.json);
   platform =
-    npmPlatforms.${stdenv.hostPlatform.system}
+    sources.platforms.${stdenv.hostPlatform.system}
       or (throw "opencode2: unsupported host system ${stdenv.hostPlatform.system}");
 
   # The Linux builds are glibc-linked ELFs with the FHS loader path hardcoded
   # (/lib/ld-linux-aarch64.so.1, /lib64/ld-linux-x86-64.so.2), which exists
   # neither in the build sandbox nor on non-FHS systems (e.g. NixOS).
   # installPhase rewrites only the interpreter — that much patchelf is safe, and
-  # that much patchelf is safe, and it lets versionCheckHook actually run the
-  # binary during the build. Setting an rpath is NOT safe: Bun's single-file
-  # loader segfaults with one, so never add it here. Darwin builds are Mach-O
-  # and need no patching.
+  # it lets versionCheckHook actually run the binary during the build. Setting
+  # an rpath is NOT safe: Bun's single-file loader segfaults with one, so never
+  # add it here. Darwin builds are Mach-O and need no patching.
   needsInterpreterPatch = stdenv.hostPlatform.isLinux;
 in
 stdenv.mkDerivation (finalAttrs: {
   pname = "opencode2";
-  version = "2.0.20";
+  version = sources.version;
 
   src = fetchzip {
     url = "https://registry.npmjs.org/@opencode/cli-${platform.npm}/-/cli-${platform.npm}-${finalAttrs.version}.tgz";
@@ -80,6 +73,6 @@ stdenv.mkDerivation (finalAttrs: {
     homepage = "https://opencode.ai/";
     license = lib.licenses.mit;
     mainProgram = "opencode2";
-    platforms = builtins.attrNames npmPlatforms;
+    platforms = builtins.attrNames sources.platforms;
   };
 })

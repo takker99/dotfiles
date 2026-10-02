@@ -103,7 +103,7 @@ nix run "${DOTFILES_DIR}#home-manager" -- switch --flake "${FLAKE_REF}"
 # 5) Create wrapper scripts (to run flake operations from any directory)
 cat > "${LOCAL_BIN}/dotfiles-update" <<EOF
 #!/usr/bin/env bash
-nix run ${DOTFILES_DIR}#update
+cd "${DOTFILES_DIR}" && nix run ${DOTFILES_DIR}#update
 EOF
 chmod +x "${LOCAL_BIN}/dotfiles-update"
 
