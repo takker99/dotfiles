@@ -13,7 +13,8 @@ in
     overlays = [
       inputs.neovim-nightly-overlay.overlays.default
       (final: _prev: {
-        opencode2 = final.callPackage ../../nix/opencode2/package.nix { };
+        # nixpkgs の opencode (v1) を OpenCode 2 のプリビルドバイナリで上書きする
+        opencode = final.callPackage ../../nix/opencode/package.nix { };
       })
     ];
     config = {
@@ -68,8 +69,7 @@ in
       nodejs
       pnpm
       neovim # nightly
-      opencode
-      opencode2 # OpenCode 2 (prebuilt upstream binary)
+      opencode # OpenCode 2 (prebuilt upstream binary)
       # WSL2: openscad GUI には Mesa swrast が必要
       (symlinkJoin {
         name = "openscad";

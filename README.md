@@ -39,7 +39,7 @@ The install itself needs no authentication (the repo is public). To commit and p
 
 ### Daily commands
 
-- Update flake inputs, bump `opencode2` when a new npm release exists, and re-apply Home Manager in one go (run inside this repository; review and commit the resulting `flake.lock` and `nix/opencode2/sources.json` changes):
+- Update flake inputs, bump `opencode` when a new npm release exists, and re-apply Home Manager in one go (run inside this repository; review and commit the resulting `flake.lock` and `nix/opencode/sources.json` changes):
 	- `nix run .#update`
 - Refresh only the flake lock file:
 	- `nix flake update`
