@@ -1,0 +1,17 @@
+{
+  "version": "2.0.22",
+  "platforms": {
+    "x86_64-linux": {
+      "npm": "linux-x64",
+      "hash": "sha256-v26AAh7M2tCtqChvcKt00UuMx5HiUXwCYEvlLc32Ob0="
+    },
+    "aarch64-linux": {
+      "npm": "linux-arm64",
+      "hash": "sha256-wIFwmyGxkRsrdqVe5evGlK7RwjeTkl/G2WNQN7s4f0k="
+    },
+    "aarch64-darwin": {
+      "npm": "darwin-arm64",
+      "hash": "sha256-JOC62mwEC+UdvJwJmBYp9Z8IB/tNGbVBbeTMvyh0dQg="
+    }
+  }
+}

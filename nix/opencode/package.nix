@@ -24,7 +24,7 @@ let
   sources = builtins.fromJSON (builtins.readFile ./sources.json);
   platform =
     sources.platforms.${stdenv.hostPlatform.system}
-      or (throw "opencode2: unsupported host system ${stdenv.hostPlatform.system}");
+      or (throw "opencode: unsupported host system ${stdenv.hostPlatform.system}");
 
   # The Linux builds are glibc-linked ELFs with the FHS loader path hardcoded
   # (/lib/ld-linux-aarch64.so.1, /lib64/ld-linux-x86-64.so.2), which exists
@@ -36,7 +36,7 @@ let
   needsInterpreterPatch = stdenv.hostPlatform.isLinux;
 in
 stdenv.mkDerivation (finalAttrs: {
-  pname = "opencode2";
+  pname = "opencode";
   version = sources.version;
 
   src = fetchzip {
@@ -59,11 +59,11 @@ stdenv.mkDerivation (finalAttrs: {
   installPhase = ''
     runHook preInstall
 
-    install -Dm755 bin/opencode $out/bin/opencode2
+    install -Dm755 bin/opencode $out/bin/opencode
     ${lib.optionalString needsInterpreterPatch ''
-      patchelf --set-interpreter ${stdenv.cc.bintools.dynamicLinker} $out/bin/opencode2
+      patchelf --set-interpreter ${stdenv.cc.bintools.dynamicLinker} $out/bin/opencode
     ''}
-    wrapProgram $out/bin/opencode2 --prefix PATH : ${lib.makeBinPath [ ripgrep ]}
+    wrapProgram $out/bin/opencode --prefix PATH : ${lib.makeBinPath [ ripgrep ]}
 
     runHook postInstall
   '';
@@ -72,7 +72,7 @@ stdenv.mkDerivation (finalAttrs: {
     description = "OpenCode 2 command line interface";
     homepage = "https://opencode.ai/";
     license = lib.licenses.mit;
-    mainProgram = "opencode2";
+    mainProgram = "opencode";
     platforms = builtins.attrNames sources.platforms;
   };
 })
