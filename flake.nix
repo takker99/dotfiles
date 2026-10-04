@@ -40,7 +40,9 @@
                 pkgs.curl
                 pkgs.git
                 pkgs.gnugrep
+                pkgs.gnused
                 pkgs.jq
+                pkgs.nodejs
               ];
               runtimeEnv.FLAKE_SYSTEM = system;
               text = builtins.readFile ./nix/update.sh;

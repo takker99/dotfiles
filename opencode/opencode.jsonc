@@ -2,9 +2,14 @@
   "$schema": "https://opencode.ai/config.json",
   "lsp": true,
   "mcp": {},
-  // OpenCode Quota: tuiCommandDisplay chooses whether native TUI command output appears in the session transcript or a local popup dialog.
-  // OpenCode Quota: loads the server plugin for slash commands and quota checks.
+  // OpenCode Quota: "plugin" のエントリがバージョンの真実の所在。
+  // `nix run .#update` が npm registry の最新と比較し、より新ければ
+  // ~/.config/opencode に npm install して、ここにある文字列の @ 以降を更新する。
   "plugin": [
-    "@slkiser/opencode-quota@latest"
-  ]
+    "@slkiser/opencode-quota@5.0.1"
+  ],
+  "provider": {
+    // Detected opencode-go authentication; opencode-quota added this global provider declaration.
+    "opencode-go": {}
+  }
 }
