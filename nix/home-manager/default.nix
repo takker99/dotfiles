@@ -190,5 +190,9 @@ in
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/dotfiles/opencode/opencode.jsonc";
     force = true;
   };
+  xdg.configFile."opencode/opencode-quota/quota-toast.jsonc" = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/dotfiles/opencode/opencode-quota/quota-toast.jsonc";
+    force = true;
+  };
 
 }

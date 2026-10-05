@@ -1,0 +1,21 @@
+{
+  // Find providers from OpenCode configuration and authentication.
+  "enabledProviders": "auto",
+  // Show every reset period (5h / weekly / monthly).
+  "formatStyle": "allWindows",
+  // Show quota used (not remaining).
+  "percentDisplayMode": "used",
+  // OpenCode Go: Five-hour, Weekly, Monthly のすべてを対象にする (default と同値だが明示)。
+  "opencodeGoWindows": ["rolling", "weekly", "monthly"],
+
+  // 定期ポップアップ(トースト)不要。reset 通知も出さない (reset 通知は toast 必須のため)。
+  "enableToast": false,
+  "resetNotifications": { "enabled": false },
+
+  // TUI サイドバーに Quota パネルを常時表示。サイドバーだけは allWindows を強制。
+  "tuiSidebarPanel": { "enabled": true, "formatStyle": "allWindows" },
+
+  // その他の自動 TUI 表示は off のままにする。
+  "tuiCompactStatus": { "enabled": false },
+  "tuiPromptBar": { "enabled": false }
+}
