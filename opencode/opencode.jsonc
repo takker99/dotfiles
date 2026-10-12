@@ -6,7 +6,7 @@
   // `nix run .#update` が npm registry の最新と比較し、より新ければ
   // ~/.config/opencode に npm install して、ここにある文字列の @ 以降を更新する。
   "plugin": [
-    "@slkiser/opencode-quota@5.0.1"
+    "@slkiser/opencode-quota@5.0.2"
   ],
   "provider": {
     // Detected opencode-go authentication; opencode-quota added this global provider declaration.
