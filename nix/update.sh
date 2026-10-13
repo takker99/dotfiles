@@ -117,7 +117,9 @@ update_opencode_quota() {
   fi
 
   echo "opencode-quota: $current -> $latest"
-  if ! npm install --prefix "$config_dir" "$package@$latest" --no-audit --no-fund; then
+  # --loglevel=error: 依存ツリー側の警告 (EBADENGINE / deprecated / install-scripts)
+  # は更新の成否と無関係なノイズなので隠す。失敗は exit code で検知する。
+  if ! npm install --prefix "$config_dir" "$package@$latest" --no-audit --no-fund --loglevel=error; then
     echo "opencode-quota: npm install failed" >&2
     return 1
   fi
