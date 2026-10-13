@@ -73,83 +73,103 @@ update_opencode() {
   fi
 }
 
-update_opencode_quota() {
-  # @slkiser/opencode-quota のバージョン管理と実ファイルの導入先。
+update_opencode_plugins() {
+  # opencode "plugin" エントリ (<package>@<version>) のバージョン管理と実ファイルの導入先。
   # バージョンの真実の所在は opencode/opencode.jsonc の "plugin" エントリ
   # ("<package>@<version>" 形式) 一箇所。npm でインストール
   # (install 手法は npm/npx/pnpm 等の同等のものでよい)。
   local manifest=opencode/opencode.jsonc
   local config_dir=$HOME/.config/opencode
-  local current_entry package current latest
+  local entry package current latest
   local tmp
 
   if [[ ! -f $manifest ]]; then
-    echo "opencode-quota: $manifest not found" >&2
+    echo "opencode-plugin: $manifest not found" >&2
     return 1
   fi
 
-  # "plugin" に並ぶ "<package>@<version>" から現在のバージョンを読む。
+  # "plugin" に並ぶ "<package>@<version>" をすべて読む。
   # 誤パース防止のため、JSON 文字列リテラル単独行 (行頭が文字列開始) に限定する。
-  if ! current_entry=$(grep -E '^[[:space:]]*"[^"]+",?[[:space:]]*$' "$manifest" \
-      | grep -oE '"(@[^"@]+(/[^"@]+)?|[^"@]+)@[0-9]+\.[0-9]+\.[0-9]+"' | head -n 1) \
-      || [[ -z $current_entry ]]; then
-    echo "opencode-quota: no \"<package>@<version>\" entry found in $manifest" >&2
-    return 1
-  fi
-  package=${current_entry%@*}
-  package=${package#\"}
-  current=${current_entry##*@}
-  current=${current%\"}
-
-  if ! latest=$(curl -fsSL "https://registry.npmjs.org/$package/latest" \
-      | jq -er '.version | select(test("^[0-9]+[.][0-9]+[.][0-9]+"))'); then
-    echo "opencode-quota: cannot determine the latest version from the npm registry" >&2
+  local entries=()
+  while IFS= read -r entry; do
+    if [[ -n $entry ]]; then
+      entries+=("$entry")
+    fi
+  done < <(
+    grep -E '^[[:space:]]*"[^"]+",?[[:space:]]*$' "$manifest" \
+      | grep -oE '"(@[^"@]+(/[^"@]+)?|[^"@]+)@[0-9]+\.[0-9]+\.[0-9]+"'
+  )
+  if (( ${#entries[@]} == 0 )); then
+    echo "opencode-plugin: no \"<package>@<version>\" entry found in $manifest" >&2
     return 1
   fi
 
-  if [[ $latest == "$current" ]]; then
-    echo "opencode-quota: $current is already the latest release"
-    return 0
-  fi
-  if [[ $(printf '%s\n%s\n' "$current" "$latest" | sort -V | tail -n 1) != "$latest" ]]; then
-    echo "opencode-quota: npm latest ($latest) is not newer than $current; skipping" >&2
-    return 0
-  fi
+  # 1 パッケージの失敗は他への更新を止めない (末尾の return で総合結果を返す)。
+  local status=0
+  for entry in "${entries[@]}"; do
+    package=${entry%@*}
+    package=${package#\"}
+    current=${entry##*@}
+    current=${current%\"}
 
-  echo "opencode-quota: $current -> $latest"
-  # --loglevel=error: 依存ツリー側の警告 (EBADENGINE / deprecated / install-scripts)
-  # は更新の成否と無関係なノイズなので隠す。失敗は exit code で検知する。
-  if ! npm install --prefix "$config_dir" "$package@$latest" --no-audit --no-fund --loglevel=error; then
-    echo "opencode-quota: npm install failed" >&2
-    return 1
-  fi
-  # npm は ^ を付けるので、厳密なバージョンに戻す
-  if ! jq --arg v "$latest" --arg p "$package" \
-      '.dependencies[$p] = $v' "$config_dir/package.json" >"$config_dir/package.json.new" \
-      || ! mv "$config_dir/package.json.new" "$config_dir/package.json"; then
-    echo "opencode-quota: failed to pin the version in $config_dir/package.json" >&2
-    return 1
-  fi
+    if ! latest=$(curl -fsSL "https://registry.npmjs.org/$package/latest" \
+        | jq -er '.version | select(test("^[0-9]+[.][0-9]+[.][0-9]+"))'); then
+      echo "opencode-plugin: $package: cannot determine the latest version from the npm registry" >&2
+      status=1
+      continue
+    fi
 
-  # jsonc 内の "plugin" に並ぶ "<package>@<version>" のバージョン部分も同期する。
-  # JSON 文字列リテラル単独行のみ置換し、コメント内の同形式を誤更新しない。
-  # mktemp + mv で原子的に差し替える (update_opencode と同パターン)。
-  if ! tmp=$(mktemp opencode/.opencode.jsonc.XXXXXX); then
-    echo "opencode-quota: cannot create a temporary file" >&2
-    return 1
-  fi
-  if ! sed "s|^\([[:space:]]*\"\)$package@[^\"]*|\1$package@$latest|" \
-      "$manifest" > "$tmp" \
-      || ! grep -q "\"$package@$latest\"" "$tmp"; then
-    rm -f "$tmp"
-    echo "opencode-quota: failed to update the version in $manifest" >&2
-    return 1
-  fi
-  if ! mv "$tmp" "$manifest"; then
-    rm -f "$tmp"
-    echo "opencode-quota: failed to write $manifest" >&2
-    return 1
-  fi
+    if [[ $latest == "$current" ]]; then
+      echo "opencode-plugin: $package: $current is already the latest release"
+      continue
+    fi
+    if [[ $(printf '%s\n%s\n' "$current" "$latest" | sort -V | tail -n 1) != "$latest" ]]; then
+      echo "opencode-plugin: $package: npm latest ($latest) is not newer than $current; skipping" >&2
+      continue
+    fi
+
+    echo "opencode-plugin: $package: $current -> $latest"
+    # --loglevel=error: 依存ツリー側の警告 (EBADENGINE / deprecated / install-scripts)
+    # は更新の成否と無関係なノイズなので隠す。失敗は exit code で検知する。
+    if ! npm install --prefix "$config_dir" "$package@$latest" --no-audit --no-fund --loglevel=error; then
+      echo "opencode-plugin: $package: npm install failed" >&2
+      status=1
+      continue
+    fi
+    # npm は ^ を付けるので、厳密なバージョンに戻す
+    if ! jq --arg v "$latest" --arg p "$package" \
+        '.dependencies[$p] = $v' "$config_dir/package.json" >"$config_dir/package.json.new" \
+        || ! mv "$config_dir/package.json.new" "$config_dir/package.json"; then
+      echo "opencode-plugin: $package: failed to pin the version in $config_dir/package.json" >&2
+      status=1
+      continue
+    fi
+
+    # jsonc 内の "plugin" に並ぶ "<package>@<version>" のバージョン部分も同期する。
+    # JSON 文字列リテラル単独行のみ置換し、コメント内の同形式を誤更新しない。
+    # mktemp + mv で原子的に差し替える (update_opencode と同パターン)。
+    if ! tmp=$(mktemp opencode/.opencode.jsonc.XXXXXX); then
+      echo "opencode-plugin: $package: cannot create a temporary file" >&2
+      status=1
+      continue
+    fi
+    if ! sed "s|^\([[:space:]]*\"\)$package@[^\"]*|\1$package@$latest|" \
+        "$manifest" > "$tmp" \
+        || ! grep -q "\"$package@$latest\"" "$tmp"; then
+      rm -f "$tmp"
+      echo "opencode-plugin: $package: failed to update the version in $manifest" >&2
+      status=1
+      continue
+    fi
+    if ! mv "$tmp" "$manifest"; then
+      rm -f "$tmp"
+      echo "opencode-plugin: $package: failed to write $manifest" >&2
+      status=1
+      continue
+    fi
+  done
+
+  return "$status"
 }
 
 # Resolve the repository root first so relative references
@@ -172,8 +192,8 @@ if ! update_opencode; then
   status=1
 fi
 
-if ! update_opencode_quota; then
-  echo "update: opencode-quota version bump failed; continuing with Home Manager" >&2
+if ! update_opencode_plugins; then
+  echo "update: opencode plugin version bump failed; continuing with Home Manager" >&2
   status=1
 fi
 
