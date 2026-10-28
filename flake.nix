@@ -23,7 +23,9 @@
     flake-utils.lib.eachSystem [ "aarch64-linux" "x86_64-linux" "aarch64-darwin" ] (
       system:
       let
-        pkgs = import nixpkgs { inherit system; };
+        pkgs = import nixpkgs {
+          inherit system;
+        };
       in
       {
         formatter = pkgs.nixfmt;
@@ -79,7 +81,10 @@
             sys:
             home-manager.lib.homeManagerConfiguration {
               pkgs = nixpkgs.legacyPackages.${sys};
-              extraSpecialArgs = { inherit inputs; };
+              extraSpecialArgs = {
+                inherit inputs;
+                hostSystem = sys;
+              };
               modules = [ ./nix/home-manager/default.nix ];
             };
         in
