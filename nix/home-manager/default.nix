@@ -3,6 +3,7 @@
   config,
   pkgs,
   lib,
+  hostSystem,
   ...
 }:
 let
@@ -66,7 +67,7 @@ in
       uv
       cargo
       deno
-      nodejs
+      nodejs_26
       pnpm
       neovim # nightly
       opencode # OpenCode 2 (prebuilt upstream binary)
